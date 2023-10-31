@@ -1,0 +1,91 @@
+---
+title: "dia10 - AL - producto punto y cosenos directores"
+author: "NCPR"
+date: "9/14/2021"
+output: html_document
+---
+
+# Ángulo entre dos vectores
+
+La relación entre el ángulo de dos vectores y el producto punto puede ser generalizado por medio de la ley de los cosenos. Esta es una generalización del Teorema de Pitágoras y sostiene que para triángulos que no tienen ángulo recto es
+
+$\lVert \mathbf{u-v} \rVert^2= \lVert \mathbf{u} \rVert^2  + \lVert \mathbf{v} \rVert^2  - 2 \lVert \mathbf{u} \rVert \lVert \mathbf{v} \rVert \cos(\theta)$
+
+donde $\theta$ es el ángulo entre los vectores $\mathbf{u}$ y $\mathbf{v}$. Note que si $\theta$ es $90°$ entonces el coseno es $1$ y la expresión se reduce al teorema de Pitágoras. Usando las ecuaciones 
+
+$\lVert \mathbf{x} \rVert^2 = \mathbf{x}^{T}\mathbf{x}$
+
+$\mathbf{u}^T\mathbf{v}=\mathbf{v}^T\mathbf{u}$
+
+$(\mathbf{u-v})^T(\mathbf{u-v})=\mathbf{u}^T\mathbf{u}-2(\mathbf{u}^T\mathbf{v})+\mathbf{v}^T\mathbf{v}$
+
+
+podemos rearreglar la expresión para producir una relación entre el ángulo y el producto punto:
+
+
+$\cos(\theta)=\frac{\mathbf{u}^T\mathbf{V}}{\lVert \mathbf{u} \rVert \lVert \mathbf{v} \rVert}$
+
+A partir de este resultado, podemos expresar otra forma de expresar el producto punto por medio de la relaciónÑ
+
+
+$\lVert \mathbf{u} \rVert \lVert \mathbf{v} \rVert \cos(\theta)=\mathbf{u}^T\mathbf{v}$
+
+
+**Ejemplo:**
+
+Dados dos vectores $\mathbf{u}=[2,1]$ y $\mathbf{v}=[1,3]$, calcule el ángulo entre ellos. 
+
+El producto punto es dado por $\mathbf{u}^T\mathbf{v}=(2)(1)+(1)(3)=5$
+
+La longitud de cada vector está dado por 
+
+$\lVert \mathbf{u} \rVert= \sqrt{2^2+1^2}=\sqrt{5}$
+
+$\lVert \mathbf{v} \rVert= \sqrt{1^2+3^2}=\sqrt{10}$
+
+Por consecuencia
+
+$\cos(\theta)=\frac{5}{\sqrt{5}\sqrt{10}}=\frac{1}{\sqrt{2}}$
+
+$\theta = \cos^{-1}(\frac{1}{\sqrt{2}})=45°$
+
+Un resultado importante se puede obtener de $\lVert \mathbf{u} \rVert \lVert \mathbf{v} \rVert \cos(\theta)=\mathbf{u}^T\mathbf{v}$. Desde que el $\cos(\theta)$ debe ser menor o igual a $1$, se deduce que 
+
+$\lVert \mathbf{u} \rVert \lVert \mathbf{v} \rVert \leq  \mathbf{u}^T  \mathbf{v}$
+
+Esto se conoce como la **desigualdad de Cauchy-Schwarz**. La importancia de esta desigualdad radica en su habilidad para establecer que la geometría en más dimensiones actúa de la misma manera que la geometría q esperamos en 2D o 3D. Un resultado general que emerge de esta desigualdad es la **desigualdad del triángulo**
+
+
+$\lVert \mathbf{u+v} \rVert \leq  \lVert \mathbf{u} \rVert + \lVert \mathbf{v} \rVert$
+
+
+Esto puede ser interpretado como que la ruta directa $\lVert \mathbf{u+v} \rVert$ (la diagonal del paralelogramo) es más corta que la ruta indirecta $\lVert \mathbf{u} \rVert + \lVert \mathbf{v} \rVert$ a lo largo de los lados del triángulo. 
+
+Finalmente sí dos vectores son coincidentes que significa que apuntan a la misma dirección, entonces el producto punto va a depender sus longitudes relativas. 
+
+Por ejemplo, si $\mathbf{u}=(3,4)$ y  $\mathbf{v}=(6,8)$, el producto punto es $50$. Sin embargo, sí nosotros normalizamos cada vector primero, la longitud de cada vector es la unidad, entonces el producto es igual a $1$.
+
+**Ejemplo:** Dados los vectores $\mathbf{u}=(3,4)$ y $\mathbf{u}=(6,8)$ calcule el producto punto.
+
+$\mathbf{u}^{T}\mathbf{v}=(3)(6)+(4)(8)=50$
+
+Usando los mismos vectores, normalicemos cada uno y recalculemos el producto punto. La longitud de $\mathbf{u}=\sqrt{3^2+4^2}=\sqrt{25}=5$. Normalizando queda $\mathbf{u}=[3/5,4/5]$. La longitud de $\mathbf{v}=\sqrt{6^2+8^2}=\sqrt{100}=10$, por lo tanto el vector normalizado es $\mathbf{u}=[6/10,8/10]$
+
+El producto punto del vector normalizado es:
+
+$(3/5)(6/10)+(4/5)(8/10)=1.0$
+
+
+# Producto punto y cosenos directores
+
+Antes se introdujo el término de **cosenos directores**. Hay una aproximación muy elegante usando el producto punto para derivar los cosenos directores. Considere el ángulo coseno $\alpha$ que es el ángulo del vector con respecto a $x$. Recuerde la expresión 
+
+
+$\cos(\theta)=\frac{\mathbf{u}^T\mathbf{v}}{ \lVert \mathbf{u} \rVert \lVert \mathbf{v} \rVert}$
+
+que expresa el ángulo entre vectores $\mathbf{u}$ y $\mathbf{v}$. Sí nosotros sustituimos el vector $\mathbf{v}$ con el vector cartesiano unitario $i$ sobre el eje $x$, se obtiene:
+
+$\cos(\theta)=\frac{\mathbf{u} \cdot \mathbf{i}}{ \lVert \mathbf{u} \rVert \lVert \mathbf{i} \rVert}$
+
+
+De este resultado porde

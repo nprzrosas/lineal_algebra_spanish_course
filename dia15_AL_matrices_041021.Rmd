@@ -1,0 +1,386 @@
+---
+title: "Día 15 - Matrices (continuación)"
+author: "Dra. Norma C. Pérez Rosas"
+date: '`r format(Sys.time(), "%d/%m/%Y")`'
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+  html_document:
+    toc: yes
+    toc_depth: 2
+---
+
+# Renglones y columnas de una matriz
+
+Dada la matriz A
+
+$$
+\mathbf{A}=\left[
+\begin{array}{cccccc}
+   a_{11} & a_{12} & \cdots & a_{1j} & \cdots & a_{1n}\\
+   a_{21} & a_{22} & \cdots & a_{2j} & \cdots & a_{2n}\\
+   \vdots & \vdots &  & \vdots & & \vdots \\
+   a_{i1} & a_{i2} & \cdots & a_{ij} & \cdots & a_{in}\\
+   \vdots & \vdots &  & \vdots & & \vdots \\
+   a_{m1} & a_{m2} & \cdots & a_{mj} & \cdots & a_{mn}\\
+\end{array}
+\right]
+$$
+
+El vector renglón $(a_{i1}, a_{i2},\dots,a_{in})$ se llama **renglón i** y el vector columna
+
+$$\begin{bmatrix}
+a_{1j}\\
+a_{2j}\\
+\vdots \\
+a_{mj}\\
+\end{bmatrix}$$
+
+se llama **columna j**. El **componente o elemento ij** de $A$, denotado por $a_{ij}$ es el número que aparece en el renglón columna $i$ y la columna $j$ de $A$.
+
+# Matrices diagonales
+
+Una matriz diagonal son las matrices cuadradas donde todos los elementos son cero excepto para la principal de elementos $a_{ii}$. La matriz identidad es un ejemplo de matriz diagonal. Los siguientes ejemplos muestran algunas matrices diagonales.
+
+$$
+\left[
+\begin{array}{ccc}
+   1 & 0 & 0 \\
+   0 & 6 & 0 \\
+   0 & 0 & -2 \\
+\end{array}
+\right]
+$$
+
+```{python}
+import numpy as np 
+A = np.array([[1, 0, 0], [0, 6, 0], [0, 0, -2]]) #creación de la matriz A
+print(A)# Mostrar A
+```
+
+$$
+\left[
+\begin{array}{cccc}
+   0.78 & 0 & 0 & 0 \\
+   0 & -1.2 & 0 & 0 \\
+   0 & 0 & -2 & 0\\
+   0 & 0 & 0 & 3.4\\
+\end{array}
+\right]
+$$
+
+```{python}
+import numpy as np 
+A = np.array([[0.78, 0, 0, 0], [0, -1.2, 0, 0], [0, 0, -2, 0], [0, 0, 0, 3.4]]) #creación de la matriz A
+print(A)# Mostrar A
+```
+
+# Matriz nula o cero
+
+La matriz cero es simplemente una matriz $m\times n$ con todas las entradas con el valor de cero , por ejemplo:
+
+$$
+\mathbf{0}_{2\times 2}=\left[
+\begin{array}{cc}
+   0 & 0  \\
+   0 & 0  \\
+\end{array}
+\right]
+$$
+
+```{python}
+import numpy as np 
+C = np.array([[0,0], [0, 0]]) #creación de la matriz de ceros C
+print(C)# Mostrar C
+```
+
+# Matriz escalar
+
+Una matriz escalar es una matriz diagonal en la que todos los valores de la diagonal principal son iguales.
+
+$$
+\left[
+\begin{array}{cccc}
+   7 & 0 & 0 & 0 \\
+   0 & 7 & 0 & 0 \\
+   0 & 0 & 7 & 0\\
+   0 & 0 & 0 & 7\\
+\end{array}
+\right]
+$$
+
+```{python}
+import numpy as np 
+A = np.array([[7, 0, 0, 0], [0, 7, 0, 0], [0, 0, 7, 0], [0, 0, 0, 7]]) #creación de la matriz A
+print(A)# Mostrar A
+```
+
+# Transpuesta de una matriz
+
+Una operación común que es aplicada a una matriz es obtener su transpuesta, esto es intercambiar las filas y las columnas de forma tal que $i-ésima$ fila de una matriz $\mathbf{A}$ se vuelve la $i-ésima$ columna de la matriz transpuesta. Nosotros hemos encontrado este concepto antes con la transpuesta de un vector. Por convención la transpuesta de una matriz se denota por $\mathbf{A}^T$. Cada elemento $a_{ij}$ en $\mathbf{A}$ se conviente en el elemento $a_{ji}$ en $\mathbf{A}^T$. Las dimensiones de una transpuesta naturalmente se intercambian en el proceso. Debe ser evidente que la transpuesta de una matriz transpuesta es igual a la matriz original:
+
+$(\mathbf{A}^T)^{T}=\mathbf{A}$
+
+```{python}
+import numpy as np
+A = np.array([[1, 2, 3], [4, 5, 6]])
+print(A)
+A_transpuesta = np.transpose(A)
+print(A_transpuesta)
+A_t_t = np.transpose(A_transpuesta)
+print(A_t_t)
+```
+
+Dada una matriz donde $\mathbf{A}^T=\mathbf{A}$, la matriz $\mathbf{A}$ es llamada **matriz simétrica**.
+
+```{python}
+import numpy as np
+A = np.array([[0, 1, 2, 3], [1, 0, 4, 5], [2, 4, 0, 6], [3, 5, 6, 0]])
+print(A)
+A_transpuesta = np.transpose(A)
+print(A_transpuesta)
+```
+
+
+# Adición y sustracción de matrices
+
+La suma y resta de matrices es directa. Dadas dos matrices $\mathbf{A}$ y $\mathbf{B}$, la suma está dada por:
+
+$$
+\mathbf{A+B}=\left[
+\begin{array}{ccc}
+a_{11}+b_{11} & \cdots &  a_{1n}+b_{1n} \\
+\vdots & \vdots  &    \vdots \\
+a_{m1}+b_{n1} & \cdots &  a_{mn}+b_{mn} \\
+\end{array}
+\right]
+$$
+
+```{python}
+# creando la primera matriz
+A = np.array([[1, 2], [3, 4]])
+# creando la segunda matriz
+B = np.array([[4, 5], [6, 7]])
+print("Imprimiendo la  matriz A")
+print(A)
+print("Imprimiendo la  matriz B")
+print(B)
+# sumando dos matrices
+print("Suma de matrices")
+print(np.add(A, B))
+```
+
+$$
+\mathbf{A-B}=\left[
+\begin{array}{ccc}
+a_{11}-b_{11} & \cdots &  a_{1n}-b_{1n} \\
+\vdots & \vdots  &    \vdots \\
+a_{m1}-b_{n1} & \cdots &  a_{mn}-b_{mn} \\
+\end{array}
+\right]
+$$
+
+$$
+(\mathbf{A+B})_{ij}= a_{ij}+b_{ij}
+$$
+
+$$
+(\mathbf{A-B})_{ij}= a_{ij}-b_{ij}
+$$
+
+Claramente, dos matrices pueden ser sumadas o restadas sí tienen **las mismas dimensiones**.
+
+Ejemplo:
+
+Si
+
+$$
+\mathbf{A}=\left[
+\begin{array}{cc}
+1 &  2 \\
+3 &  2 \\
+\end{array}
+\right]
+$$
+
+$$
+\mathbf{B}=\left[
+\begin{array}{cc}
+5 &  1\\
+4 &  6\\
+\end{array}
+\right]
+$$
+
+Entonces:
+
+$$
+\mathbf{A+B}=\left[
+\begin{array}{cc}
+6 &  3\\
+7 &  8\\
+\end{array}
+\right]
+$$
+
+```{python}
+# creando la primera matriz
+A = np.array([[1, 2], [3, 2]])
+# creando la segunda matriz
+B = np.array([[5, 1], [4, 6]])
+print("Imprimiendo la  matriz A")
+print(A)
+print("Imprimiendo la  matriz B")
+print(B)
+# sumando dos matrices
+print("Suma de matrices")
+print(np.add(A, B))
+```
+
+$$
+\mathbf{A-B}=\left[
+\begin{array}{cc}
+-4 &  1\\
+-1 &  -4\\
+\end{array}
+\right]
+$$
+
+```{python}
+# creando la primera matriz
+A = np.array([[1, 2], [3, 2]])
+# creando la segunda matriz
+B = np.array([[5, 1], [4, 6]])
+print("Imprimiendo la  matriz A")
+print(A)
+print("Imprimiendo la  matriz B")
+print(B)
+# sumando dos matrices
+print("Resta de matrices")
+print(np.subtract(A, B))
+```
+
+# Reglas aritméticas para adición y sustracción
+
+**Ley conmutativa para la suma de matrices**
+
+$$
+\mathbf{A+B}= \mathbf{B+A}
+$$
+
+```{python}
+# creando la primera matriz
+A = np.array([[1, 2], [3, 4]])
+# creando la segunda matriz
+B = np.array([[4, 5], [6, 7]])
+print("Imprimiendo la  matriz A")
+print(A)
+print("Imprimiendo la  matriz B")
+print(B)
+# sumando dos matrices
+print("Suma de matrices A + B")
+print(np.add(A, B))
+# sumando dos matrices
+print("Suma de matrices B + A")
+print(np.add(B, A))
+```
+
+**Ley asociativa para la suma de matrices**
+
+$$
+\mathbf{A}+(\mathbf{B+C})= (\mathbf{A}+\mathbf{B})+\mathbf{C}
+$$
+
+```{python}
+# creando la primera matriz
+A = np.array([[1, 2], [3, 4]])
+# creando la segunda matriz
+B = np.array([[4, 5], [6, 7]])
+# creando la tercera matriz
+C = np.array([[3, 2], [1, 8]])
+print("Imprimiendo la  matriz A")
+print(A)
+print("Imprimiendo la  matriz B")
+print(B)
+print("Imprimiendo la  matriz C")
+print(C)
+# sumando dos matrices
+print("Suma de matrices A + (B + C)")
+print(np.add(A, np.add(B, C)))
+# sumando dos matrices
+print("Suma de matrices (A + B) + C")
+print(np.add(np.add(A, B), C))
+```
+
+
+#Asistencia
+
+From Gaeta to Everyone:  01:30 PM
+
+Presente
+
+From Fernanda Pilón to Everyone:  01:30 PM
+
+Presente :)
+
+From José María Garduño to Everyone:  01:30 PM
+
+presente
+
+From Emmanuel Gonzalez to Everyone:  01:30 PM
+
+presente
+
+From Melanie Mondragón to Everyone:  01:30 PM
+
+presente
+
+From David Dorantes to Everyone:  01:30 PM
+
+Presente
+
+From Irving Barreto to Everyone:  01:30 PM
+
+Presente
+
+From Itzel Aurora Bravo Santos to Everyone:  01:30 PM
+
+Presente.
+
+From Frida Cuevas to Everyone:  01:30 PM
+
+Presente
+
+From Maria Fernanda Garcia to Everyone:  01:30 PM
+
+Presente
+
+From Ivan Barragan to Everyone:  01:30 PM
+
+presente
+
+From Karla Gómez to Everyone:  01:30 PM
+
+Presente
+
+From Andrew Flores Yebra to Everyone:  01:30 PM
+
+Presente
+
+From Fernanda Cardenas to Everyone:  01:30 PM
+
+Presente
+
+From Ivan Delgado to Everyone:  01:30 PM
+
+Presente
+
+From Víctor Jerónimo to Everyone:  01:30 PM
+
+Presente
+
+From Pérez David to Everyone:  01:31 PM
+
+Presente
+

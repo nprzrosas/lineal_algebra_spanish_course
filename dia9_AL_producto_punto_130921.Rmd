@@ -1,0 +1,216 @@
+---
+title: "Día 9 - Producto punto"
+author: "Dra. Norma C. Pérez Rosas"
+date: '`r format(Sys.time(), "%d/%m/%Y")`'
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+  html_document:
+    toc: yes
+    toc_depth: 2
+---
+
+# Producto punto 
+
+El producto punto también conocido como el **el producto escalar** o cuando está generalizado, el **producto interno** es definido por dos vectores  $\mathbf{u}$ y $\mathbf{v}$ por 
+
+$\mathbf{u}^T\mathbf{v}=[u_1v_1+u_2v_2+....+u_nv_n]$
+
+A partir de la definición, debe ser evidente que el producto punto es un valor escalado calculado a partir de la suma de los productos. En términos de filas y columnas de vectores, el producto punto también puede ser escrito como:
+
+
+\begin{equation*}
+\mathbf{u}^T\mathbf{v} = [u_1 u_2 \dots u_n]
+\begin{pmatrix}
+v_1  \\
+v_2 \\
+\vdots   \\
+v_n 
+\end{pmatrix}
+\end{equation*}
+
+Debe ser claro que a partir de esto tenemos:
+
+
+$\mathbf{u}^T\mathbf{v}=\mathbf{v}^T\mathbf{u}$
+
+Notaciones alternativas para el producto punto incluyen las siguientes:
+
+
+$\mathbf{u}^T\mathbf{v}=\mathbf{u}\cdot\mathbf{v}=\big \langle \mathbf{u},\mathbf{v}\big \rangle=\big \langle \mathbf{u}|\mathbf{v}\big \rangle$
+
+Por ejemplo, el producto punto con notación $\mathbf{u}\cdot\mathbf{v}$ es usado con frecuencia por la comunidad de física. Aquí usaremos la notación para el producto punto $\mathbf{u}^T\mathbf{v}$ porque tiene relación cercana con la notación matricial que se verá más adelante (Unidad I). 
+
+El producto punto obedece ciertas reglas algebraicas que incluyen:
+
+$\mathbf{u}^T\mathbf{v}=\mathbf{v}^T\mathbf{u}$
+
+```{python}
+import numpy as np
+u = np.array([1,2,3,4])
+v = np.array([1,2,3,4])
+u_t = np.transpose(u)
+v_t = np.transpose(v)
+#numpy.dot calcula el producto punto de dos vectores
+resultado_1 = np.dot(u_t, v)
+resultado_2 = np.dot(u, v_t)
+print(resultado_1)
+print(resultado_2)
+```
+
+$\mathbf{u}^T(\mathbf{v}+\mathbf{w})=\mathbf{u}^T\mathbf{v}+\mathbf{u}^T\mathbf{w}$
+
+```{python}
+import numpy as np
+u = np.array([1,2,3])
+v = np.array([1,2,3])
+w = np.array([1,2,3])
+u_t = np.transpose(u)
+suma_izq = v + w
+resultado_1p = np.dot(u_t, suma_izq)
+resultado_2p = np.dot(u_t, v) + np.dot(u_t, w)
+print(resultado_1p)
+print(resultado_2p)
+```
+
+$\mathbf{u}^T(\alpha\mathbf{v})=\alpha\mathbf{u}^T\mathbf{v}$
+
+```{python}
+import numpy as np
+u = np.array([1,2,3])
+v = np.array([1,2,3])
+alpha = 5
+u_t = np.transpose(u)
+r1 = alpha * v
+resultado_izq = np.dot(u_t, r1)
+resultado_der = alpha * np.dot(u_t, v)
+print(resultado_izq)
+print(resultado_der)
+```
+
+$(\mathbf{u}+\mathbf{v})^T(\mathbf{u}+\mathbf{v})=\mathbf{u}^T\mathbf{u}+2(\mathbf{u}^T\mathbf{v})+\mathbf{v}^T\mathbf{v}$
+
+```{python}
+import numpy as np
+u = np.array([1,2,3])
+v = np.array([1,2,3])
+r1 = u + v
+r1_t = np.transpose(r1)
+result_left = np.dot(r1_t, r1)
+u_t = np.transpose(u)
+v_t = np.transpose(v)
+result_right = np.dot(u_t, u) + 2 * np.dot(u_t, v) + np.dot(v_t, v)
+print(result_left)
+print(result_right)
+```
+
+$(\mathbf{u}-\mathbf{v})^T(\mathbf{u}-\mathbf{v})=\mathbf{u}^T\mathbf{u}-2(\mathbf{u}^T\mathbf{v})+\mathbf{v}^T\mathbf{v}$
+
+```{python}
+import numpy as np
+u = np.array([1,2,3])
+v = np.array([4,5,6])
+r1 = u - v
+r1_t = np.transpose(r1)
+result_left = np.dot(r1_t, r1)
+u_t = np.transpose(u)
+v_t = np.transpose(v)
+result_right = np.dot(u_t, u) - 2 * np.dot(u_t, v) + np.dot(v_t, v)
+print(result_left)
+print(result_right)
+```
+
+# Asístencia
+
+From Fernanda Pilón to Everyone:  11:32 AM
+
+Buenos días :)
+
+From Víctor Jerónimo to Everyone:  11:33 AM
+
+Presente
+
+From José María Garduño to Everyone:  11:33 AM
+
+presente
+
+From Fernanda Pilón to Everyone:  11:33 AM
+
+Presente
+
+From Emmanuel Gonzalez to Everyone:  11:34 AM
+
+Presente
+
+From Diego Nicolas to Everyone:  11:34 AM
+
+presente
+
+From Gaeta to Everyone:  11:34 AM
+
+present
+
+From Karla Gómez to Everyone:  11:34 AM
+
+presente
+
+From Gaeta to Everyone:  11:34 AM
+
+presente
+
+From Jorge Ambrosio to Everyone:  11:35 AM
+
+Presente
+
+From Andrew Flores Yebra to Everyone:  11:35 AM
+
+presente
+
+From David Dorantes to Everyone:  11:35 AM
+
+Presente
+
+From Ivan Barragan to Everyone:  11:35 AM
+
+Presente
+
+From Wenddy Ballona Martinez to Everyone:  11:35 AM
+
+gracias maestra
+
+From Maria Fernanda Garcia to Everyone:  11:35 AM
+
+Presente
+
+From Irving Barreto to Everyone:  11:35 AM
+
+Presente
+
+From Fernanda Cardenas to Everyone:  11:35 AM
+
+Presente
+
+From Ivan Delgado to Everyone:  11:35 AM
+
+Presente
+
+From Frida Cuevas to Everyone:  11:36 AM
+
+Presente
+
+From Itzel Aurora Bravo Santos to Everyone:  11:51 AM
+
+Presente
+
+From Melanie Mondragón to Everyone:  11:58 AM
+
+presente
+
+From Pérez Tadeo to Everyone:  11:58 AM
+
+Presente
+
+From Wenddy Ballona Martinez to Everyone:  11:58 AM
+
+presente

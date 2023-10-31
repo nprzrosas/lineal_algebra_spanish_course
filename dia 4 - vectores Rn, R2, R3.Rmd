@@ -1,0 +1,448 @@
+---
+title: "Día 4 - Vectores (continuación)"
+author: "Dra. Norma C. Pérez Rosas"
+date: '`r format(Sys.time(), "%d/%m/%Y")`'
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+  html_document:
+    toc: yes
+    toc_depth: 2
+---
+
+Ingrese a [Google colab](https://colab.research.google.com/notebooks/intro.ipynb?utm_source=scs-index) y practique los ejercicios de su clase.
+
+
+**Notaciones convencionales:** algunos autores tratan de usar notación que ayuden a los lectores a distinguir entre vectores y escalares (números). Por ejemplo, las letras griegas $(\alpha, \beta,...)$ pueden ser usadas para números, las letras minúsculas $(a, x, f,...)$ para vectores. Otra notación representan a los vectores con letras negritas $\mathbf{z}$, o los vectores son escritos con una flecha arriba $$\vec{z}$$. Estas notaciones no están estandarizadas, entonces este lista o listo para entender la notación de cada autor (tener claro sí el símbolo representa un escalar o un vector).
+
+**Indexación**
+
+Debo de dar un par de advertencias relacionadas con la notación de los subíndices $a_i$. 
+
+1. En muchos lenguajes de programación los arrays de longitud $n$ son indexados a partir de $i=0$ hasta $i=n-1$. Pero su notación matemática estándar de un n-vector va desde $i=1$ hasta $1=n$.
+
+2. Tenga cuidado con la notación $a_i$, usada para el $i-ésimo$ elemento del vector $a$. La misma notación puede ser usada para referirse al $i-ésimo$ vector de una colección de o lista de $k$ vectores $a_1,...,a_k$. Dónde $a_3$ significa el tercer elemento de un vector $\mathbf{a}$ (en este caso $a_3$ es un número), o el tercer vector en una lista de vectores (en este caso $a_3$ es un vector), esto debe quedar claro a partir del contexto. Podemos entonces referirnos a un elemento de un vector que es una colección indexada de vectore al escribir $(a_i)_j$ para referirnos a la $j-ésima$ entrada de $a_i$, del $i-ésimo$ vector de nuestra lista. 
+
+
+```{python}
+import numpy as np
+a = np.zeros(10)
+a
+```
+
+```{python}
+b = np.ones(6)
+b
+```
+
+
+**Ejemplo 2.**
+
+![Seis colores y sus respectivos vectores RGB,  Ref. Introduction to Applied Linear Algebra, Stephen Boyd, Stanford, 2018](colores.png)
+
+**Ejemplo 3.**
+
+![Imagen de 8x8 en escala de grises. Ref. Introduction to Applied Linear Algebra, Stephen Boyd, Stanford, 2018 ](gris.png)
+
+
+## Vectores en geometría 
+
+Una aplicación común de vectores es en geometría. Por ejemplo, un vector de dos elementos puede ser usado para representar una coordenada de dos dimensiones en el espacio, mientras que un vectpr de tres elementos puede ser representado como una coordenada en un espacio de 3D.
+
+
+```{python}
+import numpy as np
+v = np.array([2.5,1.5])
+v
+```
+
+
+
+```{r, echo = FALSE}
+etiquetas <- c('(0,0)', 'v =(a,b)' )
+plot(c(0,2.5),c(0,1.5), xlab = 'x', ylab='y', main="v=(a,b) representando como un punto en el plano",col.main='blue')
+arrows(0,0,2.5,1.5, col = 'red' )
+arrows(0,0,2.5,0, col = 'gray')
+arrows(2.5,0,2.5,1.5, col = 'gray' )
+text(c(0.0,2.3),c(0.1,1.48),etiquetas,col='red')
+
+```
+
+```{python}
+import numpy as np
+v = np.array([2,2,2])
+v
+```
+
+
+```{r, echo = FALSE}
+#install.packages("plot3D")
+library("plot3D")
+x0 <- c(0, 0, 0, 2, 2)
+y0 <- c(0, 0, 0, 0, 2)
+z0 <- c(0, 0, 0, 0, 0)
+x1 <- c(2, 2, 2, 2, 2)
+y1 <- c(0, 2, 2, 2, 2)
+z1 <- c(0, 0, 2, 0, 2)
+cols <- c("#1B9E77", "#1B9E77", "#1B9E77", "#1B9E77", "#1B9E77")
+arrows3D(x0, y0, z0, x1, y1, z1, col = cols,
+         lwd = 2, d = 3, clab = c("Quality", "score"), 
+         main = "Vector representando un punto en el espacio", bty ="g", ticktype = "detailed")
+# Add starting point of arrow
+points3D(x0, y0, z0, add = TRUE, col="darkred", 
+          colkey = FALSE, pch = 19, cex = 1)
+# Add labels to the arrows
+text3D(x1, y1, z1, c(" ", " ", "v=(a,b,c)", "", ""),
+       colvar = x1^2, col = cols, add=TRUE, colkey = FALSE)
+```
+
+La longitud de un vector es llamado la **norma** (también conocida como la norma euclidiana) y es con frecuencia $\lVert v \rVert$, y se calcula usando el teorema de Pitágoras. 
+
+Por ejemplo, un vector, **v**, en un espacio 2D, $\mathbf{v}=[a,b]$, con un punto de inicio en el origen, forman un triángulo de longitud $a$ y de altura $b$. La longitud de la hipotenusa, la cual es la longitud del vector, es dado por la raíz cuadrada de la suma de los cuadrado de dos lados, esto es $\sqrt{a^2+b^2}$.
+
+En general, la norma Euclidiana, la longitud de un vector, $\mathbf {v} = [v_1,v_2,...,v_n]$ es dado por la expresión 
+
+ $\lVert v \rVert=\sqrt{v_{1}^{2}+v_{2}^{2}+...+v_{n}^{2}}$.
+ 
+ 
+ Además de la longitud, un vector también tiene dirección. Por ejemplo, el ángulo de un vector trazado en un plano carrtesiano de dos dimensiones es medido con respecto al eje $x$ es dado por $\tan^{-1}{(b/a)}$ y algunas veces es llamado **argumento**. La dirección de un vector tiene que ser medida con respecto a algo, en este caso es el eje $x$, pero puede ser otro vector u otro eje. 
+ 
+ **Resumen**
+ 
+ La longitud de un vector dos dimensional $[x,y]$ es dado por 
+
+ $\lVert v \rVert=\sqrt{x^{2}+y^{2}}$.
+ 
+ La dirección de un vector con respecto al eje $x$ es 
+ 
+ $\theta=\tan^{-1}(y/x)$
+ 
+ **Distancia euclidiana con R
+ 
+
+ 
+ **Ejemplo**
+ 
+a) Si $\mathbf{a}=[4,3]$, la longitud del vector a partir del origen al punto $(3,4)$ es 
+ 
+ $l = \sqrt{4^{2}+3^2}=5$ unidades 
+ 
+```{python}
+m = np.array([4,3])
+print(np.linalg.norm(m))
+```
+ 
+```{r, echo = FALSE, eval=FALSE}
+a <- c(3,4)
+sqrt(sum(a^2))
+```
+ 
+```{r, echo = FALSE, eval=FALSE}
+a <- c(1,2,3,4)
+sqrt(sum(a^2))
+```
+ 
+ 
+ El ángulo del vector relativo al eje $x$ es:
+ 
+ 
+$\theta=\tan^{-1}(3/4)=36.87$ grados
+
+
+```{r, echo = FALSE, eval=FALSE}
+#codigo en R para calcular el angulo 
+rad <- atan(3/4)
+rad2deg <- function(rad) {
+ degrees <- (rad * 180) / (pi)
+ print(rad)
+ print(degrees)
+}
+
+rad2deg(rad)
+
+```
+
+```{python}
+#codigo en Python para calcular el angulo 
+#para usar las funciones trigonómetricas importamos la librería math
+#por default Python calcula el ángulo en radianes
+import math
+radianes = math.atan(3/4)
+radianes
+#con math.degrees  pasamos de radianes a angulo 
+angulo = math.degrees(radianes)
+angulo 
+```
+
+
+
+
+b) Si $\mathbf{a}=[-1,2]$, encuentre el ángulo relativo con respecto al eje $x$.
+
+```{r, echo = FALSE}
+etiquetas <- c('(0,0)', 'v =(-1,2)' )
+plot(c(0,-1),c(0,2), xlab = 'x', ylab='y', main="vector localizado en el segundo cuadrante", ylim = c(-2,2.5), xlim = c(-2,2.5), col.main='blue')
+arrows(0,0,-1,2, col = 'red' )
+abline(h=0, v=0, col= 'gray')
+#arrows(0,0,2.5,0, col = 'gray')
+#arrows(2.5,0,2.5,1.5, col = 'gray' )
+text(c(-0.1,-1.3),c(0.1,2.1),etiquetas,col='red')
+
+```
+Como este vector está localizado en el segundo cuadrante, entonces el ángulo con respecto al eje $x$ es calculado como:
+
+
+$180+\tan^{-1}(y/x)$
+
+
+
+
+```{python}
+#codigo en Python para calcular el angulo 
+import math
+radianes = math.atan(2/-1)
+radianes
+#con math.degrees  pasamos de radianes a angulo 
+angulo = math.degrees(radianes)
+angulo 
+angulo_final = 180 + angulo
+angulo_final
+```
+
+
+```{r, echo = FALSE, eval=FALSE}
+#codigo en R 
+rad <- atan(2/-1)
+rad2deg <- function(rad) {
+ grados <- (rad * 180) / (pi)
+ angulo <- 180 + grados
+ cat('radianes:', rad, "\n")
+ cat('grados:', grados, "\n")
+ cat('angulo:', angulo, "\n")
+}
+
+rad2deg(rad)
+
+```
+
+
+
+
+
+```{r , echo = FALSE, eval=FALSE}
+#codigo en R 
+rad <- atan(2/-1)
+rad2deg <- function(rad) {
+ grados <- (rad * 180) / (pi)
+ angulo <- 180 + grados
+ cat('radianes:', rad, "\n")
+ cat('grados:', grados, "\n")
+ cat('angulo:', angulo, "\n")
+}
+
+rad2deg(rad)
+
+```
+
+
+c) Si $\mathbf{a}=[-1,-3]$, encuentre el ángulo relativo con respecto al eje $x$.
+
+
+```{r, echo = FALSE}
+etiquetas <- c('(0,0)', 'v =(-1,-3)' )
+plot(c(0,-1),c(0,-3), xlab = 'x', ylab='y', main="vector localizado en el tercer cuadrante", ylim = c(-3.5,2.5), xlim = c(-2,2.5), col.main='blue')
+arrows(0,0,-1,-3, col = 'red' )
+abline(h=0, v=0, col= 'gray')
+#arrows(0,0,2.5,0, col = 'gray')
+#arrows(2.5,0,2.5,1.5, col = 'gray' )
+text(c(-0.1,-1.3),c(0.1,-3.1),etiquetas,col='red')
+
+```
+
+
+La figura muestra varios cuadrantes para calcular ángulos. Dado que el vector es $[-1,-3]$, esto indica que el vector está en el tercer cuadrante. Sí el punto esta en el tercer cuadrante, se debe restar 180 al resultado de $\tan^{-1}$, por lo tanto el ángulo es calculado usando:
+
+$-180+\tan^{-1}{(y/x)}$
+
+
+```{python}
+#codigo en Python para calcular el angulo 
+import math
+radianes = math.atan(-3/-1)
+radianes
+#con math.degrees  pasamos de radianes a angulo 
+angulo = math.degrees(radianes)
+angulo 
+#cálculo del ángulo en el tercer cuadrante
+angulo_final = -180 + angulo
+angulo_final
+```
+
+
+```{r, echo = FALSE}
+#codigo en R 
+rad <- atan(-3/-1)
+rad2deg <- function(rad) {
+ grados <- (rad * 180) / (pi)
+ angulo <- 180 - grados
+ cat('radianes:', rad, "\n")
+ cat('grados:', grados, "\n")
+ cat('angulo:', angulo, "\n")
+}
+
+rad2deg(rad)
+
+```
+
+**Notación**
+
+$\mathbf{R}$ representa un conjunto de números reales. 
+
+$\mathbf{R^2}$ representa un conjunto de vectores con dos elementos. Físicamente $\mathbf{R^2}$ es en el plano $xy$, un espacio de 2 dimensiones. 
+
+$\mathbf{R^3}$ representa un conjunto de vectores con tres elementos. Físicamente $\mathbf{R^3}$ es un espacio tridimensional. 
+
+$\mathbf{R^n}$ representa un conjunto de todos los vectores con $n$ elementos. 
+
+Para un vector en $R^n$ nosotros podemos definir una magnitud general basada en la distancia de Pitágoras. Sin embargo, no hay un solo camino para definir la dirección de un vector en $R^n$. Esto puede ser ilustrado al considerar un vector en 3 dimensiones $\mathbf{R^3}$. En la siguiente figura en lugar de tener un solo ángulo, tenemos que considerar tres ángulos. Estos ángulos son llamados los **cosenos directores** y son denotados por $\alpha$, $\beta$ y $\gamma$ para los ángulos con respecto a los ejes $x$, $y$ y $z$.
+
+![Cosenos directores $\alpha$, $\beta$ y $\gamma$](C:\Users\nprzrosas\Documents\JobMexico\UPIEM-IPN\Algebra Lineal\Imagenes\vector3D.png) 
+
+
+La dirección de los cosenos puede ser calculada considerando la longitud del vector (hipotenusa) y la longitud del vector en $x$, $y$ y $z$. Por ejemplo, al proyectar $\mathbf{v}$ sobre el plano $x,z$ y usar la regla de cosenos para triángulos rectángulos, la dirección para $\alpha$ es 
+
+ $\cos \alpha  = \frac{x}{\lVert v \rVert}$
+ 
+De forma similar, las otras dos direcciones cosenos pueden ser calculadas usando:
+ 
+ $\cos \beta  = \frac{y}{\lVert v \rVert}$
+ 
+  $\cos \gamma  = \frac{z}{\lVert v \rVert}$
+  
+  
+Un resultado interesante es cuando se suman los tres cosenos directores. El cuadrado de cada coseno director individual está dado por:
+
+ $\cos^2 \alpha  = \frac{x^2}{x^2+y^2+z^2}$
+ 
+ $\cos^2 \beta  = \frac{y^2}{x^2+y^2+z^2}$
+ 
+  $\cos^2 \gamma  = \frac{z^2}{x^2+y^2+z^2}$
+  
+  
+Sumando los tres cosenos directores nos queda 
+
+ $\cos^2 \alpha + \cos^2 \beta + \cos^2 \gamma  = 1$
+ 
+ 
+Nota. Revisaremos los cosenos directores más adelante cuando se vea producto punto. 
+
+
+
+
+# Notación alternativa 
+
+Un vector no necesariamente debe iniciar en el origen, pero cuando lo hacen generalmente se llaman **vectores posicionales**.
+
+Una definición más general puede ser considerar un vector que inicie en un punto $P$ (no necesariamente el origen) y termine en un punto $Q$, tales vectores son usualmente descritos usando la notación $\overrightarrow{PQ}$. La flecha indica la dirección del vector, y las letras los puntos de origin y fin del vector. 
+
+
+
+```{r, echo = FALSE}
+#codigo en R 
+etiquetas <- c('P', 'Q' )
+plot(c(3,6),c(4,7), xlab = 'x', ylab='y', ylim = c(-3,8), xlim = c(-3,8), main="Tres diferentes vectores iniciando en diferentes puntos en el espacio",col.main='blue')
+arrows(3,4,6,7, col = 'red' )
+arrows(0.5,0.5,-2.5,1.5, col = 'blue')
+arrows(-1.5,0,-2.5,1.5, col = 'green' )
+abline(v=0, h=0, col='gray')
+text(c(3.1,6.2),c(4.8,7.2),etiquetas,col='red')
+```
+
+Es fácil transformar un vector, como el vector  $\overrightarrow{PQ}$ en un vector de posición. Uno simplemente tiene que sustraer el punto de inicio de ambos puntos que definen al vector. Por ejemplo, si $\overrightarrow{PQ}=((3,4),(6,7))$, nosotros podemos determinar la posición del vector al sustraer $(3,4)$ de cada punto y obtener $((0,0),(3,3))$. Lo que es interesante acerca de ese cambio es que la nueva posición del vector tiene exactamente la misma magnitud y dirección del vector original. Esto sugiere un camino para definir la igualdad de vectores.
+
+
+
+# Asistencia 
+
+From Karla Gómez to Everyone:  11:32 AM
+
+Presente
+
+From Frida Cuevas to Everyone:  11:32 AM
+
+Presente
+
+From Itzel Aurora Bravo Santos to Everyone:  11:32 AM
+
+Presente.
+
+From Melanie Mondragón to Everyone:  11:33 AM
+
+Presente
+
+From Emmanuel Gonzalez to Everyone:  11:33 AM
+
+Presente...
+
+From Fernanda Pilón to Everyone:  11:33 AM
+
+Presente
+
+From Adriana Gaeta to Everyone:  11:33 AM
+
+presente
+
+From Víctor Jerónimo to Everyone:  11:33 AM
+
+Presente
+
+From David Dorantes to Everyone:  11:33 AM
+
+presente
+
+From Jorge Ambrosio to Everyone:  11:35 AM
+
+Presente
+
+From Irving Barreto to Everyone:  11:36 AM
+
+Presente
+
+From Andrew Flores Yebra to Everyone:  11:36 AM
+
+Presente
+
+From Wenddy Ballona Martinez to Everyone:  11:36 AM
+
+Presente
+
+From Fernanda Cardenas to Everyone:  11:36 AM
+
+Presente
+
+From José María Garduño to Everyone:  11:36 AM
+
+Presente
+
+From Ivan Barragan to Everyone:  11:36 AM
+
+Presente
+
+From Diego Nicolas to Everyone:  12:04 PM
+
+presente
+
+From Ivan Delgado to Everyone:  12:05 PM
+
+presente
+
+From Maria Fernanda Garcia to Everyone:  12:07 PM
+
+Presente
+
+From Wenddy Ballona Martinez to Everyone:  01:31 PM
+
+presente
+
+

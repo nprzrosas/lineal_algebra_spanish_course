@@ -1,0 +1,237 @@
+---
+title: "Día 14 - Matrices"
+author: "Dra. Norma C. Pérez Rosas"
+date: '`r format(Sys.time(), "%d/%m/%Y")`'
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+  html_document:
+    toc: yes
+    toc_depth: 2
+---
+
+# Declaración de matrices en Python 
+
+En Python las matrices son representados con módulo **array**:
+
+
+```{python}
+import numpy as np 
+A = np.array([[1,7], [2, 3], [5, 0]]) #creación de la matriz A
+B = np.array([[2, 6, 3, 1], [1, 2, 3, 4]])# creación de la matriz B
+print(A)# Mostrar A
+print(B)#Mostrar B
+A.shape# shape nos ayuda a obtener las dimensiones de la matriz 3 x 2 (3 filas, 2 columnas)
+B.shape# dimensiones de B = 2 x 4 (2 filas, 4 columnas)
+```
+
+
+# Matriz identidad y matriz cero 
+
+Hay dos matrices especiales que ocurren con frencuencia en álgebra y estás son la **matriz identidad** y la **matriz cero**. La matriz identidad es equivalente al número uno en una escala normal aritmética y se comporta como tal, como uno. Por convención, la matriz identidad es denotada por : 
+
+
+
+
+$$
+\mathbf{I}=\left[
+\begin{array}{cccc}
+   1 & 0 & \cdots &  0 \\
+   0 & 1 & \cdots &  0 \\
+   \vdots &  &  &   \vdots \\
+   0 & 0 & \cdots &  1 \\
+\end{array}
+\right]
+$$
+
+
+
+$$
+\mathbf{I}_{2\times 2}=\left[
+\begin{array}{cc}
+   1 & 0  \\
+   0 & 1  \\
+\end{array}
+\right]
+$$
+
+
+```{python}
+import numpy as np 
+I = np.array([[1,0], [0, 1]]) #creación de la matriz I
+print(I)# Mostrar I
+I.shape# shape nos ayuda a obtener las dimensiones de la matriz I
+```
+
+```{python}
+import numpy as np 
+I = np.array([[1, 0, 0 , 0], [0, 1, 0 , 0], [0, 0, 1 , 0], [0, 0, 0 , 1]]) #creación de la matriz I
+print(I)# Mostrar I
+I.shape# shape nos ayuda a obtener las dimensiones de la matriz I
+```
+
+
+La matriz identidad es definida de forma que al multiplicar la matriz por $\mathbf{I}$ deja a la matriz original sin cambios. 
+
+$\mathbf{A}\mathbf{I}=\mathbf{A}$
+
+
+```{python}
+import numpy as np 
+A = np.array([[1,7], [2, 3]]) #creación de la matriz A
+I = np.array([[1, 0], [0, 1]])# creación de la matriz I
+print(A)# Mostrar A
+print(I)#Mostrar I
+np.matmul(A, I)
+```
+
+
+La matriz cero es simplemente una matriz $m\times n$ con todas las entradas con el valor de cero , por ejemplo:
+
+$$
+\mathbf{0}_{2\times 2}=\left[
+\begin{array}{cc}
+   0 & 0  \\
+   0 & 0  \\
+\end{array}
+\right]
+$$
+
+```{python}
+import numpy as np 
+C = np.array([[0,0], [0, 0]]) #creación de la matriz de ceros C
+print(C)# Mostrar C
+```
+
+
+Una matriz multiplicada por una matriz cero, producirá una matriz de ceros:
+
+$\mathbf{A}\mathbf{0}=\mathbf{0}$
+
+```{python}
+import numpy as np 
+A = np.array([[1,7], [2, 3]]) #creación de la matriz A
+c = np.array([[0,0], [0, 0]])# creación de la matriz I
+print(A)# Mostrar A
+print(C)#Mostrar I
+np.matmul(A, C)
+```
+
+# Matrices triangulares
+
+Las matrices triangulares son matrices cuadradas donde los elementos por arriba o por debajo de la diagonal principal, son cero. Por ejemplo:
+
+
+$$
+\left[
+\begin{array}{ccc}
+   1 & 0 & 0 \\
+   3 & 9 & 0 \\
+   0 & 4 & 1 \\
+\end{array}
+\right]
+$$
+
+```{python}
+import numpy as np 
+A = np.array([[1,0, 0], [3, 9, 0], [0, 4, 1]]) #creación de la matriz A
+print(A)# Mostrar A
+```
+
+
+$$
+\left[
+\begin{array}{ccc}
+   1 & 2 & 5 \\
+   0 & 9 & 8 \\
+   0 & 0 & 1 \\
+\end{array}
+\right]
+$$
+
+```{python}
+import numpy as np 
+A = np.array([[1, 2, 5], [0, 9, 8], [0, 0, 1]]) #creación de la matriz A
+print(A)# Mostrar A
+```
+
+Las matrices triangulares son útiles porque ciertas operaciones sobre ellas son más simples, como las operaciones aritméticas, transposición, cálculo de eigenvalores. 
+
+
+
+# Asistencia
+
+From Fernanda Pilón to Everyone:  11:34 AM
+
+Presente
+
+From Karla Gómez to Everyone:  11:34 AM
+
+presente
+
+From Ivan Delgado to Everyone:  11:34 AM
+
+Presente
+
+From Fernanda Cardenas to Everyone:  11:34 AM
+
+Presente
+
+From David Dorantes to Everyone:  11:35 AM
+
+Presente
+
+From Frida Cuevas to Everyone:  11:35 AM
+
+Presente
+
+From Itzel Aurora Bravo Santos to Everyone:  11:35 AM
+
+Presente.
+
+From Pérez David to Everyone:  11:35 AM
+
+Presente
+
+From José María Garduño to Everyone:  11:35 AM
+
+presente
+
+From Maria Fernanda Garcia to Everyone:  11:35 AM
+
+Presente
+
+From Gaeta to Everyone:  11:35 AM
+
+Presente
+
+From Andrew Flores Yebra to Everyone:  11:35 AM
+
+presente
+
+From Víctor Jerónimo to Everyone:  11:35 AM
+
+Presente
+
+From Wenddy Ballona Martinez to Everyone:  11:35 AM
+
+presente
+
+From Emmanuel Gonzalez to Everyone:  11:36 AM
+
+Presente
+
+From Jorge Ambrosio to Everyone:  11:38 AM
+
+Presente
+
+From Irving Barreto to Everyone:  11:44 AM
+
+Presente
+
+From Melanie Mondragón to Everyone:  11:56 AM
+
+Presente
+
+

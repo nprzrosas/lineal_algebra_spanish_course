@@ -1,0 +1,64 @@
+---
+title: "Día 26 - Serie 1 - Notebook 3"
+author: "Dra. Norma C. Pérez Rosas"
+date: '`r format(Sys.time(), "%d/%m/%Y")`'
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+  html_document:
+    toc: yes
+    toc_depth: 2
+---
+
+
+Calcule el determinante de las siguientes matrices en su notebook de google colab. Justifique completamente su respuesta con algún código en Python y desarrollo en LaTex. 
+
+a)
+
+$$
+\mathbf{A}=\left[
+\begin{array}{cc}
+7 & 4 \\
+0 & 6  \\
+\end{array}
+\right]
+$$
+
+b)
+
+$$
+\mathbf{B}=\left[
+\begin{array}{cc}
+3 & 4 \\
+1 & 7  \\
+\end{array}
+\right]
+$$
+
+
+c)
+
+$$
+\mathbf{C}=\left[
+\begin{array}{ccc}
+1 & -3 & 7 \\
+2 & 2 & 1 \\
+-4 & -4 & 3 \\
+\end{array}
+\right]
+$$
+
+
+d)
+
+$$
+\mathbf{D}=\left[
+\begin{array}{cccc}
+2 & 1 & 0 & -1 \\
+1 & 0 & -1 & 2 \\
+0 & -1 & 2 & 1 \\
+-1 & 2 & 1 & 0 \\
+\end{array}
+\right]
+$$

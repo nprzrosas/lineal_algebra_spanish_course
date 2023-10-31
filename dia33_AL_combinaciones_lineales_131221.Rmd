@@ -1,0 +1,918 @@
+---
+title: "Día 33 - Combinación lineal, espacios generados, independencia lineal, bases, dimensión, transformaciones lineales, eigenvalores y eigenvectores"
+author: "Dra. Norma C. Pérez Rosas"
+date: '`r format(Sys.time(), "%d/%m/%Y")`'
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+  html_document:
+    toc: yes
+    toc_depth: 2
+---
+
+# Combinación lineal 
+
+Expresiones como:
+
+$\mathbf{v}_1-3\mathbf{v}_2+5\mathbf{v}_3-2\mathbf{v}_1=4$
+
+
+en la que $\mathbf{v}_1, \ \mathbf{v}_2, \ \mathbf{v}_3 \ y \ \mathbf{v}_4$ son vectores del mismo tamaño. Estas sumas de múltiplos escalares de vectores se llaman **combinaciones lineales de vectores**
+
+**Definición:** Sean $\mathbf{v}_1, \  \mathbf{v}_2, \dots, \ \mathbf{v}_k$ y sean $c_1, \ c_2, \ , c_k$ escalares. El vector $n$ de la forma 
+
+
+$c_1\mathbf{v}_1+ c_2 \mathbf{v}_2+ \dots +  c_k\mathbf{v}_k$
+
+se llama **combinación lineal** de $\mathbf{v}_1, \ \dots , \mathbf{v}_1$. Los escalares $c_1, \dots, c_k$ se llaman **coeficientes de la combinación lineal**.
+
+**Ejemplo:**
+
+Calcular y dibujar la combinación lineal $\frac{1}{2}\mathbf{v}_1-3\mathbf{v}_2$ siendo,
+
+
+\begin{equation*}
+\mathbf{v}_1 = 
+\begin{pmatrix}
+2 \\
+4 \\
+\end{pmatrix}
+\end{equation*}
+
+\begin{equation*}
+\mathbf{v}_2 = 
+\begin{pmatrix}
+-1 \\
+1 \\
+\end{pmatrix}
+\end{equation*}
+
+Solución:
+
+$$
+\frac{1}{2} \left [
+\begin{array}{c}
+    2  \\
+    4 \\
+\end{array}
+\right ] -3 \left [
+\begin{array}{c}
+    -1  \\
+    1 \\
+\end{array}
+\right ]  =\left [
+\begin{array}{c}
+    1  \\
+    2 \\
+\end{array}
+\right ]  + \left [
+\begin{array}{c}
+    3  \\
+    -3 \\
+\end{array}
+\right ] =  \left [
+\begin{array}{c}
+    4  \\
+    -1 \\
+\end{array}
+\right ] 
+$$
+
+El proceso anterior se muestra gráficamente con el siguiente código. 
+
+
+```{python}
+import matplotlib.pyplot as plt
+import numpy as np
+v1 = [2, 4]
+v2 = [-1, 1]
+v1_p = [1, 2]
+v2_p = [3, -3]
+final = [4,-1]
+origen = [0, 0]
+final2 = [3,-3]
+plt.quiver(origen[0], origen[1],  v1[0], v1[1], color = 'r', angles='xy', scale_units='xy', scale=1)
+plt.quiver(origen[0], origen[1],  v2[0], v2[1], color = 'b', angles='xy', scale_units='xy', scale=1)
+plt.quiver(origen[0], origen[1],  v1_p[0], v1_p[1], color = 'g', angles='xy', scale_units='xy', scale=1)
+plt.quiver(origen[0], origen[1],  v2_p[0], v2_p[1], color = 'm', angles='xy', scale_units='xy', scale=1)
+plt.quiver(origen[0], origen[1],  final[0], final[1], color = 'k', angles='xy', scale_units='xy', scale=1)
+plt.quiver(v1_p[0], v1_p[1],  final2[0], final2[1], color = 'y', angles='xy', scale_units='xy', scale=1)
+plt.quiver(final2[0], final2[1],  v1_p[0], v1_p[1], color = 'y', angles='xy', scale_units='xy', scale=1)
+plt.xlim([-2, 6])
+plt.ylim([-3, 5])
+plt.show()
+```
+
+
+**Ejemplo 2.** Determine si cada uno de los siguientes vectores:
+
+
+\begin{equation*}
+\mathbf{u} = 
+\begin{pmatrix}
+0 \\
+2 \\
+1 \\
+\end{pmatrix}
+\end{equation*}
+
+y 
+
+\begin{equation*}
+\mathbf{v} = 
+\begin{pmatrix}
+0 \\
+1\\
+2 \\
+\end{pmatrix}
+\end{equation*}
+
+es una combinación lineal de $\mathbf{v}_1$, $\mathbf{v}_2$ y $\mathbf{v}_3$, donde
+
+\begin{equation*}
+\mathbf{v}_1 = 
+\begin{pmatrix}
+-1 \\
+1\\
+0 \\
+\end{pmatrix}
+\end{equation*}
+
+\begin{equation*}
+\mathbf{v}_2 = 
+\begin{pmatrix}
+2 \\
+0 \\
+1 \\
+\end{pmatrix}
+\end{equation*}
+
+\begin{equation*}
+\mathbf{v}_3 = 
+\begin{pmatrix}
+1 \\
+1\\
+1 \\
+\end{pmatrix}
+\end{equation*}
+
+Solución: Buscamos los escalares $c_1$, $c_2$ y $c_3$, tales que:
+
+$\mathbf{u}=c_1\mathbf{v}_1+c_2\mathbf{v}_2+c_3\mathbf{v}_3$
+
+
+$$
+ \left [
+\begin{array}{c}
+0 \\ 
+2  \\
+1  \\
+\end{array}
+\right ]= c_1 \left [
+\begin{array}{c}
+-1  \\ 
+1  \\
+0 \\
+\end{array}
+\right ] + c_2 \left [
+\begin{array}{c}
+2  \\ 
+0  \\
+1 \\
+\end{array}
+\right ] + c_3 \left [
+\begin{array}{c}
+1  \\ 
+1  \\
+1 \\
+\end{array}
+\right ]
+$$
+
+
+$$
+ \left [
+\begin{array}{ccccc}
+-c_1 & + & 2c_2 & + & c_3 \\ 
+c_1  &   &     & + & c_3\\
+    & +  & c_2 & + & c_3 \\
+\end{array}
+\right ]=  \left [
+\begin{array}{c}
+0  \\ 
+2  \\
+1 \\
+\end{array}
+\right ] 
+$$
+
+
+\begin{alignat*}{7}
+   -c_1 & {}+{} &  2c_2 & {}+{} & c_3 &  {}={} & 0 \\
+    c_1 & {} {} &       & {}+{} & c_3 &  {}={} & 2 \\
+        & {}+{} & c_2   & {}+{} & c_3 &  {}={} & 1 \\
+\end{alignat*}
+
+
+$$
+ \left [
+\begin{array}{ccccc}
+-1 & 2 & 1 & | & 0 \\ 
+1 & 0 & 1  & | & 2 \\
+0 & 1 & 1 &  | & 1 \\
+\end{array}
+\right ]  \xrightarrow[  ]{R_2 \leftrightarrow R_1} \left [
+\begin{array}{ccccc}
+1 & 0 & 1  & | & 2 \\
+-1 & 2 & 1 & | & 0 \\ 
+0 & 1 & 1 &  | & 1 \\
+\end{array}
+\right ]
+$$
+
+$$
+ \left [
+\begin{array}{ccccc}
+1 & 0 & 1  & | & 2 \\
+-1 & 2 & 1 & | & 0 \\ 
+0 & 1 & 1 &  | & 1 \\
+\end{array}
+\right ]  \xrightarrow[  ]{R_2 \rightarrow R_1+R_2} \left [
+\begin{array}{ccccc}
+1 & 0 & 1  & | & 2 \\
+0 & 2 & 2 & | & 2 \\ 
+0 & 1 & 1 &  | & 1 \\
+\end{array}
+\right ]
+$$
+
+
+$$
+ \left [
+\begin{array}{ccccc}
+1 & 0 & 1  & | & 2 \\
+0 & 2 & 2 & | & 2 \\ 
+0 & 1 & 1 &  | & 1 \\
+\end{array}
+\right ]  \xrightarrow[  ]{R_2 \rightarrow \frac{1}{2}R_2} \left [
+\begin{array}{ccccc}
+1 & 0 & 1  & | & 2 \\
+0 & 1 & 1 & | & 1 \\ 
+0 & 1 & 1 &  | & 1 \\
+\end{array}
+\right ]
+$$
+
+$$
+ \left [
+\begin{array}{ccccc}
+1 & 0 & 1  & | & 2 \\
+0 & 1 & 1 & | & 1 \\ 
+0 & 1 & 1 &  | & 1 \\
+\end{array}
+\right ]  \xrightarrow[  ]{R_3 \rightarrow R_2 - R_3} \left [
+\begin{array}{ccccc}
+1 & 0 & 1  & | & 2 \\
+0 & 1 & 1 & | & 1 \\ 
+0 & 0 & 0 &  | & 0 \\
+\end{array}
+\right ]
+$$
+
+
+Por lo tanto la solución del sistema es:
+
+$c_1=2-c_3$
+
+$c_2=1-c_3$
+
+Si $c_3=r$ donde $r$ es un escalar, entonces tenemos:
+
+$c_1=2-r$
+
+$c_2=1-r$
+
+$c_3=r$
+
+En este caso hay una cantidad infinita de escaleras tales que $\mathbf{u}=c_1\mathbf{v}_1+c_2\mathbf{v}_2+c_3\mathbf{v}_3$. Por ejemplo, si $r=0$, entonces $c_1=1$, $c_3=0$ y $c_2=2$
+
+
+$$
+ \left [
+\begin{array}{c}
+0 \\
+2 \\ 
+1 \\
+\end{array}
+\right ] = 1 \left [
+\begin{array}{c}
+-1 \\
+ 1 \\ 
+ 0 \\
+\end{array}
+\right ] +  3 \left [
+\begin{array}{c}
+2 \\
+0 \\ 
+1 \\
+\end{array}
+\right ] + 0 \left [
+\begin{array}{c}
+1 \\
+1 \\ 
+1 \\
+\end{array}
+\right ]
+$$
+
+
+**Ejemplo 3:** encuentre los escalares $d_1$, $d_2$ y $d_3$ tales que $\mathbf{v}=d_1\mathbf{v}_1+d_2\mathbf{v}_2+d_3\mathbf{v}_3$, es decir:
+
+$$
+ \left [
+\begin{array}{c}
+0 \\
+1 \\ 
+2 \\
+\end{array}
+\right ] = d_1 \left [
+\begin{array}{c}
+-1 \\
+ 1 \\ 
+ 0 \\
+\end{array}
+\right ] +  d_2 \left [
+\begin{array}{c}
+2 \\
+0 \\ 
+1 \\
+\end{array}
+\right ] + d_3 \left [
+\begin{array}{c}
+1 \\
+1 \\ 
+1 \\
+\end{array}
+\right ]
+$$
+
+La matriz aumentada del sistema correspondiente en $d_1$, $d_2$ y $d_3$ tiene las columnas $\mathbf{v}_1$, $\mathbf{v}_2$, $\mathbf{v}_3$ y $\mathbf{v}$, y se reduce como sigue:
+
+
+$$
+ \left [
+\begin{array}{ccccc}
+-1 & 2 & 1  & | & 0 \\
+1 & 0 & 1 & | & 1 \\ 
+0 & 1 & 1 &  | & 2 \\
+\end{array}
+\right ] 
+$$
+
+
+$$
+ \left [
+\begin{array}{ccccc}
+-1 & 2 & 1  & | & 0 \\
+1 & 0 & 1 & | & 1 \\ 
+0 & 1 & 1 &  | & 2 \\
+\end{array}
+\right ]  \xrightarrow[  ]{R_2 \leftrightarrow R_1 } \left [
+\begin{array}{ccccc}
+1 & 0 & 1  & | & 2 \\
+-1 & 2 & 1 & | & 0 \\ 
+0 & 1 & 1 &  | & 2 \\
+\end{array}
+\right ]
+$$
+
+$$
+ \left [
+\begin{array}{ccccc}
+1 & 0 & 1  & | & 2 \\
+-1 & 2 & 1 & | & 0 \\ 
+0 & 1 & 1 &  | & 2 \\
+\end{array}
+\right ]  \xrightarrow[  ]{R_3 \leftrightarrow R_2 } \left [
+\begin{array}{ccccc}
+1 & 0 & 1  & | & 2 \\
+0 & 1 & 1 &  | & 2 \\
+-1 & 2 & 1 & | & 0 \\ 
+\end{array}
+\right ]
+$$
+$$
+ \left [
+\begin{array}{ccccc}
+1 & 0 & 1  & | & 2 \\
+0 & 1 & 1 &  | & 2 \\
+-1 & 2 & 1 & | & 0 \\
+\end{array}
+\right ]  \xrightarrow[  ]{R_3 \rightarrow R_1 + R_3 } \left [
+\begin{array}{ccccc}
+1 & 0 & 1  & | & 0 \\
+0 & 1 & 1 &  | & 2 \\
+0 & 2 & 2 & | & 0 \\ 
+\end{array}
+\right ]
+$$
+$$
+ \left [
+\begin{array}{ccccc}
+1 & 0 & 1  & | & 0 \\
+0 & 1 & 1 &  | & 2 \\
+0 & 2 & 2 & | & 0 \\ 
+\end{array}
+\right ]  \xrightarrow[  ]{R_3 \rightarrow R_3 -2 R_2 } \left [
+\begin{array}{ccccc}
+1 & 0 & 1  & | & 0 \\
+0 & 1 & 1 &  | & 2 \\
+0 & 0 & 0 & | & -4 \\ 
+\end{array}
+\right ]
+$$
+$$
+ \left [
+\begin{array}{ccccc}
+1 & 0 & 1  & | & 0 \\
+0 & 1 & 1 &  | & 2 \\
+0 & 0 & 0 & | & -4 \\ 
+\end{array}
+\right ]  \xrightarrow[  ]{R_3 \rightarrow -\frac{1}{4} R_3 } \left [
+\begin{array}{ccccc}
+1 & 0 & 1  & | & 0 \\
+0 & 1 & 1 &  | & 2 \\
+0 & 0 & 0 & | & 1 \\ 
+\end{array}
+\right ]
+$$
+De lo anterior definimos que el sistema es incosistente.  En vista de lo anterior $\mathbf{v}$ **no es una combinación lineal**. 
+
+## Relación entre sistemas lineales y combinaciones lineales
+
+Si $x_1, \ x_2, \ \dots \ , \ x_n$ son las incógnitas de un sistema, la matriz de coeficientes es $\mathbf{A}$, cuyos términos constantes son las componentes de un vector $\mathbf{b}$; por lo tanto, si $\mathbf{a}_1, \ \mathbf{a}_2, \ \dots \ , \mathbf{a}_n$ son las columnas de $\mathbf{A}$, las notaciones siguientes son equivalentes:
+
+$[\mathbf{A}:\mathbf{b}] \leftrightarrow x_1 \mathbf{a}_1+x_2 \mathbf{a}_2+\dots+x_n\mathbf{a}_n=\mathbf{b}$
+
+**Ejemplo:** escriba el siguiente sistema en forma de ecuación vectorial.
+
+\begin{alignat*}{5}
+   x & {}-{} &  5y  &  {}={} & 1 \\
+   -x & {}+{} &  6y  &  {}={} & 3 \\
+\end{alignat*}
+
+Solución:
+
+$$
+x \left [
+\begin{array}{c}
+1 \\
+-1 \\ 
+\end{array}
+\right ] + y \left [
+\begin{array}{c}
+-5 \\
+ 6 \\ 
+\end{array}
+\right ] = \left [
+\begin{array}{c}
+1 \\
+3 \\ 
+\end{array}
+\right ]
+$$
+
+
+# Espacio generado por un conjunto de vectores 
+
+El conjunto de todas las combinaciones lineales de los   vectores $n$ $\mathbf{v}_1,\dots,\mathbf{v}_k$ se llama **espacio generado por los vectores** $\mathbf{v}_1,\dots,\mathbf{v}_k$  y se representa por Gen$\{ \mathbf{v}_1,\dots,\mathbf{v}_k \}$, se dice que $\mathbf{v}_1,\dots,\mathbf{v}_k$ **generan** a $V$ y que $\{ \mathbf{v}_1,\dots,\mathbf{v}_k \}$ es un **conjunto generador** de $V$.
+
+**Ejemplo:** demuestre que los siguientes vectores 
+
+$\mathbf{0}$
+
+$\mathbf{v}_1$
+
+$\mathbf{v}_2$
+
+$\mathbf{v}_1+\mathbf{v}_2$
+
+$3\mathbf{v}_1-2.5\mathbf{v}_2$
+
+están en Gen$\{ \mathbf{v}_1, \mathbf{v}_2 \}$
+
+**Solución.** Cada uno de estos vectores son una combinación lineal de $\mathbf{v}_1, \mathbf{v}_2$ porque:
+
+$\mathbf{0}=0\mathbf{v}_1+0\mathbf{v}_2$
+
+$\mathbf{v}_1=1\mathbf{v}_1+0\mathbf{v}_2$
+
+$\mathbf{v}_2=0\mathbf{v}_1+1\mathbf{v}_2$
+
+$\mathbf{v}_1+\mathbf{v}_2=1\mathbf{v}_1+1\mathbf{v}_2$
+
+$3\mathbf{v}_1=3\mathbf{v}_1+0\mathbf{v}_2$
+
+$3\mathbf{v}_1-2.5\mathbf{v}_2=3\mathbf{v}_1+(-2.5)\mathbf{v}_2$
+
+# Independencia lineal 
+
+En esta sección aprenderemos lo que son los vectores $n \ linealmente \ dependientes \ y \ linealmente \ independientes$.
+
+Una combinación lineal de vectores $n$ $\mathbf{v}_1,\dots,\mathbf{v}_k$  es 
+$c_1\mathbf{v}_1+c_2\mathbf{v}_2+\dots+c_k\mathbf{v}_k$
+
+y se llama **no trivial** cuando algunas de las $c_1,\dots , c_k$ son diferentes de cero, pero si todos los coeficientes son cero se denomina **trivial**.
+
+**Definición:** una *sucesión* de vectores $n$, $\mathbf{v}_1,\dots,\mathbf{v}_k$ es **linealmente dependiente** si $\mathbf{0}$ es una combinación lineal no trivial de esos vectores. En otras palabras, cuando hay escalares $c_1, \dots, c_k$ y no todos son cero, como 
+
+$c_1\mathbf{v}_1+c_2\mathbf{v}_2+\dots \dots + c_k\mathbf{v}_k=\mathbf{0}$
+
+Un conjunto de $\mathbf{v}_1,\dots,\mathbf{v}_k$ de vectores $n$ es linealmente dependiente si lo es como sucesión. Una relación de la forma $c_1\mathbf{v}_1+c_2\mathbf{v}_2+\dots \dots + c_k\mathbf{v}_k=\mathbf{0}$ cuando no todas las $c_1,\dots,c_k$ son cero, se llama **relación de dependencia lineal**.
+
+
+Un *conjunto* de vectores $n$, $\mathbf{v}_1,\dots,\mathbf{v}_k$ es **linealmente independiente** si no lo es linealmente dependiente. Es lo mismo que decir que la única combinación lineal de $\mathbf{0}$ en función de $\mathbf{v}_1,\dots,\mathbf{v}_k$ es la trivial o que la ecuación 
+
+$c_1\mathbf{v}_1+c_2\mathbf{v}_2+\dots \dots + c_k\mathbf{v}_k=\mathbf{0}$
+
+implica que $c_1=0, \dots, c_k = 0$
+
+**Ejemplo:**
+
+El conjunto 
+
+$$
+\left \{ \left[
+\begin{array}{c}
+1 \\
+-1 \\ 
+\end{array}
+\right ], \left [
+\begin{array}{c}
+1 \\
+ 2 \\ 
+\end{array}
+\right ], \left [
+\begin{array}{c}
+2 \\
+1 \\ 
+\end{array}
+\right ]  \right \}
+$$
+es linealmente dependiente porque 
+
+$$
+1 \left[
+\begin{array}{c}
+1 \\
+-1 \\ 
+\end{array}
+\right ]+ \left [
+\begin{array}{c}
+1 \\
+ 2 \\ 
+\end{array}
+\right ] -1 \left [
+\begin{array}{c}
+2 \\
+1 \\ 
+\end{array}
+\right ]   = \left [
+\begin{array}{c}
+0 \\
+0 \\ 
+\end{array}
+\right ] 
+$$
+
+
+Ejemplo: la sucesión 
+
+$$
+\left[
+\begin{array}{c}
+1 \\
+2 \\ 
+\end{array}
+\right ], \left [
+\begin{array}{c}
+2 \\
+1 \\ 
+\end{array}
+\right ], \left [
+\begin{array}{c}
+1 \\
+2 \\ 
+\end{array}
+\right ]  
+$$
+es linealmente dependiente porque 
+
+$$
+1 \left[
+\begin{array}{c}
+1 \\
+2 \\ 
+\end{array}
+\right ]+ 0 \left [
+\begin{array}{c}
+2 \\
+1 \\ 
+\end{array}
+\right ] + (-1) \left [
+\begin{array}{c}
+1 \\
+2 \\ 
+\end{array}
+\right ]   = \left [
+\begin{array}{c}
+0 \\
+0 \\ 
+\end{array}
+\right ] 
+$$
+# El espacio nulo 
+
+El **espacio nulo** $v(A)$ o **nulidad** de una matriz $\mathbf{A}$ de $m \times n$ contiene todos los vectores $n$ en $\mathbf{x}$, tales que $\mathbf{A}\mathbf{x}=\mathbf{0}$. Es el conjunto de soluciones del sistema homogéneo $\mathbf{A}\mathbf{x}=\mathbf{0}$
+
+
+$v(A)=\{ \mathbf{x}  \ en \ \mathbf{R}^n \ tal \ que \mathbf{A}\mathbf{x}=\mathbf{0}$
+
+Observe que $\mathbf{A}\mathbf{x}=\mathbf{0}$ solo tiene la solución trivial si y sólo si $v(\mathbf{A})=\{ \mathbf{0} \}$. Calcular $v(A)$ equivale a determinar todas las soluciones de $\mathbf{A}\mathbf{x}=\mathbf{0}$.
+
+Ejemplo: ¿Cuál de 
+
+$$
+\mathbf{u} = \left[
+\begin{array}{c}
+1 \\
+2 \\ 
+\end{array}
+\right ] \ y \  \mathbf{v} = \left [
+\begin{array}{c}
+-1 \\
+2 \\ 
+\end{array}
+\right ] 
+$$
+
+está en el espacio nulo de 
+
+$$
+\left[
+\begin{array}{cc}
+2 & -1 \\
+-4 & 2 \\ 
+\end{array}
+\right ] ? 
+$$
+
+Solución 
+
+En vista de que
+
+
+$$
+\left[
+\begin{array}{cc}
+2 & -1 \\
+-4 & 2 \\ 
+\end{array}
+\right ]  \left[
+\begin{array}{c}
+1 \\
+2 \\ 
+\end{array}
+\right ] = \left[
+\begin{array}{c}
+0 \\
+0 \\ 
+\end{array}
+\right ]
+$$
+y 
+
+
+$$
+\left[
+\begin{array}{cc}
+2 & -1 \\
+-4 & 2 \\ 
+\end{array}
+\right ]  \left[
+\begin{array}{c}
+-1 \\
+2 \\ 
+\end{array}
+\right ] = \left[
+\begin{array}{c}
+-4 \\
+8 \\ 
+\end{array}
+\right ] \neq  \left[
+\begin{array}{c}
+0 \\
+0 \\ 
+\end{array}
+\right ]
+$$
+
+
+es evidente que $\mathbf{u}$ está en el espacio nulo y $\mathbf{v}$ no lo  está.
+
+# Bases y dimensión 
+
+Los vectores $[1,0]$, $[0,1]$ y $[2,3]$ generan un espacio en 2 dimensiones. Sin embargo, uno de los vectores es redundante porque el conjunto es linealmente dependiente. Por ejemplo: $[2,3]$ puede ser obtenido por una combinación lineal de los dos primeros. A partir de esto surge el concepto del mínimo espacio generado, esto es el mínimo número de vectores requeridos para describir un espacio generado. A tales vectores se les llama **bases**.
+
+Las **bases** de un espacio vectorial $V$, es el conjunto más pequeño de un conjunto de vectores linealmente independientes que generan $V$. Esto simplemente significa que todos los puntos en el espacio puede ser expresado con este mínimo número de vectores. 
+
+Por ejemplo, dado el conjunto $[1,0]$, $[0,1]$ y $[2,3]$ una base para este conjunto es el conjunto es $[1,0], [0,1]$ mientras que el otro es $[1,0],[2,3]$. Las bases $[1,0],[0,1]$ con frecuencia se les llama bases estándar y se generaliza para un espacio n dimensional. 
+
+Al tamaño de una base se le llama **dimensión**, denotado por $V$.
+
+Aunque el espacio puede tener diferentes bases, un resultado importante es que la dimensión de la base será siempre la misma. Por ejemplo, la dimensión del espacio generado por $[1,0], [0,1]$ y $[1,0], [2,3]$ es 2. 
+
+# Unidad IV. Transformaciones lineales
+
+Los vectores y las matrices se relaciona en forma íntima a través de la multiplicación matricial. Para una matriz fija $\mathbf{A}$ de $m \times n$, cualquier vector $n\mathbf{x}$ corresponde al vector  $m\mathbf{A}\mathbf{x}$. Esta correspondencia definida por el productor matricial $\mathbf{A}\mathbf{x}$ es el principal ejemplo de una transformación lineal. 
+
+Para futuras referencias consulte <https://aga.frba.utn.edu.ar/definicion-y-propiedades-de-las-transformaciones-lineales/>
+
+
+# Unidad V. Eigenvalores y eigenvectores 
+
+Los eigenvalores y los eigenvectores juegan un papel importante cuando se resuelven ecuaciones diferenciales y determinan la estabilidad y la dinámica de una sistema dinámico lineal. Como ellos constituyen una parte importante de la ingeniería, revisaremos esos términos a continuación. 
+
+Dada la matriz 
+
+
+$$
+\mathbf{A}=\left[
+\begin{array}{cccc}
+   a_{11} & a_{12} & \dots & a_{1n} \\
+   a_{21} & a_{22} & \dots & a_{2n} \\
+   \vdots &         &       & \vdots \\
+   a_{n1} & a_{n2} & \dots & a_{nn} \\
+\end{array}
+\right]
+$$
+
+Los **eigenvectores** tienen una relación especial con esta matriz $\mathbf{A}$ de forma tal que 
+
+
+
+$\mathbf{A}\mathbf{x}=\lambda \mathbf{x}$
+
+donde 
+
+$\mathbf{x}$ es el eigenvector
+
+$\lambda$ es el eigenvalor (valor escalar y también se le conoce como el valor característico)
+
+Los eigenvectores tienen que ser no triviales, es decir, no puede ser un vector de ceros. Una matriz puede tener múltiples eigenvalores, pero no más que su número de filas o columnas, además de que cada eigenvalor es asociado con un eigenvector en específico. Ejemplo, si tengo la matriz 
+
+$$
+\mathbf{A}=\left[
+\begin{array}{cc}
+   -3 & 1  \\
+   -2 & 0
+\end{array}
+\right]
+$$
+
+
+y el vector 
+
+
+$$
+\mathbf{x}=\left[
+\begin{array}{c}
+   1   \\
+   1 
+\end{array}
+\right]
+$$
+
+La pregunta es, ¿será $\mathbf{x}$ un eigenvector de $\mathbf{A}$? Es decir, 
+
+¿$\mathbf{A}\mathbf{x}=\lambda \mathbf{x}$?
+
+
+$$
+\mathbf{Ax}=\left[
+\begin{array}{cc}
+   -3 & 1  \\
+   -2 & 0
+\end{array}
+\right]\left[
+\begin{array}{c}
+   1 \\
+   1
+\end{array}
+\right]=\left[
+\begin{array}{c}
+   (-3)(1)+(1)(1)\\
+   (-2)(1)+(0)(1)
+\end{array}
+\right]=\left[
+\begin{array}{c}
+   -2   \\
+   -2 
+\end{array}
+\right]=-2\left[
+\begin{array}{c}
+   1  \\
+   1 
+\end{array}
+\right]
+$$
+
+
+De lo anterior se concluye que 
+
+$$
+\mathbf{x}=\left[
+\begin{array}{c}
+   1   \\
+   1 
+\end{array}
+\right]
+$$
+
+es un eigenvector y $-2$ es un eigenvalor. 
+
+
+# Asistencia
+
+From Fernanda Cardenas to Everyone 11:32 AM
+
+Presente
+
+From David Dorantes to Everyone 11:32 AM
+
+Presente
+
+From Andrew Flores Yebra to Everyone 11:32 AM
+
+Presente
+
+From Itzel Aurora Bravo Santos to Everyone 11:32 AM
+
+Presente
+
+From Wenddy Ballona to Everyone 11:32 AM
+
+presente
+
+From Ivan Delgado to Everyone 11:32 AM
+
+presente
+
+From Diego Nicolas to Everyone 11:32 AM
+
+presente
+
+From Fernanda Pilón to Everyone 11:33 AM
+
+Presente :)
+
+From Emmanuel GR to Everyone 11:33 AM
+
+Presente
+
+From Frida Cuevas to Everyone 11:33 AM
+
+Presente
+
+From Jorge Ambrosio to Everyone 11:33 AM
+
+Presente
+
+From Víctor Jerónimo to Everyone 11:34 AM
+
+Presente
+
+From Gaeta to Everyone 11:35 AM
+
+presente
+
+From Pérez David to Everyone 11:44 AM
+
+Presente
+
+From Irving Barreto to Everyone 11:53 AM
+
+presente
+
+From Melanie Mendieta Mondragón to Everyone 12:10 PM
+
+Presente
+
+From Karla Gómez to Everyone 12:56 PM
+
+Presente
+
+
+
+

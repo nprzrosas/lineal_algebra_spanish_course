@@ -1,0 +1,229 @@
+---
+title: "Día 2 - Introducción al Álgebra Lineal- Vectores"
+author: "Dra. Norma C. Pérez Rosas"
+date: '`r format(Sys.time(), "%d/%m/%Y")`'
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+  html_document:
+    toc: yes
+    toc_depth: 2
+---
+
+# Introducción al álgebra lineal 
+
+
+La palabra "lineal" proviene del latin *linealis*, perteneciente o relativo a la línea. Una gran parte de la teoría de álgebra lineal es una generalización de las propiedades de la línea recta. 
+
+## Revisión de conceptos
+
+i) La **pendiente m** de una recta que pasa por los puntos $(x_1,y_1)$ y $(x_2,y_2)$ está dada por 
+
+$m=\frac{y_2-y_1}{x_2-x_1}=\frac{\Delta y}{\Delta x}$  
+
+Si $x_1\neq x_2$
+
+ ![Pendiente de una recta](C:\Users\nprzrosas\Documents\JobMexico\UPIEM-IPN\Algebra Lineal\Imagenes\recta_puntos2.png) 
+
+
+ii) Si $x_2-x_1=0$ y $y_2 \neq y_1$, entonces la recta es vertical y se dice que la pendiente es **indefinida**, vea el siguiente link [PheT](https://phet.colorado.edu/sims/html/graphing-lines/latest/graphing-lines_en.html) 
+
+iii) Cualquier recta (excepto una con pendiente indefinida) se puede describir escribiendo su ecuación en la forma pendiente-ordenada $y=mx+b$, donde $m$ es la pendiente de la recta y $b$ es la ordenada (el valor de $y$ en el punto en el que la recta cruza el eje $y$). Vea el siguiente link [PheT](https://phet.colorado.edu/sims/html/graphing-lines/latest/graphing-lines_en.html) 
+
+iv) Dos rectas distintas son paralelas si y sólo si tienen la misma pendiente. 
+
+v) Si la ecuación de la recta se escribe en la forma $ax+by=c$  $(b\neq0)$, entonces, como se puede calcular fácilmente, $m=\frac{-a}{b}$.
+
+vi) Si $m_1$ es la pendiente de la recta $L_1$, $m_2$ es la pendiente de la recta $L_2$, $m_1\neq0$ y $L_1$ y $L_2$ son perpendiculares, entonces $m_2=\frac{-1}{m_1}$.
+
+vii) Las rectas paralelas al eje $x$ tienen una pediene de cero. 
+
+viii) Las rectas paralelas al eje de las $y$ tienen una pendiente indefinida. 
+
+# Vectores
+
+Vector es un arreglo ordenado de números. 
+
+\begin{equation*}
+\mathbf{v} = 
+\begin{pmatrix}
+v_{1}  \\
+v_{2} \\
+\vdots   \\
+v_{n} 
+\end{pmatrix}
+\end{equation*}
+
+Los vectores con frecuencia son denotadas con letras minúscula y en negritas, como $\mathbf{u}$ o $\mathbf{v}$. Un vector generalmente es representado como una columna, sin embargo también es posible representar vectores como una fila. Con frecuencia un vector en forma de fila es denotado por la **transpuesta** de un vector columna. Entonces, si $\mathbf{u}$ es un vector columna entonces la forma de fila con frecuencia es denotado por $\mathbf{u}^T$.
+
+
+**Vector columna** 
+
+\begin{equation*}
+\mathbf{u} = 
+\begin{pmatrix}
+u_{1}  \\
+u_{2} \\
+\vdots   \\
+u_{n} 
+\end{pmatrix}
+\end{equation*}
+
+**Vector fila**
+
+\begin{equation*}
+\mathbf{u}^{T} = 
+\begin{pmatrix}
+u_{1} & u_{2} & \cdots & u_{n}  \\
+\end{pmatrix}
+\end{equation*}
+
+Para reducir espacio, los vectores algunas veces son representados como fila en el texto principal. 
+
+**Ejemplo**
+
+
+![Correlación entre el tráfico telefónico y la presencia de personas. Datos extraídos del libro: Mapping Urban
+Practices Through
+Mobile Phone Data, Springer, 2015](C:\Users\nprzrosas\Documents\JobMexico\UPIEM-IPN\Algebra Lineal\Imagenes\lombardi.png) 
+
+
+\begin{equation*}
+\mathbf{promedio} = 
+\begin{pmatrix}
+0.937125  \\
+0.968859 \\
+0.930791 \\
+0.986318 \\
+0.920895 \\
+0.982498 \\
+0.939052\\
+0.878923 \\
+0.978077 \\
+0.874587 \\
+0.919483 \\
+0.986226
+\end{pmatrix}
+\end{equation*}
+
+
+
+
+Los **elementos** (o entradas, coeficientes, componentes) de un vector son los valores dentro del arreglo (array). El **tamaño** (también llamado **dimensión** o **longitud**) del vector es el número de elementos que el contiene. El vector anterior, por ejemplo, tiene un tamaño de 12, y su tercer entrada es 0.930791. Un vector de tamaño $n$ es llamado un vector **n-vector**.  Un vector $1-vector$ es considerado lo mismo que un número, es decir, nosotros no distinguimos entre un $1-vector$ $[1.3]$ y el número $1.3$.
+
+Nosotros con frecuencia usamos símbolos para denotar vectores. Sí nosotros denotamos un $n-vector$ usando el símbolo $\mathbf{a}$, el $i-ésimo$ elemento del vector $\mathbf{a}$ es denotado como $a_i$, dónde el subíndice $i$ es un número entero que corre de $1$ a $n$, que es el tamaño del vector. 
+
+Dos vectores $\mathbf{a}$ y $\mathbf{b}$ son **iguales**, lo cual denotamos como $\mathbf{a}=\mathbf{b}$, sí tienen el mismo tamaño, y cada una de las entradas correspondientes son las mismas. Sí $\mathbf{a}$ y $\mathbf{b}$ son $n-vectores$ entonces $\mathbf{a}=\mathbf{a}$ significa que $\mathbf{a}_1=\mathbf{b}_1,...,\mathbf{a}_n=\mathbf{b}_n$.
+
+
+Los números o valores de los elementos en un vector son llamados **escalares**. Nosotros nos enfocaremos en el caso dónde los números son reales. En este caso nos referimos al vector como **números reales**. Ocasionalmente, se usan otro tipo de escalares, por ejemplo, los números complejos, en cuyo caso nos referimos al vector como un **vector complejo**. El conjunto de todos los números reales es escrito como $\mathbf{R}$, y el conjunto de todos los $n-vectores$ es denotado por $\mathbf{R}^n$, entonces $\mathbf{a}\in \mathbf{R}^n$ es otra forma de decir que $\mathbf{a}$ es un $n-vector$ con entradas reales. Aquí la notación $\mathbf{a}\in \mathbf{R}^n$ significa que $\mathbf{a}$ es un elemento de conjunto $\mathbf{R}^n$.
+
+
+# Python 
+
+[Python](https://www.python.org/) es un lenguaje de programación. 
+
+
+# Google colab 
+
+Es un bloc de notas de [Jupyther](https://jupyter.org/) libre que corre en la nube y que almacena sus blocs de notas en Google Drive. 
+
+Ingrese a [Google colab](https://colab.research.google.com/notebooks/intro.ipynb?utm_source=scs-index) y practique los ejercicios de su clase.
+
+
+# Creando un vector en Python
+
+Es posible crear vectores en Python usando la librería [NumPy](https://numpy.org/). NumPy es una librería de Python que puede ser usada para aplicaciones científicas y numéricas y es la herramienta usada para las operaciones lineales algebraicas. La estructura en NumPy para crear un arreglo es array El siguiente código muestra la declaración de un vector usando NumPy 
+
+```{python}
+import numpy as np
+lista = [1,2,3,4]
+v = np.array(lista)
+v
+```
+
+# Asistencia
+
+From Wenddy Ballona Martinez to Everyone:  11:34 AM
+
+presente
+
+From Jorge Ambrosio to Everyone:  11:34 AM
+
+Presente
+
+From José María Garduño to Everyone:  11:34 AM
+
+Presente
+
+From Fernanda Pilón to Everyone:  11:34 AM
+
+Presente
+
+Mejía Pilón
+
+From Itzel Aurora Bravo Santos to Everyone:  11:34 AM
+
+Presente.
+
+From Ivan Barragan to Everyone:  11:35 AM
+
+Presente
+
+From David Dorantes to Everyone:  11:35 AM
+
+Presente
+
+From Irving Barreto to Everyone:  11:35 AM
+
+Presente
+
+From Diego Nicolas to Everyone:  11:35 AM
+
+presente
+
+From Maria Fernanda to Everyone:  11:35 AM
+
+Presente
+
+From Fernanda Cardenas to Everyone:  11:35 AM
+
+Presente
+
+From Pérez Tadeo to Everyone:  11:35 AM
+
+Presente
+
+From Frida Cuevas to Everyone:  11:35 AM
+
+Presente.
+
+From Melanie Mondragón to Everyone:  11:35 AM
+
+Presente
+
+From Karla Gómez to Everyone:  11:35 AM
+
+presente
+
+From Andrew Flores Yebra to Everyone:  11:35 AM
+
+Presente
+
+From Ivan Delgado to Everyone:  11:38 AM
+
+Presente
+
+From Emmanuel Gonzalez to Everyone:  11:40 AM
+
+Presente
+
+From Adriana Gaeta to Everyone:  11:41 AM
+
+presente
+
+From Víctor Jeronimo to Everyone:  11:50 AM
+
+Presente
+

@@ -1,0 +1,229 @@
+---
+title: "Notebook 2"
+author: "Dra. Norma C. Pérez Rosas"
+date: '`r format(Sys.time(), "%d/%m/%Y")`'
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+  html_document:
+    toc: yes
+    toc_depth: 2
+---
+
+# Instrucciones
+
+
+Elabore un notebook en  [Google colab](https://colab.research.google.com/notebooks/intro.ipynb?utm_source=scs-index) que resuelva los siguientes ejercicios.  
+
+Nombre su notebook como: apellidopaterno_materno_nombre_grupo.ipynb. Ejemplo: perez_rosas_norma_3MM1.ipynb
+
+Al inicio de su archivo coloque lo siguiente: 
+
+* Nombre completo 
+
+* Notebook 2 
+
+* Grupo
+
+* Número de Boleta 
+
+* Direccion de correo electronico institucional
+
+* Mencione las condiciones en las que realizó su notebook:
+
+  * "Yo trabajé esta tarea sola/solo usando sólo los materiales visto en clase"
+
+  * "Yo discutí esta tarea con nombre completo de la persona con la que discutió los ejercicios (si así lo hizo)"
+
+  * Sí corresponde el caso, reporte los sitios de internet de donde obtuvo información. 
+  
+
+Nota 1: el notebook 2 se entregará máximo el viernes 5 de noviembre a las 8 pm. 
+
+Nota 2: cada una de las soluciones de los problemas debe estar escrita en palabras en una celda de texto utilizando Markdown, si corresponde el caso utilice LaTeX para mostrar su razonamiento. Las soluciones deben de venir acompañadas de su código en Python que avale su razonamiento. 
+
+Nota 2: todos los códigos deberán estar ejecutandose correctamente para considerar el 20% de su evaluación 
+
+Nota 3: sí bien para la elaboración del notebook puede discutir los ejercicios con sus colegas, le recomiendo ampliamente lo razone de forma individual, ya que esto es su entrenamiento para el examen. 
+
+Nota 4: notebooks iguales quedarán cancelados. 
+
+
+**Ejercicio 1.** Calcule el producto cruz del siguiente par de vectores.
+
+
+a) $$
+\mathbf{u}=\left[
+\begin{array}{c}
+1 \\
+3 \\
+0 \\
+\end{array}
+\right], \mathbf{v}= \left[
+\begin{array}{c}
+4 \\
+1 \\
+0 \\
+\end{array}
+\right]
+$$
+
+b) $$
+\mathbf{u}=\left[
+\begin{array}{c}
+4 \\
+0 \\
+1 \\
+\end{array}
+\right], \mathbf{v}= \left[
+\begin{array}{c}
+2 \\
+2 \\
+0 \\
+\end{array}
+\right]
+$$
+
+
+**Ejercicio 2.** Calcule el área del triángulo dados los siguientes tres vértices:
+
+
+$$
+\mathbf{a}=\left[
+\begin{array}{c}
+2 \\
+1 \\
+2 \\
+\end{array}
+\right], \mathbf{b}= \left[
+\begin{array}{c}
+4 \\
+4 \\
+6 \\
+\end{array}
+\right], \mathbf{c}= \left[
+\begin{array}{c}
+3 \\
+0 \\
+4 \\
+\end{array}
+\right]
+$$
+
+
+
+
+**Ejercicio 3.** Dadas las siguientes ecuaciones calcule los incisos $a)$, $b)$, $c)$, $d)$, $e)$, $f)$, $g)$ y $h$
+
+
+$$
+\mathbf{A}=\left[
+\begin{array}{ccc}
+1 & -1 & 3 \\
+2 & 5 & -2 \\
+\end{array}
+\right], \mathbf{B}= \left[
+\begin{array}{ccc}
+4 & 2 & 1 \\
+-1 & 0 & 8 \\
+\end{array}
+\right] , \mathbf{C}= \left[
+\begin{array}{cc}
+7 & 4  \\
+1 & 2  \\
+\end{array}
+\right]
+$$
+
+
+$$
+\mathbf{D}=\left[
+\begin{array}{ccc}
+1 & 2 & 3 \\
+3 & 1 & 3 \\
+1 & 0 & 0 \\
+\end{array}
+\right], \mathbf{E}= \left[
+\begin{array}{cc}
+2 & 2  \\
+5 & 3  \\
+\end{array}
+\right] , \mathbf{F}= \left[
+\begin{array}{cc}
+8 & 8  \\
+1 & 2  \\
+4 & 0  \\
+\end{array}
+\right]
+$$
+
+a) Describa las dimensiones de las seis matrices 
+
+b) Enliste las matrices cuadradas
+
+c) ¿Qué pares de matrices se pueden sumar? Justifique su respuesta
+
+d) Calcule 
+
+$\mathbf{C}+\mathbf{E}$
+
+$\mathbf{A} - \mathbf{B}$
+
+$4\mathbf{F}$
+
+$2\mathbf{A}-3\mathbf{B}$
+
+e) Enliste los pares que pueden multiplicarse, en todos los casos mencione las dimensiones de los productos. 
+
+f) Calcule los siguientes productos
+
+1. $\mathbf{CB}$
+
+2. $\mathbf{EA}$
+
+3. $\mathbf{FC}$
+
+g) Calcule $\mathbf{A}^T$, $\mathbf{D}^T$ y $\mathbf{F}^T$. En todos casos proporcione las dimensiones de las matrices transpuestas.
+
+h) Verifique que $(\mathbf{EB})^{T}=\mathbf{B}^T\mathbf{E}^T$
+
+**Ejercicio 4.** ¿Qué significa que una matriz sea singular?
+
+**Ejercicio 5.** Encuentre la inversa de las siguientes matrices
+
+
+$$
+\mathbf{A}=\left[
+\begin{array}{cc}
+2 & -4\\
+1 & 3 \\
+\end{array}
+\right], \mathbf{B}= \left[
+\begin{array}{cc}
+-1 & 2\\
+2 & 5\\
+\end{array}
+\right]
+$$
+
+**Ejercicio 6.** Muestre que la siguiente matriz no tiene inversa
+
+
+$$
+\mathbf{A}=\left[
+\begin{array}{cc}
+1 & 1\\
+2 & 2 \\
+\end{array}
+\right]
+$$
+**Ejercicio 7.** Pruebe que las siguientes identidades no son ciertas
+
+a) $(\mathbf{AB})^{-1}=\mathbf{B}^{-1}\mathbf{A}^{-1}$
+
+b) $\mathbf{A}^{-1}+\mathbf{B}^{-1}=\mathbf{A}^{-1}(\mathbf{A}+\mathbf{B})\mathbf{B}^{-1}$
+
+C) $(\mathbf{I}^{-1}+\mathbf{A}^{-1})^{-1}=\mathbf{A}(\mathbf{A}+\mathbf{I})^{-1}$
+
+d) $(\mathbf{A}+\mathbf{B}\mathbf{B}^{T})^{-1}\mathbf{B}=\mathbf{A}^{-1}\mathbf{B}(\mathbf{I}+\mathbf{B}^{T}\mathbf{A}^{-1}\mathbf{B})^{-1}$

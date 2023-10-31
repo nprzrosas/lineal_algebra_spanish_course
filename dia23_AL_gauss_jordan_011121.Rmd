@@ -1,0 +1,182 @@
+---
+title: "Día 23 - Método de Gauss-Jordan de sistemas con un número infinito de soluciones y sin solución"
+author: "Dra. Norma C. Pérez Rosas"
+date: '`r format(Sys.time(), "%d/%m/%Y")`'
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+  html_document:
+    toc: yes
+    toc_depth: 2
+---
+
+**Ejemplo.** Solución de un sistema de tres ecuaciones con tres incógnitas: número infinito de soluciones
+
+
+
+\begin{alignat*}{5}
+   2x_1 & {}+{} &  4x_2  &  {}+{} &  6x_3  & {}={} & 18  \label{eq:eq1}\tag{1} \\
+   4x_1 & {}+{} &  5x_2  &  {}+{} &  6x_3  & {}={} & 24 \\
+   2x_1 & {}+{} &  7x_2  &  {}-{} &  12x_3  & {}={} & 30 \\
+\end{alignat*}
+
+**Solución.**
+
+Para resolver el sistema se procede como en el ejemplo anterior, primero se escribe el sistema como una matriz aumentada:
+
+\begin{equation*}
+\begin{pmatrix}
+2 & 4 & 6 & | & 18    \\
+4 & 5 & 6 & | & 24    \\
+2 & 7 & 12 & | & 30 
+\end{pmatrix}
+\end{equation*}
+
+
+![Reducción Gauss - Jordan.](gauss_infinito.png)
+
+Esto es equivalente al sistema de ecuaciones
+
+
+
+\begin{alignat*}{5}
+   x_1 & {}{} &   &  {}+{} &  x_3  & {}={} & 1  \label{eq:eq2}\tag{2} \\
+    & {}{} &  x_2  &  {}+{} &  2x_3  & {}={} & 4 \\
+\end{alignat*}
+
+Hasta aquí se puede llegar. Se tienen sólo dos ecuaciones para las tres incógnitas $x_1$, $x_2$, $x_3$ y existe un número infinito de soluciones. Para ver esto se elige un valor de $x_3$. Entonces $x_2=4-2x_3$ y $x_1=1+x_3$. Ésta será una solución para cualquier número $x_3$. Seescribe esta solución  en la forma $(1+x_3,4-2x_3,x_3)$. Por ejemplo, si $x_3=0$, se obtiene la solución $(1,4,0)$. Para $x_3=10$ se obtiene la solución $(11,-16,10)$.
+
+**Ejemplo.** Un sistema inconsistente. Resuelva el sistema 
+
+\begin{alignat*}{5}
+    & {}+{} & 2x_2  &  {}+{} &  3x_3  & {}={} & 4  \label{eq:eq3}\tag{3} \\
+ 2x_1   & {}-{} & 6x_2  &  {}+{} &  7x_3  & {}={} & 15  \\     x_1   & {}-{} &  2x_2  &  {}+{} &  5x_3  & {}={} & 10 \\
+\end{alignat*}
+
+
+**Solución.** La matriz aumentada para este sistema es
+
+\begin{equation*}
+\begin{pmatrix}
+0 & 2 & 3 & | & 4    \\
+2 & -6 & 7 & | & 15    \\
+1 & -2 & 5 & | & 10 
+\end{pmatrix}
+\end{equation*}
+
+El elemento $1,1$ de la matriz no se puede hacer $1$ como antes porque al multiplicar $0$ por cualquier número real se obtiene $0$. En su lugar, se puede usar la operación elemental con renglones $(iii)$ para obtener un número diferente de cero en la posición $1,1$. Se puede intercambiar el renglón $1$ con cualquiera de los otros dos; sin embargo, al intercambiar los renglones $1$ y $3$ queda un $1$ en esa posición. Al hacerlo se obtiene lo siguiente:
+
+
+
+![Reducción Gauss - Jordan.](gauss_inconsistente.png)
+
+Debe hacerse una pausa aquí; las últimas dos ecuaciones son 
+
+
+\begin{alignat*}{5}
+    & {}-{} & 2x_2  &  {}-{} &  3x_3  & {}={} & -5   \\
+    & {}{} & 2x_2  &  {}+{} &  3x_3  & {}={} & 4   \\
+\end{alignat*}
+
+lo que es imposible (si $-2x-3x_3=-5$, entonces $2x_2+3x_3=5,$ no 4). Así no hay una solución. Se puede proceder como en los últimos dos ejemplos para obtener una forma más estándar:
+
+
+![Reducción Gauss - Jordan.](gauss_incosistente2.png)
+
+
+Ahora la última ecuación es $0x_1+0x_2+0x_3=-1$, lo que es imposible ya que $0\neq-1$. Así el sistema no tiene solución. En este caso se dice que el sistema es $inconsistente$.
+
+# Resolver un sistema de ecuaciones lineales con Python 
+
+**Ejemplo.** Resuelva el sistema 
+
+\begin{alignat*}{5}
+   2x_1 & {}+{} &  4x_2  &  {}+{} &  6x_3  & {}={} & 18  \label{eq:eq5}\tag{5} \\
+   4x_1 & {}+{} &  5x_2  &  {}+{} &  6x_3  & {}={} & 24 \\
+   3x_1 & {}+{} &  x_2  &  {}-{} &  2x_3  & {}={} & 4 \\
+\end{alignat*}
+
+
+Para resolver un sistema de ecuaciones lineales en Python, primero ingrese la matriz de coeficientes en una array y el vector de resultados en otro, como se muestra a continuación:
+
+```{python}
+import numpy as np
+a = np.array([[2, 4, 6], [4, 5, 6], [3, 1, -2]])
+b = np.array([18, 24, 4])
+x = np.linalg.solve(a, b)
+x
+#comprobación 
+np.allclose(np.dot(a, x), b)
+```
+
+La solución es la misma que habíamos visto el día 22. 
+
+
+
+
+# Asistencia
+
+From Emmanuel GR to Everyone:  07:06 AM
+
+Presente
+
+From Fernanda Pilón to Everyone:  07:06 AM
+
+Presente :)
+
+From Irving Barreto to Everyone:  07:07 AM
+
+Presente
+
+From Fernanda Cardenas to Everyone:  07:08 AM
+
+Presente
+
+From Víctor Jerónimo to Everyone:  07:08 AM
+
+Presente
+
+From Pérez David to Everyone:  07:08 AM
+
+Presente
+
+From Karla Gómez to Everyone:  07:09 AM
+
+Presente
+
+From wenddy Ballona to Everyone:  07:09 AM
+
+presente
+
+From Gaeta to Everyone:  07:13 AM
+
+presente
+
+From Andrew Flores Yebra to Everyone:  07:13 AM
+
+Presente
+
+From Diego Nicolas to Everyone:  07:13 AM
+
+presente
+
+From Frida Cuevas to Everyone:  07:13 AM
+
+presente
+
+From Jorge Ambrosio to Everyone:  07:16 AM
+
+Presente
+
+From Melanie Mendieta Mondragón to Everyone:  08:30 AM
+
+Presente
+
+From David Dorantes to Everyone:  08:30 AM
+
+presente
+
+From Fernanda Cardenas to Everyone:  08:30 AM
+
+Presente

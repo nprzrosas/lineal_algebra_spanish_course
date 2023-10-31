@@ -1,0 +1,432 @@
+---
+title: "Día 19 - Sistemas de ecuaciones lineales"
+author: "Dra. Norma C. Pérez Rosas"
+date: '`r format(Sys.time(), "%d/%m/%Y")`'
+output:
+  html_document:
+    toc: yes
+    toc_depth: 2
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+---
+
+# Unidad III - Soluciones de ecuaciones lineales
+
+
+## Sistemas de ecuaciones lineales 
+
+
+Una **ecuación lineal** en las variables $x_1,...,x_n$ es una ecuación que puede ser escrita de la forma 
+
+\begin{alignat*}{5}
+   a_{1}x_1 & {}+{} &  a_{2}x_2 & {}+{} & ... & {}+{} & a_{n}x_n & {}={} & b \label{eq:eq1}\tag{A}\\
+\end{alignat*}
+
+
+donde $b$ y los **coeficientes** $a_1,...,a_n$ son números reales o complejos, usualmente conocidos por adelantado. El subíndice $n$ puede ser cualquier entero positivo o negativo. En los libros de texo y ejercicios $n$ normalmente toma los valores entre $2$ y $5$. En problemas de la vida real, $n$ puede valer entre $50$ y $5000$ o incluso más. 
+
+La ecuación 
+
+\begin{alignat*}{5}
+   4x_1 & {}-{} &  5x_2 & {}+{} & 2 &  {}={} & x_1\\
+\end{alignat*}
+
+y la ecuación 
+
+\begin{alignat*}{5}
+  x_2  &  {}={} & 2(\sqrt{6}-x_1)& {}+{} &x_3\\
+\end{alignat*}
+
+son ambas lineales porque pueden ser rearregladas algebraicamente como en la ecuación (A):
+
+
+\begin{alignat*}{5}
+   3x_1 & {}-{} &  5x_2 &  {}={} & -2\\
+\end{alignat*}
+
+
+y 
+
+\begin{alignat*}{5}
+   2x_1 & {}+{} &  x_2 &   {}-{} & x_3 & {}={} & 2 \sqrt{6}\\
+\end{alignat*}
+
+
+Las ecuaciones 
+
+\begin{alignat*}{5}
+   4x_1 & {}-{} &  5x_2 & {}+{} & 2 &  {}={} & x_1x_2\\
+\end{alignat*}
+
+y
+
+
+\begin{alignat*}{5}
+  x_2  &  {}={} & 2\sqrt{x_1}{}-{} & 6 \\
+\end{alignat*}
+
+son no lineales por la presencia de $x_1x_2$ en la primera ecuación y $\sqrt{x_1}$ en la segunda. 
+
+Un **sistema de ecuaciones lineales** o (un **sistema lineal**) es una colección de una o más ecuaciones lineales involucrando las mismas variables, es decir, $x_1,...,x_n$. Por ejemplo:
+
+\begin{alignat*}{5}
+   2x_1 & {}-{} &  x_2 & {}+{} & 1.5x_3 &  {}={} & 8  \label{eq:eq2}\tag{B}\\
+    x_1 & {} {} &    & {} - {} & 4x_3 &  {}={} & -7\\
+\end{alignat*}
+
+
+Una **solución** del sistema es una lista $(s_1,s_2,...,s_n)$ de números que hace a cada ecuación verdadera cuando los valores $s_1,s_2,...,s_n$ son sustituidos por $x_1, x_2, ..., x_n$, respectivamente. Por ejemplo, los valores $(5,6.5,3)$ es la solución del sistema (B), porque al sustituirlos respectivamente en el sistema de ecuaciones lineales (B) para $x_1, x_2, x_3$, es obtiene $8=8$ y $-7=-7$. 
+
+```{r}
+2*5-6.5+1.5*3
+```
+
+```{r}
+5-4*3
+```
+Todo el conjunto posible de soluciones es llamado el **conjunto solución** de un sistema lineal. Dos sistemas lineales son llamados **equivalentes** si tienen el mismo conjunto solución. Esto es, cada solución del primer sistemas es una solución del segundo sistema, y cada solución del segundo sistema es una solución del primer sistema. 
+
+Encontrar el conjunto solución de un sistema de dos ecuaciones lineales en dos variables es fácil porque equivale a encontrar la intersección de dos líneas. Un problema típico es 
+
+\begin{alignat*}{5}
+   x_1 & {}-{} &  2x_2  &  {}={} & -1\\
+   -x_1 & {}+ {} & 3x_2 &  {}={} & 3\\
+\end{alignat*}
+
+Grafiquemos esto usando la forma de la línea recta pendiente-intercepto sobre el mismo conjunto de ejes. Recuede que la forma pendiente-intercepto se ve como $y=mx+b$, entonces nosotros resolveremos las ecuaciones para $x_2$.
+
+Resolvemos para $x_2$:
+
+\begin{alignat*}{5}
+   x_2 & {} = {} & \frac{1}{2}(x_1+1) \\
+   x_2 & {} = {} & \frac{1}{3}(3+x_1) \\
+\end{alignat*}
+
+Las gráficas de estas ecuaciones son líneas rectas. Un par de números $(x_1,x_2)$ satisface **ambas** ecuaciones en el sistema si y solo si el punto $(x_1,x_2)$ cae en ambas líneas. En el sistema de nuestro ejemplo, la solución es el punto $(3,2)$ como puede verificar de la gráfica. 
+
+
+```{python}
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+from matplotlib import pyplot
+# Función cuadrática.
+def f7(x):
+    return (1/2)*(x+1)
+# Función lineal.
+def f8(x):
+    return (1/3)*(3+x)
+# Valores del eje X que toma el gráfico.
+x = range(-3, 6)
+# Graficar ambas funciones.
+pyplot.plot(x, [f7(i) for i in x], color="red", linewidth=2, label="(1/2)*(x+1)")
+pyplot.plot(x, [f8(i) for i in x], '-o', label="(1/3)*(3+x)")
+# Establecer el color de los ejes.
+pyplot.axhline(0, color="black")
+pyplot.axvline(0, color="black")
+# Limitar los valores de los ejes.
+pyplot.xlim(-3, 5)
+pyplot.ylim(-5, 5)
+pyplot.title('Gráficas')
+pyplot.xlabel('x')
+pyplot.ylabel('y')
+leg = pyplot.legend(loc='upper left')
+# Guardar gráfico como imágen PNG.
+#pyplot.savefig("output.png")
+# Mostrarlo.
+pyplot.show()
+```
+
+
+```{r}
+curve((1/2)*(x+1), from = 0, to = 5, col = "violet", lwd = 2, ylab = "x2")
+curve((1/3)*(3+x), col = "green", add = TRUE, lwd = 2)
+legend("topleft",
+legend=c("x2=(1/2)*(x1+1)","x2=(1/3)*(3+x1)"),
+col=c("violet","green"),
+lty=1,lwd=2)
+abline(h=0, v=0, col="gray")
+```
+
+Por supuesto, dos líneas pueden no intersectarse en un ningún punto, ellas pueden ser paralelas, o ellas pueden coincidir e intersectar todos los puntos sobre la línea. Vea los siguientes ejemplos.
+
+**Ejemplo de un sistema que no tiene solución. **
+
+
+\begin{alignat*}{5}
+   x_1 & {}-{} &  2x_2  &  {}={} & -1\\
+   -x_1 & {}+ {} & 2x_2 &  {}={} & 3\\
+\end{alignat*}
+
+Resolviendo para $x_2$, obtenemos:
+
+
+\begin{alignat*}{5}
+   x_2 & {} = {} & \frac{1}{2}(x_1+1) \\
+   x_2 & {} = {} & \frac{1}{2}(x_1+3) \\
+\end{alignat*}
+
+
+
+
+```{python}
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+from matplotlib import pyplot
+# Función cuadrática.
+def f1(x):
+    return (1/2)*(x+1)
+# Función lineal.
+def f2(x):
+    return (1/2)*(3+x)
+# Valores del eje X que toma el gráfico.
+x = range(-3, 6)
+# Graficar ambas funciones.
+pyplot.plot(x, [f1(i) for i in x], color="red", label="(1/2)*(x+1)")
+pyplot.plot(x, [f2(i) for i in x], color="blue", label="(1/2)*(3+x)")
+# Establecer el color de los ejes.
+pyplot.axhline(0, color="black")
+pyplot.axvline(0, color="black")
+# Limitar los valores de los ejes.
+pyplot.xlim(-3, 5)
+pyplot.ylim(-5, 5)
+pyplot.title('Gráficas')
+pyplot.xlabel('x')
+pyplot.ylabel('y')
+leg = pyplot.legend(loc='upper left')
+# Guardar gráfico como imágen PNG.
+#pyplot.savefig("output.png")
+# Mostrarlo.
+pyplot.show()
+```
+
+```{r, echo=FALSE, eval=FALSE}
+curve((1/2)*(x+1), from = -3, to = 5, col = "blue", lwd = 2, ylab = "x2")
+curve((1/2)*(3+x), col = "pink", add = TRUE, lwd = 2)
+legend("topleft",
+legend=c("x2=(1/2)*(x1+1)","x2=(1/2)*(3+x1)"),
+col=c("blue","pink"),
+lty=1,lwd=2)
+abline(h=0, v=0, col="gray")
+```
+
+
+**Ejemplo de un sistema con muchas soluciones. **
+
+
+\begin{alignat*}{5}
+   x_1 & {}-{} &  2x_2  &  {}={} & -1\\
+   -x_1 & {}+ {} & 2x_2 &  {}={} & 1\\
+\end{alignat*}
+
+
+Resolviendo para $x_2$, obtenemos:
+
+
+\begin{alignat*}{5}
+   x_2 & {} = {} & \frac{1}{2}(x_1+1) \\
+   x_2 & {} = {} & \frac{1}{2}(x_1+1) \\
+\end{alignat*}
+
+```{python}
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+from matplotlib import pyplot
+# Función cuadrática.
+def f3(x):
+    return (1/2)*(x+1)
+# Función lineal.
+def f4(x):
+    return (1/2)*(x+1)
+# Valores del eje X que toma el gráfico.
+x = range(-3, 6)
+# Graficar ambas funciones.
+pyplot.plot(x, [f3(i) for i in x], color="green", label="(1/2)*(x+1)")
+pyplot.plot(x, [f4(i) for i in x], color="purple", label="(1/2)*(x+1)")
+# Establecer el color de los ejes.
+pyplot.axhline(0, color="black")
+pyplot.axvline(0, color="black")
+# Limitar los valores de los ejes.
+pyplot.xlim(-3, 5)
+pyplot.ylim(-5, 5)
+pyplot.title('Gráficas')
+pyplot.xlabel('x')
+pyplot.ylabel('y')
+leg = pyplot.legend(loc='upper left')
+# Guardar gráfico como imágen PNG.
+#pyplot.savefig("output.png")
+# Mostrarlo.
+pyplot.show()
+```
+
+
+```{r, eval=FALSE, echo=FALSE}
+curve((1/2)*(x+1), from = -3, to = 5, col = "blue", lwd = 3, ylab = "x2")
+curve((1/2)*(x+1), col = "pink", add = TRUE, lwd = 1, lty = 4)
+legend("topleft",
+legend=c("x2=(1/2)*(x1+1)","x2=(1/2)*(x1+1)"),
+col=c("blue","pink"),
+lty=1,lwd=2)
+abline(h=0, v=0, col="gray")
+```
+
+Un sistema de ecuaciones lineales tiene:
+
+1. Exactamente una solución 
+2. No tiene solución 
+3. Tiene un número infinito de soluciones 
+
+Un sistema de ecuaciones lineales es **consistente** si tiene una solución o un número infinito de soluciones, un sistema es **inconsistente** si no tiene solución. 
+
+## Notación matricial 
+
+La información esencial de un sistema lineal puede ser registrada en forma compacta en un arreglo rectangular llamado **matriz**. Por ejemplo, considere el siguiente sistema 
+
+
+\begin{alignat*}{5}
+   x_1 & {}-{} &  2x_2  &  {}+{} &  x_3  & {}={} & 0 \label{eq:eq3}\tag{C}\\
+       & {} {} &  2x_2  &  {}-{} &  8x_3  & {}={} & 8\\   5x_1 & {} {} &        &  {}-{} &  5x_3  & {}={} & 10\\
+\end{alignat*}
+
+
+con los coeficientes de cada variable alineados en columnas, la matriz:
+
+\begin{equation*}
+\begin{pmatrix}
+1 & -2 & 1  \\
+0 &  2 & -8  \\
+5 &  0 & -5 
+\end{pmatrix}
+\end{equation*}
+
+es llamada la **matriz de coeficientes** del sistema (C), y 
+
+\begin{equation*}
+\begin{pmatrix}
+1 & -2 & 1  & 0 \label{eq:eq4}\tag{D}\\
+0 &  2 & -8 & 8 \\
+5 &  0 & -5 & 10
+\end{pmatrix}
+\end{equation*}
+
+es llamada la **matriz aumentada** del sistema. La segunda fila aquí contiene un cero porque la segunda ecuación puede ser escrita como $0x_1+2x_2-8x_3=8$. Una matriz aumentada de un sistema consiste en los coeficientes de la matriz con una columna agregada conteniendo las constantes del lado derecho de las ecuaciones. 
+
+El **tamaño** de la matriz nos dice cuántas filas y columnas tiene. La matriz aumentada (D) tiene $3$ filas y $4$ columnas y es llamada una matriz $3\times 4$ (se lee $3$ por $4$). Si $m$  y $n$ son enteros positivos, una **matriz** $m \times n$ es un arreglo rectangular de número con $m$ filas y $n$ columnas. El número de filas siempre viene primero. 
+
+
+
+# Dos ecuaciones lineales con dos incógnitas 
+
+Considere el siguiente sistema de dos ecuaciones lineales con dos incógnitas $x$
+
+\begin{alignat*}{5}
+   a_{1,1}x_1 & {}+{} &  a_{1,2}x_2   & {}={} & b_1 \label{eq:eq1}\tag{1} \\
+   a_{2,1}x_1 & {}+{} &  a_{2,2}x_2   & {}={} & b_2 
+\end{alignat*}
+
+donde $a_{1,1},a_{1,2},a_{2,1},a_{2,2},$ $b_1$ y $b_2$ son números dados. Cada una de estas ecuaciones corresponde a una línea recta. Una solución al sistema (1) es un par de números, denotados por $(x,y)$, que satisface (1). ¿Cuántos pares ordenados pueden ser solución del sistema (1)? La pregunta se responde usando dos hechos importantes del álgebra elemental. 
+
+**Hecho A.** Si $a=b$ y $c=d$, entonces $a+c=b+d$
+
+**Hecho B.** Si $a=b$ y $c$ es cualquier número real, entonces $ca=cb$.
+
+El hecho A establece que si se suman dos ecuaciones se obtiene una tercera ecuación correcta. El hecho B establece que si se multiplican ambos lados de una ecuación por una constante se obtiene una segunda ecuación válida. Se debe suponer que $c \neq0$ ya que aunque la ecuación $0 = 0$ es correcta, no es útil. 
+
+La clase anterior vimos tres diferentes sistemas lineales, los cuales tenían una única solución, no tenían solución o tenían un número infinito de soluciones. Ahora, usando los hechos A y B vamos a tratar de resolver dichos sistemas. 
+
+# Sistema con una solución única
+
+Considere el sistema 
+
+\begin{alignat*}{5}
+   x_1 & {}-{} &  2x_2  &  {}={} & -1 \label{eq:eq2}\tag{2}\\
+   -x_1 & {}+ {} & 3x_2 &  {}={} & 3\\
+\end{alignat*}
+
+Si se suman las dos ecuaciones se tiene, por le hecho A, la siguiente ecuación: $x_2=2$ . Entonces si se despeja de la primera ecuación $x_1=-1+2x_2=-1+2(2)=3$. Así, el par (3,2) satisface el sistema (2) y la forma en que se encontró la solución muestra que es el único par de números que lo hace. Es decir, el sistema (2) tiene una **solución única.**
+
+# Sistema sin solución
+
+Considere el sistema 
+
+\begin{alignat*}{5}
+   x_1 & {}-{} &  2x_2  &  {}={} & -1 \label{eq:eq3}\tag{3}\\
+   -x_1 & {}+ {} & 2x_2 &  {}={} & 3\\
+\end{alignat*}
+
+Si se multiplica por $-1$ la primera ecuación (que está permitido por el hecho B) se obtiene $-x_1+2x_2=1$ esto contradice la segunda ecuación. Por lo tanto, el sistema (3) **no tiene solución**. Como se expresó un sistema que no tiene solución es **incosistente.**
+
+# Sistema con un número infinito de soluciones
+
+Considere el sistema 
+
+\begin{alignat*}{5}
+   x_1 & {}-{} &  2x_2  &  {}={} & -1 \label{eq:eq4}\tag{4}\\
+   -x_1 & {}+ {} & 2x_2 &  {}={} & 1\\
+\end{alignat*}
+
+Estas dos ecuaciones son equivalentes porque cualesquiera dos números, $x$ y $y$, que satisfacen la primera ecuación también satisfacen la segunda, y viceversa. Para comprobar esto se multiplica la primera ecuación por $-1$. Esto está permitido por el hecho B. Entonces, $x_2=\frac{1}{2}(1+x_1)$. Así, el par $(x_1,\frac{1}{2}(1+x_1))$ es una solución del sistema (4) para cualquier número real $x$. Es decir, el sistema (4) tiene un **número infinito de soluciones**. Para este ejemplo, los siguientes pares son soluciones: $(0,\frac{1}{2})$, $(1,1)$, $(-5,-2)$ 
+
+
+```{python}
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+from matplotlib import pyplot
+# Función cuadrática.
+def f3(x):
+    return (1/2)*(x+1)
+# Función lineal.
+def f4(x):
+    return (1/2)*(x+1)
+# Valores del eje X que toma el gráfico.
+x = range(-3, 6)
+# Graficar ambas funciones.
+pyplot.plot(x, [f3(i) for i in x], color="green", label="(1/2)*(x+1)")
+pyplot.plot(x, [f4(i) for i in x], color="purple", label="(1/2)*(x+1)")
+# Establecer el color de los ejes.
+pyplot.axhline(0, color="black")
+pyplot.axvline(0, color="black")
+# Limitar los valores de los ejes.
+pyplot.xlim(-3, 5)
+pyplot.ylim(-5, 5)
+pyplot.title('Gráficas')
+pyplot.xlabel('x')
+pyplot.ylabel('y')
+leg = pyplot.legend(loc='upper left')
+# Guardar gráfico como imágen PNG.
+#pyplot.savefig("output.png")
+# Mostrarlo.
+pyplot.show()
+```
+
+
+
+```{r, eval=FALSE, echo=FALSE}
+curve((1/2)*(x+1), from = -6, to = 5, col = "blue", lwd = 3, ylab = "x2")
+curve((1/2)*(x+1), col = "pink", add = TRUE, lwd = 1, lty = 4)
+legend("topleft",
+legend=c("x2=(1/2)*(x1+1)","x2=(1/2)*(x1+1)"),
+col=c("blue","pink"),
+lty=1,lwd=2)
+points(0,0.5)
+points(1,1)
+points(-5,-2)
+abline(h=0, v=0, col="gray")
+```
+
+
+Lo anterior se resumen en el siguiente teorema: el sistema 
+
+\begin{alignat*}{5}
+   a_{1,1}x_1 & {}+{} &  a_{1,2}x_2   & {}={} & b_1  \\
+   a_{2,1}x_1 & {}+{} &  a_{2,2}x_2   & {}={} & b_2 
+\end{alignat*}
+
+de dos ecuaciones con dos incógnitas $x_1$ y $x_2$ no tiene solución, tiene una solución única o tiene un número infinito de soluciones. Esto es:
+
+i) Tiene una solución única si y sóli si $a_{1,1}a_{2,2}-a_{1,2}a_{2,1}\neq0$.
+
+ii) No tiene solución o tiene un 
+número infinito de soluciones, si y sólo si 
+$a_{1,1}a_{2,2}-a_{1,2}a_{2,1}=0$.
+

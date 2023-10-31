@@ -1,0 +1,216 @@
+---
+title: "Día 22 - Eliminación Gaussiana"
+author: "Dra. Norma C. Pérez Rosas"
+date: '`r format(Sys.time(), "%d/%m/%Y")`'
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+  html_document:
+    toc: yes
+    toc_depth: 2
+---
+
+
+# Eliminación Gaussiana
+
+El problema 
+
+
+\begin{alignat*}{3}
+   2x &  {}+{} & y  & {}={} & 1  \\
+   x &  {}-{} & y  & {}={} & 2  \\
+\end{alignat*}
+
+involucra encontrar los valores de las incógnitas $x$ y $y$ que satisfagan ambas ecuaciones simultáneamente. 
+
+En este caso las ecuaciones son muy simples y rápidamente se puede resolver para $x$ y $y$. Las soluciones para este sistema son  $x=1$ y $y=-1$.
+
+Para problemas más complicados involucrando más ecuaciones, hay un método sistemático para resolver sistemas de ecuaciones lineales, este el método de **eliminación Gaussiana**.
+
+La idea detrás de la eliminación Gaussiana es tranformar el problema en un problema más simple y equivalente al problema inicial al eliminar sucesivamente las variables desconocidas. El procedimiento tiene dos fases: **la eliminación hacia adelante** seguido de la **eliminación hacia atrás**. La **eliminación hacia adelante** inicial al tratar de eliminar una de las variables de la variable de la primera ecuación ya sea por sumar o restar la ecuación a partir de otras. Por ejemplo, del sistema anterior, se puede multiplicar la última ecuación por dos y sustraerla de la primera ecuación de esta última, guiando al siguiente sistema equivalente:
+
+\begin{alignat*}{3}
+   2x &  {}+{} & y  & {}={} & 1  \\
+    &  {}-{} & 3y  & {}={} & 3  \\
+\end{alignat*}
+
+Alternativamente, se pueden sumar ambas ecuaciones y reemplazar la segunda ecuación por $3x=3$. La eliminación hacia adelante se continúa hasta que el sistema adquiere una forma triangular en ese punto el método cambia hacia la **eliminación hacia atrás**. Entonces, cuando el sistema está en la forma triangular, se puede continuar con la sustitución hacia atrás. 
+
+La sustitución hacia atrás se usa para resolver una ecuación a la vez desde la base hacia arriba. Es claro que $y=-1$, se puede sustituir $y$ en la primera ecuación para producir $2x-1=1$ a partir de la cual se puede decir que $x=1$.
+
+El siguiente conjunto de ecuaciones muestra un ejemplo más complicado involucrando múltiples eliminaciones y sustituciones hacia atrás. 
+
+\begin{alignat*}{4}
+   x &  {}+{} & y &  {}+{} & z  & {}={} & 1\\
+   x &  {}-{} & 2y &  {}+{} & 2z  & {}={} & 2\\
+   x &  {}+{} & 2y &  {}-{} & z  & {}={} & 4\\
+\end{alignat*}
+
+La eliminación gaussiana comienza como sigue:
+
+1. Reste la primera ecuación de la tercera:
+
+
+\begin{alignat*}{4}
+   x &  {}+{} & y &  {}+{} & z  & {}={} & 1\\
+   x &  {}-{} & 2y &  {}+{} & 2z  & {}={} & 2\\
+     &  {} {} &  y &  {}-{} & 2z  & {}={} & 3\\
+\end{alignat*}
+
+2. Extraiga la primera ecuación de la segunda:
+
+\begin{alignat*}{4}
+   x &  {}+{} & y &  {}+{} & z  & {}={} & 1\\
+    &  {}-{} & 3y &  {}+{} & z  & {}={} & 1\\
+     &  {} {} &  y &  {}-{} & 2z  & {}={} & 3\\
+\end{alignat*}
+
+
+3. Multiplica la tercera ecuación por tres:
+
+\begin{alignat*}{4}
+   x &  {}+{} & y &  {}+{} & z  & {}={} & 1\\
+    &  {}-{} & 3y &  {}+{} & z  & {}={} & 1\\
+     &  {} {} &  3y &  {}-{} & 6z  & {}={} & 9\\
+\end{alignat*}
+
+
+4. Agrega la segunda ecuación a la tercera:
+
+\begin{alignat*}{4}
+   x &  {}+{} & y &  {}+{} & z  & {}={} & 1\\
+    &  {}-{} & 3y &  {}+{} & z  & {}={} & 1\\
+     &  {} {} &   &  {}-{} & 5z  & {}={} & 10\\
+\end{alignat*}
+
+El sistema está ahora en la forma triangular, esto es la última fila tiene una sola variable desconocida, la siguiente fila tiene dos variables desconocidas, y la fila de hasta arriba tiene la tres variables desconocidas. Entonces, una vez que se alcanza este patrón, se puede encontrar una solución. La sustitución hacia atrá se puede usar ahora para resolver primero la última ecuación. Este resultado se usa para resolver la segunda ecuación y así sucesivamente. Por ejemplo, de la última ecuación podemos ver que $z=-2$. Sustituyendo este resultado en la segunda ecuación tenemos que se puede encontrar una solución para $y$, es decir, $y=-1$. Finalmente $z$ y $y$ pueden ser sustituidos en la primera ecuación para producir una solución para $x=4$.
+
+La eliminación hacia adelante y hacia atrás puede ser calculada en un programa de computadora.
+
+```{python}
+# Resolver la matriz Ax=b 
+# La indexacion de la matriz es a partir de 1
+import numpy as np
+A = np.matrix([[1.0, 1.0, 1.0],[1.0, -2.0, 2.0],[1.0, 2.0, -1.0]])
+b = np.array([1.0, 2.0, 4.0])
+x = np.matrix(([[0.0],[0.0],[0.0]]))
+
+#Pida las dimensiones de la matriz cuadrada
+
+n = A.shape[0]
+# Eliminación hacia adelante
+
+for k in range (n-1):
+  for i in range (k+1, n):
+    theta = A[i,k]/A[k,k]
+    for j in range (k+1, n):
+      A[i,j] = A[i,j] - theta*A[k,j]
+    b[i] = b[i] - theta * b[k]
+    
+# Eliminación hacia atrás
+
+x[n-1] = b[n-1]/A[n-1,n-1]
+for i in range (n-1, -1, -1):
+  sum = 0 
+  for j in range (i+1, n):
+    sum = sum + A[i,j]*x[j]
+  x[i] = (b[i] - sum)/A[i,i]
+  
+  
+print ("Solución =", x)
+```
+
+
+
+# Operaciones elementales con renglones 
+
+Del ejercicio de la clase anterior se ha visto que multiplicar (o dividir) los dos lados de una ecuación por un número diferente de cero da por resultado una nueva ecuación equivalente. Más aún, si se suma un múltiplo de una ecuación a otra del sistema se obtiene una ecuación equivalente. Por último, si se intercambian dos ecuaciones en un sistema de ecuaciones se obtiene un sistema equivalente. Estas tres operaciones, cuando se aplican a los renglones de la matriz aumentada que representa un sistema de ecuaciones se denominan **operaciones elementales con renglones**.
+
+i) Multiplicar (o dividir) un renglón por un número diferente de cero. 
+
+ii) Sumar un múltiplo de un renglón a otro renglón.  
+
+iii) Intercambiar dos renglones. 
+
+El proceso de aplicar las operaciones elementales con renglones para simplicar una matriz aumentada se llama **reducción por renglones**.
+
+
+# Asistencia
+
+From Irving Barreto to Everyone:  11:32 AM
+
+Presente
+
+From Melanie Mondragón to Everyone:  11:32 AM
+
+Presente
+
+From Fernanda Pilón to Everyone:  11:32 AM
+
+Presente :)
+
+From Gaeta to Everyone:  11:32 AM
+
+Presente
+
+From Karla Gómez to Everyone:  11:33 AM
+
+Presente
+
+From Maria Fernanda Garcia to Everyone:  11:33 AM
+
+Presente
+
+From José María Garduño to Everyone:  11:33 AM
+
+Presene
+
+From Andrew Flores Yebra to Everyone:  11:33 AM
+
+presente
+
+From David Dorantes to Everyone:  11:33 AM
+
+Presentee
+
+From Víctor Jerónimo to Everyone:  11:33 AM
+
+Presente
+
+From Diego Nicolas to Everyone:  11:33 AM
+
+presente
+
+From Fernanda Cardenas to Everyone:  11:34 AM
+
+Presente
+
+From Ivan Delgado to Everyone:  11:34 AM
+
+Presente
+
+From Emmanuel GR to Everyone:  11:36 AM
+
+Presente
+
+From Frida Cuevas to Everyone:  11:37 AM
+
+Presente
+
+From Itzel Aurora Bravo Santos to Everyone:  11:38 AM
+
+Presente.
+
+From Jorge Ambrosio to Everyone:  11:49 AM
+
+Presente
+
+From Pérez David to Everyone:  12:01 PM
+
+Presente
+
+From wenddy Ballona to Everyone:  12:01 PM
+
+presente
+

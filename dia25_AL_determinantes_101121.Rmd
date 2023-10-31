@@ -1,0 +1,154 @@
+---
+title: "Día 25 - Determinantes"
+author: "Dra. Norma C. Pérez Rosas"
+date: '`r format(Sys.time(), "%d/%m/%Y")`'
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+  html_document:
+    toc: yes
+    toc_depth: 2
+---
+
+# Determinantes
+
+El determinante es un número escalar que puede ser calculado a partir de una **matriz cuadrada**, con frecuencia simbolizado como $\det(\mathbf{A})$ o usando la notación $|\mathbf{A}|$. El cálculo de un determinante es hecho de forma recursiva. Comenzaremos por definir el determinante de una matriz $2 \times 2$
+
+$$
+\mathbf{A}=\left[
+\begin{array}{cc}
+a & b \\
+c & d  \\
+\end{array}
+\right]
+$$
+
+El determinante de una matriz de $2 \times 2$ es dado por el $\det(\mathbf{A})=ad-bc$. El determinante puede ser positivo, cero o negativo, 
+
+Entonces, definiremos  el determinante de una matrix de $2 \times 2$ por $\det(\mathbf{A})=ad-bc$.
+
+Por ejemplo, calcule el determinante de las siguientes matrices:
+
+
+$$
+\mathbf{A}=\left [
+\begin{array}{cc}
+4 & 1 \\
+2 & 1  \\
+\end{array}
+\right], \mathbf{B}=\left[
+\begin{array}{cc}
+3 & 4 \\
+6 & 8  \\
+\end{array}
+\right]
+$$
+$\det(\mathbf{A})=4\times 1-1 \times 2 = 2$
+
+$\det(\mathbf{B})=3\times 8 - 4\times 6 = 0$
+
+
+Recuerde que la fórmula para la inversa de una matriz 
+
+$$
+\mathbf{A}^{-1}=\frac{1}{ad-bc}\left[
+\begin{array}{cc}
+a & b \\
+c & d  \\
+\end{array}
+\right]
+$$
+
+El denominador será reconocido como el determinante. Además uno puede notar que sí el determinante es cero, entonces la inversa está indefinida. De hecho siempre que el determinante para matriz es cero, la matriz es considerada **singular**.
+
+**Sí el determinante de una matriz A es cero, entonces la matriz es singular.**
+
+$$
+\det(\mathbf{A})=\left |
+\begin{array}{ccc}
+a & b & c \\ 
+d & e & f \\ 
+g & h & k \\
+\end{array}
+\right | = a \left |
+\begin{array}{cc}
+e & f  \\ 
+h & k  \\
+\end{array}
+\right | - b \left |
+\begin{array}{cc}
+d & f  \\ 
+g & k \\ 
+\end{array}
+\right | + c \left |
+\begin{array}{cc}
+d & e  \\ 
+g & h \\ 
+\end{array}
+\right |
+$$
+
+
+$=a(ek-fh)-b(dk-fg)+c(dh-eg)$
+
+Y para una matriz de $4 \times 4$
+
+$$
+\det(\mathbf{A})=\left |
+\begin{array}{cccc}
+a & b & c & d \\ 
+e & f & g & h \\ 
+i & j & k & l \\
+m & n & o & p \\
+\end{array}
+\right | = a \left |
+\begin{array}{ccc}
+f & g & h  \\ 
+j & k & l  \\ 
+n & o & p  \\
+\end{array}
+\right | - b \left |
+\begin{array}{ccc}
+e & g & h \\ 
+i & k & l \\
+m & o & p \\
+\end{array}
+\right | + c \left |
+\begin{array}{ccc}
+e & f & h \\ 
+i & j & l \\
+m & n & p \\ 
+\end{array}
+\right | - d \left |
+\begin{array}{ccc}
+e & f & g \\ 
+i & j & k \\
+m & n & o \\
+\end{array}
+\right |
+$$
+
+
+A partir de lo anterior se puede ver un patrón. 
+ 
+# Menores y cofactores
+
+Para ser más precisos en calcular el determinante, definamos primero un **menor** y **cofactor**.
+
+Sea $\mathbf{A}$ una matriz con entradas $i,j$. Nosotros definimos un **menor**, $M_{fc}$ sea una submatriz de $(n-1)\times (n-1)$ que es obtenida al eliminar la $i-ésima$ fila y la $j-ésima$ columna. Entonces podemos calcular el determinante de un menor, denotado por $\det(\mathbf{M}_{fc})$. Además, los números:
+
+$\mathbf{C}_{ij}=(-1)^{i+j}\det(\mathbf{M}_{ij})$
+
+y son llamados los **cofactores**.
+
+Entonces, se puede definir el determinante de una matriz $\mathbf{A}$ como:
+
+Sea $\mathbf{A}$ una matriz de $n \times n$. El **determinante** de $\mathbf{A}$ es dado por:
+
+$\det(\mathbf{A})=a_{11}\mathbf{C}_{11}+a_{12}\mathbf{C}_{12}+\dots + a_{1n}\mathbf{C}_{1n}$
+
+Esta relación aplica a cualquier fila en la matriz $\mathbf{A}$ de forma tal que:
+
+$\det(\mathbf{A})=a_{i1}\mathbf{C}_{i1}+a_{i2}\mathbf{C}_{i2}+\dots + a_{in}\mathbf{C}_{in}$
+

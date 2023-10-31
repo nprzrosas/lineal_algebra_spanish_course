@@ -1,0 +1,291 @@
+---
+title: "Día 20 - Método de Gauss - Jordan"
+author: "Dra. Norma C. Pérez Rosas"
+date: '`r format(Sys.time(), "%d/%m/%Y")`'
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+  html_document:
+    toc: yes
+    toc_depth: 2
+---
+
+# m ecuaciones con n incógnitas: eleminación de Gauss-Jordan y Gaussina
+
+En esta parte se describe un método para encontrar todas las soluciones (si es que existe) de un sistema de $m$ ecuaciones lineales con $n$ incógnitas. Al hacerlo, se verá que tales sitemas o bien no tienen solución, tienen una solución o tienen un número infinito de soluciones. Antes de llegar al método general se verán algunos ejemplos sencillos. 
+
+## Solución de un sistema de tres ecuaciones con tres incógnitas: solución única
+
+**Ejemplo.** Resuelva el sistema 
+
+\begin{alignat*}{5}
+   2x_1 & {}+{} &  4x_2  &  {}+{} &  6x_3  & {}={} & 18  \label{eq:eq5}\tag{5} \\
+   4x_1 & {}+{} &  5x_2  &  {}+{} &  6x_3  & {}={} & 24 \\
+   3x_1 & {}+{} &  x_2  &  {}-{} &  2x_3  & {}={} & 4 \\
+\end{alignat*}
+
+
+**Solución**
+
+En este caso se buscan tres números $x_1, x_2, x_3,$ tales que las tres ecuaciones del sistema (5) se satisfaga. El método de solución que se estudiará será el de simplificar las ecuaciones como se hizo anteriormente, de manera que las soluciones puedan identificarse de inmediato. Se comienza por dividir la primera ecuación entre 2 .
+
+$\frac{1}{2}(2x_1+4x_2+6x_3=18)$
+
+$x_1+2x_2+3x_3=9)$
+
+Esta ecuación se sustituye por la primera ecuación del sistema (A). Esto da: 
+
+\begin{alignat*}{5}
+   x_1 & {}+{} &  2x_2  &  {}+{} &  3x_3  & {}={} & 9  \label{eq:eqb}\tag{B} \\
+   4x_1 & {}+{} &  5x_2  &  {}+{} &  6x_3  & {}={} & 24 \\
+   3x_1 & {}+{} &  x_2  &  {}-{} &  2x_3  & {}={} & 4 \\
+\end{alignat*}
+
+
+Luego multiplicamos por $-4$ la primera ecuación del sistema (B) 
+
+$-4(x_1+2x_2+3x_3=9)$
+
+$-4x_1-8x_2-12x_3=-36$
+
+Y sumamos esta nueva ecuación a la segunda ecuación del sistema (B).
+
+\begin{alignat*}{5}
+   -4x_1 & {}-{} &  8x_2  &  {}-{} &  12x_3  & {}={} & -36 \\
+   4x_1 & {}+{} &  5x_2  &  {}+{} &  6x_3  & {}={} & 24 \\
+\end{alignat*}
+
+y obtenemos $-3x_2-6x_3=-12$, esta ecuación es la nueva ecuación dos del sistema de ecuaciones (B). Este nuevo sistema se llama (C)
+
+
+\begin{alignat*}{5}
+   x_1 & {}+{} &  2x_2  &  {}+{} &  3x_3  & {}={} & 9  \label{eq:eqc}\tag{C} \\
+    & {}-{} &  3x_2  &  {}-{} &  6x_3  & {}={} & -12 \\
+   3x_1 & {}+{} &  x_2  &  {}-{} &  2x_3  & {}={} & 4 \\
+\end{alignat*}
+
+
+Luego multiplicamos por $-3$ la primera ecuación y el resultado se suma con la tercera ecuación del sistema (C)
+
+$-3(x_1+2x_2+3x_3=9)$
+
+$-3x_1-6x_2-9x_3=-27$
+
+\begin{alignat*}{5}
+   -3x_1 & {}-{} &  6x_2  &  {}-{} &  9x_3  & {}={} & -27 \\
+   3x_1 & {}+{} &  x_2  &  {}-{} &  2x_3  & {}={} & 4 \\
+\end{alignat*}
+
+y el resultado es $-5x_2-11x_3=-23$. Esta ecuación es la nueva ecuación del sistema (C). Este nuevo sistema se llama (D). 
+
+
+\begin{alignat*}{5}
+   x_1 & {}+{} &  2x_2  &  {}+{} &  3x_3  & {}={} & 9  \label{eq:eqd}\tag{D} \\
+    & {}-{} &  3x_2  &  {}-{} &  6x_3  & {}={} & -12 \\
+    & {}-{} &  5x_2  &  {}-{} &  11x_3  & {}={} & -23 \\
+\end{alignat*}
+
+Observe que en el sistema (D) se ha eliminado $x_1$ de la 2da y 3ra ecuación. 
+
+Después dividimos la segunda ecuación del sistema (D) por $-3$. 
+
+$-\frac{1}{3}(-3x_2-6x_3=-12)$
+
+$x_2+2x_3=4$
+
+Esta última ecuación es la nueva ecución dos del sistema lineal (D). Al sustituirla nos genera un nuevo sistema de ecuaciones lineales al que llamamos (E). 
+
+\begin{alignat*}{5}
+   x_1 & {}+{} &  2x_2  &  {}+{} &  3x_3  & {}={} & 9  \label{eq:eqe}\tag{E} \\
+    & {}{} &  x_2  &  {}+{} &  2x_3  & {}={} & 4 \\
+    & {}-{} &  5x_2  &  {}-{} &  11x_3  & {}={} & -23 \\
+\end{alignat*}
+
+Si multiplica la segunda ecuación del sistema (E) por $-2$ 
+
+
+$-2(x_2+2x_3=4)$
+
+$-2x_2-4x_3=-8$
+
+Si esta última ecuación se suma a la ecuación (1) del sistema (E), tenemos
+
+\begin{alignat*}{5}
+   x_1 & {}+{} &  2x_2  &  {}+{} &  3x_3  & {}={} & 9 \\
+       & {}-{} &  2x_2  &  {}-{} &  4x_3  & {}={} & -8 \\
+\end{alignat*}
+
+lo que da como resultado $x_1-x_3=1$. Si ecuación la sustituimos por la primera del sistema de ecuaciones lineales (E), obtenemos un nuevo sistema lineal al llamamos (F)
+
+
+\begin{alignat*}{5}
+   x_1 & {} {} &   &  {}-{} &  x_3  & {}={} & 1  \label{eq:eqf}\tag{F} \\
+    & {}{} &  x_2  &  {}+{} &  2x_3  & {}={} & 4 \\
+    & {}-{} &  5x_2  &  {}-{} &  11x_3  & {}={} & -23 \\
+\end{alignat*}
+
+
+Después multiplicamos por $5$ la ecuación dos del sistema F 
+
+$5(x_2+2x_3=4)$
+
+$5x_2+10x_3=20)$
+
+y lo sumanos a la tercera ecuación del sistema F. 
+
+\begin{alignat*}{5}
+    & {}{} &  5x_2  &  {}+{} &  10x_3  & {}={} & 20 \\
+       & {}-{} &  5x_2  &  {}-{} &  11x_3  & {}={} & -23 \\
+\end{alignat*}
+
+que da como resultado $-x_3=-3$. Este resultado lo sustituimos por la ecuación tres del sistema F. Esta sustitución produce un nuevo sistema al que llamamos G. 
+
+
+\begin{alignat*}{5}
+   x_1 & {} {} &   &  {}-{} &  x_3  & {}={} & 1  \label{eq:eqG}\tag{G} \\
+    & {}{} &  x_2  &  {}+{} &  2x_3  & {}={} & 4 \\
+    & {}{} &    &  {}-{} &  x_3  & {}={} & -3 \\
+\end{alignat*}
+
+
+Ahora multiplicamos por $-1$ la tercera ecuación del sistema G. 
+
+$-1(-x_3=-3)$
+
+$x_3=3$
+
+Y esta última expresión la sustituimos por la ecuación tercera del sistema G. Obteniendo un nuevo sistema equivalente H. 
+
+\begin{alignat*}{5}
+   x_1 & {} {} &   &  {}-{} &  x_3  & {}={} & 1  \label{eq:eqh}\tag{H} \\
+    & {}{} &  x_2  &  {}+{} &  2x_3  & {}={} & 4 \\
+    & {}{} &    &  {}{} &  x_3  & {}={} & 3 \\
+\end{alignat*}
+
+
+Sumamos la tercera ecuación a la primera 
+
+\begin{alignat*}{5}
+   x_1 & {} {} &   &  {}-{} &  x_3  & {}={} & 1  \\
+    & {}{} &    &  {}{} &  x_3  & {}={} & 3 \\
+\end{alignat*}
+
+y obtenemos $x_1=4$. Esta expresión la sustituimos en el sistema H generando un nuevo sistema de ecuaciones lineales I . 
+
+\begin{alignat*}{5}
+   x_1 & {} {} &   &  {}{} &   & {}={} & 4  \label{eq:eqi}\tag{I} \\
+    & {}{} &  x_2  &  {}+{} &  2x_3  & {}={} & 4 \\
+    & {}{} &    &  {}{} &  x_3  & {}={} & 3 \\
+\end{alignat*}
+
+Se multiplica la tercera ecuación del sistema I por $-2$,
+
+$-2(x_3=3)$
+
+$-2x_3=-6$
+
+\begin{alignat*}{5}
+    & {}{} &  x_2  &  {}+{} &  2x_3  & {}={} & 4 \\
+    & {}{} &    &  {}-{} &  2x_3  & {}={} & -6 \\
+\end{alignat*}
+
+Y esto nos da como resultado $x_2=-2$. Al sustituir esta expresión por la ecuación dos del sistema I, tenemos 
+
+\begin{alignat*}{5}
+   x_1 & {} {} &   &  {}{} &   & {}={} & 4  \label{eq:eqj}\tag{J} \\
+    & {}{} &  x_2  &  {}{} &   & {}={} & -2 \\
+    & {}{} &    &  {}{} &  x_3  & {}={} & 3 \\
+\end{alignat*}
+
+Ésta es la solución única para el sistema. Se escribe en la forma $(4,-2,3)$. El método que se usó para resolver el sistema se conoce como **eliminación de Gauss-Jordán.**
+
+Lo que se hizo en este ejercicio fue:
+
+i) Se dividió la primera ecuación, entre una constante, para hacer el coeficiente de $x_1$ igual a $1$.
+
+ii) Se "eliminaron" los términos en $x_1$ de la segunda y terceras ecuaciones. Esto es, los coeficientes de estos términos se hicieron cero al multiplicar la primera ecuación por las constantes adecuadas y sumándola a la segunda y tercera ecuaciones, respectivamente, de manera que al sumar las ecuaciones una de las incógnitas se eliminaba. 
+
+iii) Se dividió la segunda ecuación entre una constante, para hacer el coeficiente de $x_2$ igual a $1$ y después se usó la segunda ecuación para "eliminar" los términos en $x_2$ de la primera y tercera ecuaciones, de manera parecida a como se hizo en el paso anterior. 
+
+iv) Se dividió la tercera ecuación entre una constante, para hacer el coeficiente de $x_3$ igual a $1$ y después se usó la tercera ecuación para "eliminar" los términos de $x_3$ de la primera y segunda ecuaciones.
+
+Cabe resaltar el hecho de que, en cada paso, se obtuvieron sistemas equivalentes. Es decir, cada sistema tenía el mismo conjunto de soluciones que el precedente. Esto es una consecuencia de los hechos A y B. 
+
+
+# Asistencia
+
+From Emmanuel Gonzalez Rulfo to Everyone:  11:36 AM
+
+Presente
+
+From Ivan Delgado to Everyone:  11:36 AM
+
+presente
+
+From Diego Nicolas to Everyone:  11:37 AM
+
+Presente
+
+From Karla Gómez to Everyone:  11:37 AM
+
+Presente
+
+From Gaeta to Everyone:  11:37 AM
+
+Presente
+
+From Fernanda Pilón to Everyone:  11:37 AM
+
+Presente :)
+
+From Melanie Mendieta Mondragón to Everyone:  11:37 AM
+
+Presente
+
+From Fernanda Cardenas to Everyone:  11:37 AM
+
+Presente
+
+From José María Garduño to Everyone:  11:37 AM
+
+presente
+
+From Frida Cuevas to Everyone:  11:37 AM
+
+Presente
+
+From Jorge Ambrosio to Everyone:  11:37 AM
+
+Presente
+
+From Irving Barreto to Everyone:  11:37 AM
+
+Presente
+
+From David Dorantes to Everyone:  11:38 AM
+
+Presente
+
+From Andrew Flores Yebra to Everyone:  11:38 AM
+
+Presente
+
+From Víctor Jerónimo to Everyone:  11:38 AM
+
+Presente
+
+From Itzel Aurora Bravo Santos to Everyone:  11:39 AM
+
+Presente.
+
+From wenddy Ballona to Everyone:  11:47 AM
+
+Presente
+
+From Itzel Aurora Bravo Santos to Everyone:  01:29 PM
+
+Presente
+
+
+

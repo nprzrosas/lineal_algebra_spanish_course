@@ -1,0 +1,61 @@
+---
+title: "Ejercicios - Serie 2"
+author: "Dra. Norma C. Pérez Rosas"
+date: '`r format(Sys.time(), "%d/%m/%Y")`'
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+  html_document:
+    toc: yes
+    toc_depth: 2
+---
+
+Complete su notebook con los siguientes ejercicios
+
+**Ejercicio 1.** Encuentre el producto punto de los siguientes vectores (explique sus resultados):
+
+a) $$
+\left[
+\begin{array}{c}
+1 \\
+2 \\
+\end{array}
+\right], \left[
+\begin{array}{c}
+4 \\
+7 \\
+\end{array}
+\right]
+$$
+
+
+
+b) $$
+\left[
+\begin{array}{c}
+8 \\
+4 \\
+\end{array}
+\right], \left[
+\begin{array}{c}
+1 \\
+-2 \\
+\end{array}
+\right]
+$$
+
+**Ejercicio 2.** Calcule el producto punto de $\mathbf{i}$ y $\mathbf{j}$. Explique sus resultados
+
+**Ejercicio 3.**  Normalice el vector $\mathbf{v}=[2,-1,3]$
+
+**Ejercicio 4.**  ¿Cuál de los siguientes vectores son ortogonales?
+
+$\mathbf{v}_{1}=[-2,-2,1]$, $\mathbf{v}_{2}=[4,0,4]$, $\mathbf{v}_{3}=[-1,-1,1]$ 
+
+
+**Ejercicio 5.** Asuma que $\mathbf{u}$, $\mathbf{v}$ y $\mathbf{w}$ son vectores con al menos dos elementos, explique ¿por qué los siguientes cálculos no tienen sentido?
+
+a) $\mathbf{v}^{T}\mathbf{u} + \mathbf{w}$
+
+b) $\mathbf{v}+\mathbf{u}^{T}$

@@ -1,0 +1,356 @@
+---
+title: "Día 7 - Graficos de vectores, operaciones vectoriales, producto punto & Markdown "
+author: "Dra. Norma C. Pérez Rosas"
+date: '`r format(Sys.time(), "%d/%m/%Y")`'
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+  html_document:
+    toc: yes
+    toc_depth: 2
+---
+
+
+La gran ventaja es que cualquier vector puede ser representado como una combinación de vectores unitarios escalados, por ejemplo: [2, 3, 4] puede ser escrito como $2\mathbf{i}+3\mathbf{j}+4\mathbf{k}.$
+
+
+```{r, echo = FALSE}
+#install.packages("plot3D")
+library("plot3D")
+x0 <- c(0,0,0,0)
+y0 <- c(0,0,0,0)
+z0 <- c(0,0,0,0)
+x1 <- c(1,0,0,2) 
+y1 <- c(0,1,0,3)
+z1 <- c(0,0,1,4)
+cols <- c("orchid2", "purple", "royalblue1", "red3")
+arrows3D(x0, y0, z0, x1, y1, z1, col = cols,
+         lwd = 2, d = 3, clab = c("Quality", "score"), 
+         main = "Vectores unitarios v = 2i+3j+4k", bty ="g", ticktype = "detailed")
+# Add starting point of arrow
+points3D(x0, y0, z0, add = TRUE, col="darkred", 
+          colkey = FALSE, pch = 15, cex = 1)
+# Add labels to the arrows
+text3D(x1, y1, z1, c(" i", "j ", "k", "v=(2,3,4)"), col = c("orchid2", "purple", "royalblue1", "red3"), add=TRUE, colkey = FALSE)
+#text3D(x1, y1, z1, c("i", "j ", "k", "h", "u", "t"),
+   #   )
+# colvar = x1^2, col = cols, add=TRUE, colkey = FALSE
+```
+
+# Código para dibujar un vector en Python 
+
+```{python}
+# Código en Python para graficar un vector en 2D
+import matplotlib.pyplot as plt
+u = [5, 4]
+v = [-8, 2]
+origen = [0, 0]
+plt.quiver(origen[0], origen[1],  u[0], u[1], color = 'r', angles='xy', scale_units='xy', scale=1)
+plt.quiver(origen[0], origen[1],  v[0], v[1], color = 'b', angles='xy', scale_units='xy', scale=1)
+plt.xlim([-9, 9])
+plt.ylim([0, 6])
+plt.show()
+```
+
+
+
+
+```{python}
+
+import matplotlib.pyplot as plt 
+# Código en Python para graficar un vector en 3D
+u = [2, 3, 1]
+v = [0, 5, 4]
+w = [7, -8, 10]
+fig = plt.figure()
+ax = plt.axes(projection = '3d')
+ax.set_xlim([-1,10])
+ax.set_ylim([-10,10])
+ax.set_zlim([0,10])
+
+origen = [0,0,0]
+ax.quiver(origen[0], origen[1], origen[2], u[0], u[1], u[2], color = 'b')
+ax.quiver(origen[0], origen[1], origen[2], v[0], v[1], v[2], color = 'r')
+ax.quiver(origen[0], origen[1], origen[2], w[0], w[1], w[2], color = 'g')
+plt.show()
+
+```
+
+
+# Algebra vectorial 
+
+Así como las reglas de álgebra puede ser aplicado a números reales, nosotros podemos considerar las operaciones algebráicas usuales (como adición y sustracción) aplicados a vectores. 
+
+## Adición y sustracción de vectores
+
+La adición y sustracción de vectores es directa y es complementada para agregar y sustraer elementos correspondientes en dos vectores. Ambos vectores deben tener el mismo número de elementos y deben ser ambos o vectores columas o vectores filas. 
+
+
+
+\begin{equation*}
+\mathbf{u\pm v}  = 
+\begin{pmatrix}
+u_{1} \\
+u_{2}\\
+\vdots    \\
+u_{n} 
+\end{pmatrix} \pm
+\begin{pmatrix}
+v_{1} \\
+v_{2}\\
+\vdots    \\
+v_{n} 
+\end{pmatrix}
+=
+\begin{pmatrix}
+u_{1} \pm v_{1} \\
+u_{2} \pm v_{2} \\
+\vdots \\
+u_{n} \pm  v_{n}
+\end{pmatrix}
+\end{equation*}
+
+
+Ejemplo: Dados dos vectores $\mathbf{u}=[1,2,3]$ y $\mathbf{v}=[-1,3,2]$, el vector suma y diferencia está dado por:
+
+
+$\mathbf{u} + \mathbf{v} = [1,2,3] + [-1,3,2] = [0,5,5]$
+
+
+$\mathbf{u} - \mathbf{v} = [1,2,3] - [-1,3,2] = [2,-1,1]$
+
+Geométricamente, la suma de dos vectores que inicia en el origen puede ser interpretada en términos de la **Ley del paralelogramo**. Dos vectores forman dos lados adyacentes de un paralelogramo a partir de los cuales podemos dibujar los dos lados restantes. El vector suma se extiende entonces desde el origen hasta el lado opuesto del paralelogramo. 
+
+
+![Suma de vectores. Imagen tomada de https://mathinsight.org/vectors_cartesian_coordinates_2d_3d](vector_suma.png)
+
+
+![Suma de vectores. Imagen tomada de https://mathinsight.org/vectors_cartesian_coordinates_2d_3d](vector_suma_2.png)
+
+
+La sustracción de vectores también puede ser interpretada geométricamente usando el método del paralelogramo al desarrollar la adición $\mathbf{u}+(\mathbf{-v})$. Para formar el paralelogramo, la resta $(\mathbf{v})$
+
+
+![Resta de vectores. Imagen tomada de internet](vector_resta_2.png)
+
+Una forma tradicional para visualizar la sustracción de vectores es trasladar el vector $\mathbf{u}-\mathbf{v}$ de forma tal que conecte los puntos terminales de $\mathbf{u}$ con $\mathbf{v}$. Note que la traslación no cambia la magnitud o la dirección, aquí el vector trasladado es por definición considerado igual al original. 
+
+Algo más interesante es el hecho que la longitud de $\mathbf{u}-\mathbf{v}$ es la distancia Euclidiana entre los puntos de $\mathbf{u}$ y $\mathbf{v}$. Esto se puede demostrar fácilmente al notar $\mathbf{u}-\mathbf{v} = [u_1-v_1,u_2-v_2]$ de forma que la longitud es $\mathbf{u}-\mathbf{v}$ está dada por $\left\Vert  \mathbf{u}-\mathbf{v} \right\Vert=\sqrt{(u_1-v_1)^2+(u_2-v_2)^2}$. Así mismo, la distancia entre los puntos terminales $\mathbf{u}$ y $\mathbf{v}$ puede ser calculada a partir del triángulo rectángulo  que se forma con $\Delta y = v_2-u_2$ y $\Delta x=v_1-u_1$ que también está dada por $\left\Vert  \mathbf{u}-\mathbf{v} \right\Vert= \sqrt{(v_1-u_1)^2+(v_2-u_2)^2}$ que es de la misma longitud como fue calculado a partir de $\mathbf{u}-\mathbf{v}$. Sí elevamos la distancia al cuadrado tenemos 
+
+
+$\left\Vert  \mathbf{u}-\mathbf{v} \right\Vert ^2=(v_1-u_1)^2+(u_2-v_2)^2$
+
+Ejemplo:
+
+$\mathbf{u} = [1,2]$
+
+$\mathbf{v} = [4,3]$ 
+
+Procedimiento 1:
+
+$\mathbf{u}-\mathbf{v} = [u_1-v_1,u_2-v_2]$
+
+$\left\Vert  \mathbf{u}-\mathbf{v} \right\Vert=\sqrt{(u_1-v_1)^2+(u_2-v_2)^2}$
+
+$\left\Vert  \mathbf{u}-\mathbf{v} \right\Vert=\sqrt{(1-4)^2+(2-3)^2}=\sqrt{(-3)^2-(-1)^2}=\sqrt{9+1}=\sqrt{10}$
+
+Procedimiento 2:
+
+$\Delta x=v_1-u_1$
+
+
+$\Delta y = v_2-u_2$ 
+
+
+$\left\Vert  \mathbf{u}-\mathbf{v} \right\Vert= \sqrt{(v_1-u_1)^2+(v_2-u_2)^2}$
+
+$\left\Vert  \mathbf{u}-\mathbf{v} \right\Vert= \sqrt{(4-1)^2+(3-2)^2}=\sqrt{3^2+1^2}=\sqrt{10}$
+
+
+Como se puede observar por cualquiera de los dos procedimientos se puede obtener la resta de $\mathbf{u}-\mathbf{v}$.
+
+
+## Adición y sustracción de vectores con Python
+
+
+
+```{python}
+#codigo en Python para sumar o restar dos vectores
+import numpy as np
+x = np.array([3,2,1])
+y = np.array([5,1,2])
+print(x + y) 
+print(x - y) 
+```
+
+**Ejemplo.** Muestre que $\left\Vert  \mathbf{i}-\mathbf{j} \right\Vert=\sqrt{2}$
+
+$\left\Vert  \mathbf{i}-\mathbf{j} \right\Vert=(0,1)-(1,0)=(-1,1)$
+
+La magnitud esta dada por 
+
+
+$\left\Vert (-1,1) \right\Vert=(-1)^2+(1)^2=\sqrt{2}$
+
+
+## Multipicación por un escalar 
+
+La multiplicación por un escalar es realizada al multiplicar cada elemento del vector por un **escalar**. Por ejemplo, un escalar $k$ y un vector $\mathbf{v}$, denotado por $k\mathbf{v}$ puede ser interpretado geométricamente como un vector que apunta en la misma dirección, pero la longitud ha sido escalada por $k$.
+
+
+$k\mathbf{v}=[kv_1,kv_2,...,kv_n]$
+
+
+```{r, echo = FALSE}
+etiquetas <- c('v', 'kv' )
+plot(c(0,4),c(0,3), xlab = 'x', ylab='y', main="Multiplicación de un vector v por un escalar k: kv ",col.main='blue', xaxt='n', yaxt='n')
+arrows(0,0,4,3, col = 'red' )
+arrows(0,0,4/5,3/5, col = 'blue')
+text(c(0.5,2.6),c(0.7,2.3),etiquetas,col = c("blue", "red"))
+
+```
+
+
+Como se sugirió anteriormente, dadas la reglas de multiplicación por un escalar y adición, nosotros ahora podemos usarlas para escribir cualquier vector de base estándar, entonces el vector $\mathbf{v}=[5,4,6]$ puede ser expresado como:
+
+$k\mathbf{v}=5e_1+4e_2+6e_3$
+
+o en geometría e ingeniería
+
+$k\mathbf{v}=5_1+4_j+6_k$
+
+
+
+```{python}
+#codigo en Python para multiplicar un vector por un escalar 
+import numpy as np
+k = 3
+x = np.array([3,2,1])
+print(k*x)
+```
+
+
+
+# LaTex para construir las expresiones matemáticas
+
+La notas de clase vienen acompañadas de expresiones matemáticas. Para editar ecuaciones se utiliza el lenguaje [LaTeX](https://www.latex-project.org/). Ejemplo:
+
+> Para dimensiones arriba de tres $\mathbf{e_i}$ puede ser usado para representar los vectores unitarios. 
+
+\begin{equation*}
+\mathbf{e_1} = 
+\begin{pmatrix}
+1  \\
+0 \\
+\vdots   \\
+0 
+\end{pmatrix}
+\end{equation*}
+
+
+
+\begin{equation*}
+\mathbf{e_2} = 
+\begin{pmatrix}
+0  \\
+1 \\
+\vdots   \\
+0 
+\end{pmatrix}
+\end{equation*}
+
+quedaría escritos en Markwon como:
+
+![Sintaxis de latex para generar un vector columna](latex_sintaxis.png)
+
+La sintaxis en Latex para un vector fila es 
+
+![Sintaxis en latex para un vector fial](latex_fila.png)
+
+
+# LaTex & Overleaf
+
+[Overleaf](https://www.overleaf.com/) es un editor colaborativo de [LaTeX](https://www.latex-project.org/) basado en la nube que se utiliza para escribir, editar y publicar documentos científicos. En la figura se muestra el ambiente de Overleaf, con el fin de que adquiera experiencia en Latex, le recomiendo ampliamente crear una cuenta en Overleaf y comenzar a escribir en LaTex para practicar. Para nuestra clase sólo tiene que aprender a escribir expresiones matemáticas en Latex, así que en la sección de bibliografía de classroom encontrará un nuevo libro titulado **LaTex in 24 hours**, revise los capítulos 11 y 12 del libro para que se familiarize con la escritura de expresiones matemáticas en Latex. 
+
+
+![Overleaf: editor de LaTex online](overleaf2.png)
+
+
+
+
+# Asistencia 
+
+From Karla Gómez to Everyone:  11:31 AM
+
+Presente
+
+From Fernanda Pilón to Everyone:  11:31 AM
+
+Presente
+
+From David Dorantes to Everyone:  11:32 AM
+
+Presente
+
+From José María Garduño to Everyone:  11:32 AM
+
+PRESE
+
+From Víctor Jerónimo to Everyone:  11:32 AM
+
+Presente
+
+From Itzel Aurora Bravo Santos to Everyone:  11:32 AM
+
+Presente.
+
+From José María Garduño to Everyone:  11:32 AM
+
+PRESENTE
+
+From Maria Fernanda Garcia to Everyone:  11:32 AM
+
+Presente
+
+From Frida Cuevas to Everyone:  11:32 AM
+
+Presente
+
+From Pérez Tadeo to Everyone:  11:32 AM
+
+PRESENTE
+
+From Gaeta to Everyone:  11:38 AM
+
+presente
+
+From Wenddy Ballona Martinez to Everyone:  11:38 AM
+
+presente
+
+From Melanie Mondragón to Everyone:  11:38 AM
+
+presente
+
+From Irving Barreto to Everyone:  11:39 AM
+
+Presente
+
+From Fernanda Cardenas to Everyone:  11:39 AM
+
+Presente
+
+From Jorge Ambrosio to Everyone:  11:39 AM
+
+Presente
+
+From Andrew Flores Yebra to Everyone:  11:39 AM
+
+Presente
+
+From Diego Nicolas to Everyone:  11:39 AM
+
+Presente
+
+

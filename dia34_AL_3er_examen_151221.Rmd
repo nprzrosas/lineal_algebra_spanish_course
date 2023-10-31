@@ -1,0 +1,149 @@
+---
+title: "Día 34 -3er. Examen - Álgebra Lineal"
+author: "Dra. Norma C. Pérez Rosas"
+date: '`r format(Sys.time(), "%d/%m/%Y")`'
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+  html_document:
+    toc: yes
+    toc_depth: 2
+---
+
+Instrucciones: responda correctamente las siguientes preguntas. Al terminar tome fotografía a sus respuestas, genere un solo PDF con la siguiente estructura apellido_paterno_apellido_materno_nombre_examen3_grupo.pdf y envíe su examen al classroom.
+
+Al inicio de su examen coloque 
+
+**Nombre completo**
+
+**Grupo**
+
+**Boleta**
+
+**correo electrónico**
+
+1. ¿Cuál de los siguientes es $0$ para todo $x$ y $y$? Justifique su respuesta. (Valor: 10 puntos)
+
+a)
+
+$$
+\left |
+\begin{array}{cc}
+x & y \\ 
+-y & x \\ 
+\end{array}
+\right | 
+$$
+
+b)
+
+$$
+\left |
+\begin{array}{cc}
+x & -y \\ 
+-x & y \\ 
+\end{array}
+\right | 
+$$
+
+
+
+c)
+
+$$
+\left |
+\begin{array}{cc}
+x & x \\ 
+y & -y \\ 
+\end{array}
+\right | 
+$$
+
+2. Si 
+
+$$
+\mathbf{A}=\left [
+\begin{array}{cccc}
+2 & -1 & 5 & 6\\ 
+ 0 & 3 & 2 & 4\\
+ 0 & 0 & -2 & 15\\
+  0 & 0 & 0 & 1\\
+\end{array}
+\right ] 
+$$
+
+encuentre el $\det (\mathbf{A})$. Justifique su respuesta. (Valor: 15 puntos)
+
+
+3. Resuelva el siguiente sistema usando la regla de Cramer (Valor: 15 puntos)
+
+\begin{alignat*}{5}
+   2x_1 & {}+{} &  4x_2 & {}+{} & 6x_3 &  {}={} & 18\\
+   4x_1 & {}+{} &  5x_2 & {}+{} & 6x_3 &  {}={} & 24\\
+   3x_1 & {}+{} &  x_2 & {}-{} & 2x_3 &  {}={} & 4\\
+\end{alignat*}
+
+4. Para un espacio que sea descrito como un espacio vectorial debe mostrar cerradura, ¿qué significa esto? (Valor: 2.5 puntos)
+
+5. ¿Qué significa espacio generado?(Valor: 2.5 puntos)
+
+6. Defina los términos linealmente dependiente y linealmente independiente. (Valor: 2.5 puntos) 
+
+7. Defina los téminos bases y dimensión. (Valor: 2.5 puntos)
+
+8. Determine si los vectores:
+
+$$
+\mathbf{v}_1=\left [
+\begin{array}{c}
+1 \\ 
+2\\
+3\\
+\end{array}
+\right ], \  \mathbf{v}_2=\left [
+\begin{array}{c}
+5 \\ 
+6\\
+-1\\
+\end{array}
+\right ] \ y  \ \mathbf{v}_3=\left [
+\begin{array}{c}
+3 \\ 
+2\\
+1\\
+\end{array}
+\right ]
+$$
+
+son linealmente independientes o linealmente dependientes en $R^3$. (Valor: 20 puntos)
+
+9. Si tiene la matriz 
+
+$$
+\mathbf{A}=\left[
+\begin{array}{cc}
+   3 & 0  \\
+   8 & -1
+\end{array}
+\right]
+$$
+
+
+y el vector 
+
+
+$$
+\mathbf{x}=\left[
+\begin{array}{c}
+   1   \\
+   2 
+\end{array}
+\right]
+$$
+
+La pregunta es, ¿será $\mathbf{x}$ un eigenvector de $\mathbf{A}$? Es decir, 
+
+¿$\mathbf{A}\mathbf{x}=\lambda \mathbf{x}$?
+
+Justifique su respuesta. (Valor: 10 puntos)

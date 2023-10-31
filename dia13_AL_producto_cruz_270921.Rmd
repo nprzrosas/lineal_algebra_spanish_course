@@ -1,0 +1,386 @@
+---
+title: "Día 13 - Producto cruz y matrices"
+author: "Dra. Norma C. Pérez Rosas"
+date: '`r format(Sys.time(), "%d/%m/%Y")`'
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+  html_document:
+    toc: yes
+    toc_depth: 2
+---
+
+#Producto cruz (continuación)
+
+**Ejercicio 2.** Determine un vector unitario perpendicular al plano definido por $\mathbf{u}=[3, -4, 0]$ y $\mathbf{u}=[7, 5, -4]$.
+
+Pista 1: recuerde que el producto cruz genera un vector perpendicular al plano. 
+
+Pista 2: recuerde el procedimiento para generar un vector de magnitud uno a partir de un vector. 
+
+```{python}
+import numpy as np
+u = np.array([3,-4,0])
+v = np.array([7,5,-4])
+u_cruz_v = np.cross(u, v)
+print('u x v =', u_cruz_v)
+norma = np.array(u_cruz_v)
+print('La magnitud del vector perpendicular a u x v es', np.linalg.norm(norma))
+print('El vector unitario es (16/47.42, 12/47.42, 43/47.42)')
+```
+
+
+## Magnitud del producto cruz 
+
+Veamos ahora con más detalle la magnitud del producto cruz $\lVert  \mathbf{v} \times \mathbf{w} \rVert$. Se mencionó anteriormente que la magnitud del producto cruz es el área del paralelogramo formado por los dos vectores. 
+
+La figura muestra un paralelogramo formado por dos vectores  $\mathbf{v}$ y $\mathbf{w}$. La base del paralelogramo es denotado por el módulo de $\mathbf{v}$, $\lVert  \mathbf{v} \rVert$. El área del paralelogramo es dada por la fórmula estándar  $h\times \lVert  \mathbf{v} \rVert$, donde $h$ es la altura. La altura $h$ es dada por $\lVert  \mathbf{v} \rVert \sin{\theta}$. Por lo tanto el área del paralelogramo puede ser escrita como:
+
+$A=\lVert \mathbf{v}\rVert \lVert \mathbf{w}\rVert \sin{\theta}$
+
+![La magnitud del vector resultante del producto cruz es el área del paralelogramo que se forma con los vectores $\mathbf{u}$ y  $\mathbf{w}$. El área del paralelogramo es el producto de la altura $h$ y el ancho $\lVert \mathbf{w}\rVert$.](area_cruz.png)
+
+
+Se puede demostrar que la magnitud del producto cruz es el cálculo del área como se muestra a continuación:
+
+
+\begin{equation} 
+\begin{split}
+\lVert \mathbf{v} \times  \mathbf{w} \rVert ^2  & = (v_2w_3-v_3w_2)^2+(v_3w_1-v_1w_3)^2+(v_1w_2-v_2w_1)^2 \\
+ & = v_2^2w_3^2-2v_2w_3v_3w_2+v_3^2w_2^2+v_3^2w_1^2-2v_3w_1v_1w_3+v_1^2w_3^2+v_1^2w_2^2-2v_1w_2v_2w_1+v_2^2w_1^2
+\end{split}
+\end{equation}
+
+\begin{equation} 
+\begin{split}
+\lVert \mathbf{v}  \rVert ^2  \lVert \mathbf{w} \rVert ^2   & = (v_1^2+v_2^2+v_3^2)(w_1^2+w_2^2+w_3^2)\\
+& = v_1^2(w_1^2+w_2^2+w_3^2) + v_2^2(w_1^2+w_2^2+w_3^2) + v_3^2(w_1^2+w_2^2+w_3^2)\\
+& = v_1^2w_1^2+v_1^2w_2^2+v_1^2w_3^2+v_2^2w_1^2+v_2^2w_2^2+v_2^2w_3^2+v_3^2w_1^2+v_3^2w_2^2+v_3^2w_3^2
+\end{split}
+\end{equation}
+
+
+
+\begin{equation} 
+\begin{split}
+(\mathbf{v} \cdot  \mathbf{w}) ^2   & = (v_1w_1+v_2w_2+v_3w_3)^2\\
+& = v_1w_1(v_1w_1+v_2w_2+v_3w_3)+v_2w_2(v_1w_1+v_2w_2+v_3w_3)+v_3w_3(v_1w_1+v_2w_2+v_3w_3)\\
+& = v_1^2w_1^2+v_1w_1v_2w_2+v_1w_1v_3w_3+v_1w_1v_2w_2+v_2^2w_2^2+v_2w_2v_3w_3+v_1w_1v_3w_3+v_2w_2v_3w_3+v_3^2w_3^2\\
+& = v_1^2w_1^2+v_2^2w_2^2+v_3^2w_3^2+2v_1w_1v_2w_2+2v_1w_1v_3w_3+2v_2w_2v_3w_3
+\end{split}
+\end{equation}
+
+
+Por otra parte, sí hacemos 
+
+
+\begin{equation} 
+\begin{split}
+\lVert \mathbf{v}  \rVert ^2  \lVert \mathbf{w} \rVert ^2 - (\mathbf{v} \cdot \mathbf{w})^2   & = v_1^2w_1^2+v_1^2w_2^2+v_1^2w_3^2+v_2^2w_1^2+v_2^2w_2^2+v_2^2w_3^2+v_3^2w_1^2+v_3^2w_2^2+v_3^2w_3^2 - (v_1^2w_1^2+v_2^2w_2^2+v_3^2w_3^2+2v_1w_1v_2w_2+2v_1w_1v_3w_3+2v_2w_2v_3w_3)\\
+& = v_1^2w_2^2+v_1^2w_3^2+v_2^2w_1^2+v_2^2w_3^2+v_3^2w_1^2+v_3^2w_2^2-2v_1w_1v_2w_2-2v_1w_1v_3w_3-2v_2w_2v_3w_3 \\
+& = \lVert \mathbf{v} \times  \mathbf{w} \rVert ^2
+\end{split}
+\end{equation}
+
+
+Entonces $\lVert \mathbf{v} \times  \mathbf{w} \rVert ^2 = \lVert \mathbf{v}  \rVert ^2  \lVert \mathbf{w} \rVert ^2 - (\mathbf{v} \cdot \mathbf{w})^2$
+
+
+\begin{equation} 
+\begin{split}
+\lVert \mathbf{v} \times  \mathbf{w} \rVert ^2 & = \lVert \mathbf{v}  \rVert ^2  \lVert \mathbf{w} \rVert ^2 - (\mathbf{v} \cdot \mathbf{w})^2\\
+& =  \lVert \mathbf{v}  \rVert ^2  \lVert \mathbf{w} \rVert ^2 - ( \lVert \mathbf{v}  \rVert  \lVert \mathbf{w}  \rVert \cos(\theta))^2\\
+& =  \lVert \mathbf{v}  \rVert ^2 \lVert \mathbf{w}  \rVert ^2 (1 - \cos^2\theta)\\
+& =  \lVert \mathbf{v}  \rVert ^2 \lVert \mathbf{w}  \rVert ^2 \sin^2 \theta
+\end{split}
+\end{equation}
+
+
+
+Recordando que $\sin^2\theta=1-cos^2\theta$  y tomando la raíz cuadrada de la expresión anterior como el $\sin\theta>0$ para $0\leq\theta\leq \pi$
+
+Obtenemos $\lVert \mathbf{v} \times  \mathbf{w} \rVert  = \lVert \mathbf{v}  \rVert \lVert \mathbf{w}  \rVert \sin\theta$
+
+En otras palabras, el producto cruz es el área del paralelogramo. Sí se dibuja una línea del punto $C$ al $B$ se parte el paralelogramo en dos triángulos de áreas iguales. Entonces, el área de un triángulo puede ser obtenida al calcular la mitad del área del producto cruz:
+
+$Área_{COB}= \frac{1}{2} \lVert \mathbf{v} \times  \mathbf{w} \rVert$. 
+
+Este resultado hace más fácil calcular el área del triángulo en tres dimensiones. 
+
+**Ejemplo:** encuentre el área del triángulo que tiene las siguientes coordenadas como vértices:
+
+
+$\mathbf{a}=(5,-1,1)$
+
+$\mathbf{b}=(4,3,0)$
+
+$\mathbf{c}=(0,1,2)$
+
+Una forma de resolver esto es trasladar todos los vértices de forma que la coordenada de $\mathbf{a}$ sea $(0,0,0)$. Esto involucra sustraer $\mathbf{a}$ de cada vértice, produciendo un nuevo conjunto de coordenadas:
+
+
+$\mathbf{a}=(0,0,0)$
+
+$\mathbf{b}=(-1,4,-1)$
+
+$\mathbf{c}=(-5,2,1)$
+
+
+
+
+Note que esta operación no cambia el área del triángulo. Para determinar el área primero calculamos el producto cruz. 
+
+$\mathbf{b} \times \mathbf{c} = (b_2c_3-b_3c_1, b_3c_1-b_1c_3, b_1c_2-b_2c_1)$
+
+que produce 
+
+$\mathbf{b} \times \mathbf{c} = (6, 6, 18)$
+
+El paso final es determinar la mitad de la magnitud del producto cruz:
+
+$\frac{1}{2} \lVert \mathbf{b} \times  \mathbf{c} \rVert=\frac{1}{2}\sqrt{36+36+324}=\frac{1}{2}\sqrt{32}\sqrt{356}=\frac{1}{2}6\sqrt{11}=3\sqrt{11}$
+
+Uno de los teoremas más importantes involucrando el producto cruz es la relación del producto cruz con el producto punto.
+
+
+Sí $\mathbf{u}$ y $\mathbf{v}$ son vectores en $R^3$, entonces 
+
+$\mathbf{u} \cdot (\mathbf{u} \times \mathbf{v})= 0$
+
+$\mathbf{v} \cdot (\mathbf{u} \times \mathbf{v})= 0$
+
+
+Esto es, el vector $\mathbf{u} \times \mathbf{v}$ es ortogonal tanto a $\mathbf{u}$ como a $\mathbf{v}$. Esto hace sentido con la definición geométrica. Este resultado implica que sí dos vectores son paralelos $\mathbf{u} \times \mathbf{v} = \mathbf{0}$.
+
+Esto implica también que sí el producto cruz de dos vectores no es cero, entonces el producto punto con cualquiera de los dos vectores será **cero**, es decir, **ortogonal**.
+
+
+**Ejemplo:**
+
+muestre que $\mathbf{u} \cdot (\mathbf{u} \times \mathbf{v})= 0$ donde $\mathbf{u} = [1,2,-2]$ y  $\mathbf{v} = [3,0,1]$. El producto cruz es
+
+$\mathbf{u} \times \mathbf{v}= [2, -7, -6]$
+
+Todo lo que resta hacer es calcular el producto punto de $\mathbf{u}$ y con este resultado de producto cruz:
+
+
+$\mathbf{u} \cdot (\mathbf{u} \times \mathbf{v}) = (1)(2)+(2)(-7)+(-2)(-6)= 0$
+
+
+## Productos triples
+
+Un productor triple tiene la forma de 
+
+$\mathbf{u} \cdot(\mathbf{v} \times \mathbf{w})$   **Triple producto escalar**
+
+$\mathbf{u} \times (\mathbf{v} \times \mathbf{w})$ **Triple producto vectorial**
+
+
+El **triple producto escalar** tiene una interpretación geométrica donde el resultado escalar es el volumen de un paralelepipedo con los vértices dados por $\mathbf{u}$, $\mathbf{v}$ y  $\mathbf{w}$.
+
+$V=\mathbf{u}\cdot(\mathbf{v}\times\mathbf{w})$
+
+![El triple producto escalar nos da el volumen del paralelepído. Imagen extraída de <https://www.youtube.com/watch?v=6NeAK0rJwlk>](scalar_triple_product.png)
+
+El **triple producto vectorial** es más difícil de interpretar. Dado el triple producto $\mathbf{u} \times (\mathbf{v} \times \mathbf{w})$ podemos decir que $\mathbf{u}$ es perpendicular a $\mathbf{v} \times \mathbf{w}$. Por otro lado, $\mathbf{v} \times \mathbf{w}$ es perpendicular a $\mathbf{u}$ y $\mathbf{w}$. Por lo tanto, $\mathbf{u} \cdot(\mathbf{v} \times \mathbf{w})$ debe de quedar en el mismo plano que $\mathbf{v}$ y $\mathbf{w}$.
+
+Use Python para calcular el producto cruz de dos vectores y luego demostrar su ortogonalidad. 
+
+
+```{python}
+import numpy as np
+x = np.array([1,2,3])
+y = np.array([5,4,5])
+pc = np.cross(x,y)
+p1 = np.dot(pc,x)
+p2 = np.dot(pc,y)
+print(p1)
+print(p2)
+```
+
+
+## Aplicaciones del producto cruz 
+
+Geométricamente, el producto vectorial es útil en aplicaciones donde se necesita construir un vector perpendicular al plano. Físicamente, aparece en el cálculo en par de fuerza y en el cálculo de la fuerza magnética de una carga en movimiento. 
+
+
+![Aplicaciones del producto cruz. Imagen tomada de la internet.](cruz_aplicacion.png)
+
+
+
+# Unidad I - Matrices
+
+# Matrices 
+
+Las matrices son una forma consisa de representar grupos de números, escalares o complejos en una formato tabular. Una ventaja de las matrices es qu los grupos de números pueden ser tratados como una unidad que puede ser manipulada algebraicamente. 
+
+Para el propósito de este curso, una matriz va a ser considerada un arreglo rectangular de números arreglados en filas y columnas e indexados de forma que un elemento de $i-ésima$ fila y la $j-ésima$ columna es representado por el término, $a_{i,j}$. En general una matriz tiene la forma: 
+
+
+$$\begin{bmatrix}
+a_{11}&a_{12}&\cdots& a_{1n}\\
+a_{21}&a_{22}&\cdots& a_{3n}\\
+a_{31}&a_{32}&\cdots& a_{2n}\\
+\vdots &  & &  \vdots \\
+a_{m1}&a_{m2}&\cdots& a_{mn}\\
+\end{bmatrix}$$
+
+
+
+
+dónde $m$ son las filas y $n$ son las columnas. Tal matriz es con frecuencia referida como una matriz de $m\times n$. Cuando describimos las dimensiones de una matriz, las filas se especifican primero, seguido del número de columnas. Sí $m=n$, la matriz es llamada **matriz cuadrada** como se muestra a continuación:
+
+$$\begin{bmatrix}
+1 & 2 & 3\\
+4 & 5 & 6\\
+7 & 8 & 9\\
+\end{bmatrix}$$
+
+Sí dos matrices tienen el mismo tamaño y todos los elementos correspondientes son iguales, entonces las matrices son consideradas iguales entre sí. 
+
+
+Los siguientes ejemplos ilustran tres pequeñas matrices:
+
+Matriz $3\times 3$ 
+
+$$\begin{bmatrix}
+1 & 2 & 3\\
+4 & 5 & 6\\
+7 & 8 & 9\\
+\end{bmatrix}$$
+
+Matriz $3\times 2$ 
+
+
+$$\begin{bmatrix}
+3 & -2 \\
+5 & -1 \\
+8 & 0 \\
+\end{bmatrix}$$
+
+
+Matriz $4\times 3$ 
+
+$$\begin{bmatrix}
+1 & -1 & -1 \\
+0 & 1 & 0 \\
+0 & -1 & 1 \\
+1 & 1 & 0 \\
+\end{bmatrix}$$
+
+Usualmente se usan letras mayúsculas para representar una variable que es una matriz, de forma tal que las matrices anteriores podrían ser representadas como $\mathbf{A}$, $\mathbf{B}$ y $\mathbf{C}$
+
+En Python las matrices son representados con módulo **array**:
+
+
+```{python}
+import numpy as np 
+A = np.array([[1,7], [2, 3], [5, 0]]) #creación de la matriz A
+B = np.array([[2, 6, 3, 1], [1, 2, 3, 4]])# creación de la matriz B
+print(A)# Mostrar A
+print(B)#Mostrar B
+A.shape# shape nos ayuda a obtener las dimensiones de la matriz 3 x 2 (3 filas, 2 columnas)
+B.shape# dimensiones de B = 2 x 4 (2 filas, 4 columnas)
+```
+
+
+
+# Matrices y vectores
+
+Para dar una idea del por qué las matrices y los vectores son útiles en matemáticas, ingeniería y ciencias, considere el siguiente sistema de ecuaciones lineales:
+
+\begin{alignat*}{5}
+  a_{11}x_1 & {}+{} & a_{12}x_2 & {}+{} & \cdots  &  {}+{} & a_{1n}x_n  &  {}={} & b_1 \\
+  a_{21}x_1 & {}+{} & a_{22}x_2 & {}+{} & \cdots  &  {}+{} & a_{2n}x_n  &  {}={} & b_2 \\
+            &      &            &       & \cdots  &        &            &        &      \\
+  a_{m1}x_1 & {}+{} & a_{m2}x_2 & {}+{} & \cdots  &  {}+{} & a_{mn}x_n  &  {}={} & b_m \\
+\end{alignat*}
+
+donde $x_i$ son las variables, $a_{ij}$ son los coeficientes, y $b_i$ las igualaciones de cada ecuación que están de lado derecho. Esta notación tan compleja puede ser reducida en tamaño al usar simple notación algebraica como la que sigue:
+
+
+$\Sigma_{j=1}^na_{ij}x_{j}=b_i$,  $i = 1,2,...,m$
+
+
+#Asistencia
+
+From David Dorantes to Everyone:  11:34 AM
+
+Presente
+
+From Ivan Delgado to Everyone:  11:35 AM
+
+Presente
+
+From José María Garduño to Everyone:  11:35 AM
+
+Presente
+
+From Gaeta to Everyone:  11:35 AM
+
+Presente
+
+From Pérez David to Everyone:  11:35 AM
+
+Ipresente
+
+From Fernanda Pilón to Everyone:  11:35 AM
+
+Presente
+
+From Víctor Jerónimo to Everyone:  11:35 AM
+
+Presente
+
+From Fernanda Cardenas to Everyone:  11:35 AM
+
+Presente
+
+From Diego Nicolas to Everyone:  11:35 AM
+
+Presente
+
+From Wenddy Ballona Martinez to Everyone:  11:36 AM
+
+Presente
+
+From Jorge Ambrosio to Everyone:  11:36 AM
+
+presente
+
+From Frida Cuevas to Everyone:  11:36 AM
+
+Presente
+
+From Itzel Aurora Bravo Santos to Everyone:  11:37 AM
+
+Presente
+
+From Andrew Flores Yebra to Everyone:  11:37 AM
+
+Presente
+
+From Irving Barreto to Everyone:  11:38 AM
+
+Presente
+
+From Karla Gómez to Everyone:  11:41 AM
+
+Presente
+
+From Melanie Mondragón to Everyone:  11:41 AM
+
+Presente
+
+From Ivan Barragan to Everyone:  11:42 AM
+
+Presente
+
+
+
+
+
+
+
+

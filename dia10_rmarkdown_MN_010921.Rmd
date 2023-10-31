@@ -1,0 +1,312 @@
+---
+title: "Día 10 - LaTeX, Overleaf y vectores  "
+author: "Dra. Norma C. Pérez Rosas"
+date: '`r format(Sys.time(), "%d/%m/%Y")`'
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+  html_document:
+    toc: yes
+    toc_depth: 2
+---
+
+## LaTex para construir las expresiones matemáticas
+
+La notas de clase vienen acompañadas de expresiones matemáticas. Para editar ecuaciones se utiliza el lenguaje [LaTeX](https://www.latex-project.org/). Ejemplo:
+
+> Para dimensiones arriba de tres $\mathbf{e_i}$ puede ser usado para representar los vectores unitarios. 
+
+\begin{equation*}
+\mathbf{e_1} = 
+\begin{pmatrix}
+1  \\
+0 \\
+\vdots   \\
+0 
+\end{pmatrix}
+\end{equation*}
+
+
+
+\begin{equation*}
+\mathbf{e_2} = 
+\begin{pmatrix}
+0  \\
+1 \\
+\vdots   \\
+0 
+\end{pmatrix}
+\end{equation*}
+
+quedaría escritos en Markwon como:
+
+![Sintaxis de latex para generar un vector columna](latex_sintaxis.png)
+
+La sintaxis en Latex para un vector fila es 
+
+![Sintaxis en latex para un vector fial](latex_fila.png)
+
+
+# LaTex & Overleaf
+
+[Overleaf](https://www.overleaf.com/) es un editor colaborativo de [LaTeX](https://www.latex-project.org/) basado en la nube que se utiliza para escribir, editar y publicar documentos científicos. En la figura se muestra el ambiente de Overleaf, con el fin de que adquiera experiencia en Latex, le recomiendo ampliamente crear una cuenta en Overleaf y comenzar a escribir en LaTex para practicar. Para nuestra clase sólo tiene que aprender a escribir expresiones matemáticas en Latex, así que en la sección de bibliografía de classroom encontrará un nuevo libro titulado **LaTex in 24 hours**, revise los capítulos 11 y 12 del libro para que se familiarize con la escritura de expresiones matemáticas en Latex. 
+
+
+![Overleaf: editor de LaTex online](overleaf2.png)
+
+
+# Vectores (continuación)
+
+Podemos hacer crecer un vector agregando un elemento al final:
+
+```{r}
+x <- c(3.2, 1.7, -11.3, -0.67, 4, 0)
+x
+x[7] = 700 
+x
+```
+
+Si un elemento falta dentro del vector, se le asignará el número especial `NA` (not avilable - no disponible)
+
+```{r}
+x <- c(3.2, 1.7, -11.3, -0.67, 4, 0)
+x
+x[11] = 900 
+x
+```
+
+para remover un elemento, ingresé el valor de la posición del elemento con el signo menos y entre corchetes `[]` :
+
+
+```{r}
+y <- c(3.2, 1.7, -11.3, -0.67, 4, 0)
+y
+y[-3]
+#y
+```
+
+También hay un conjunto de funciones que regresan la longitud, la media, la desviación estándar, el mínimo, el máximo, etc., de un vector: 
+
+
+```{r}
+x <- c(3.2, 1.7, -11.3, -0.67, 4, 0)
+length(x) # longitud del vector 
+```
+```{r}
+x <- c(3.2, 1.7, -11.3, -0.67, 4, 0)
+sd(x) # desviación estándar del vector 
+```
+
+```{r}
+x <- c(3.2, 1.7, -11.3, -0.67, 4, 0)
+var(x) # varianza del vector 
+```
+
+
+```{r}
+x <- c(3.2, 1.7, -11.3, -0.67, 4, 0)
+min(x) # valor mínimo del vector 
+```
+
+```{r}
+x <- c(3.2, 1.7, -11.3, -0.67, 4, 0)
+range(x) # rango del vector 
+```
+
+```{r}
+x <- c(3.2, 1.7, -11.3, -0.67, 4, 0)
+cumsum(x) # suma acumulativa  
+```
+
+
+```{r}
+x <- c(3.2, 1.7, -11.3, -0.67, 4, 0)
+cumprod(x) # producto acumulativo  
+```
+
+Un vector `y` puede actuar sobre otro vector `x`. Sí `y` es más pequeño que `x`, se recicla `y` hasta que un vector con la longitud de `x` se obtiene, con un mensaje de alerta!!
+
+```{r}
+x1 <- c(1, 2, 3, 4, 5)
+y1 <- c(1, 2)
+x1*y1
+ 
+```
+
+# Asistencia
+
+From Maya González to Everyone:  10:01 AM
+
+Presente
+
+From Rafael Lara to Everyone:  10:02 AM
+
+Presente
+
+From Juan Andres Alvarez Juarez to Everyone:  10:02 AM
+
+Presente
+
+From Yulianna Jarillo to Everyone:  10:02 AM
+
+Presente
+
+From Evelyn Espinosa to Everyone:  10:02 AM
+
+Presente
+
+From Valeria Lopez to Everyone:  10:02 AM
+
+PRESENTE
+
+From Erikaa Calderón to Everyone:  10:02 AM
+
+Presente
+
+From Diego De La Concha Camarena to Everyone:  10:02 AM
+
+Presente
+
+From Elizabeth Alejandra Ávalos Hernández to Everyone:  10:02 AM
+
+Presente
+
+From Dalia L.H. to Everyone:  10:02 AM
+
+Presente
+
+From Sofía López Estrada to Everyone:  10:02 AM
+
+Presente
+
+From Jessica SeguraSolano to Everyone:  10:02 AM
+
+Presente
+
+From Leon Gonzalez to Everyone:  10:02 AM
+
+presente
+
+From Lupita López to Everyone:  10:02 AM
+
+Presente
+
+From Yahir Mena to Everyone:  10:02 AM
+
+Presente
+
+From Diana Alavez to Everyone:  10:03 AM
+
+Presente
+
+From Viry Rojas to Everyone:  10:03 AM
+
+presente
+
+From Carlos zambrano to Everyone:  10:03 AM
+
+presente
+
+From Fernanda Vargas to Everyone:  10:03 AM
+
+Presente
+
+From Rosa Isela Chávez Moreno to Everyone:  10:04 AM
+
+Presente
+
+From Jéromme Pimienta to Everyone:  10:04 AM
+
+Presente
+
+From Sonia Gutiérrez to Everyone:  10:04 AM
+
+Presente
+
+From Diego B to Everyone:  10:04 AM
+
+Presente.
+
+From Ana Díaz to Everyone:  10:04 AM
+
+Presente
+
+From Rodrigo Carranco to Everyone:  10:04 AM
+
+Presente
+
+From Yulian Bravo to Everyone:  10:05 AM
+
+Presente
+
+From Aurora Morales Catemaxca to Everyone:  10:05 AM
+
+Presente
+
+From Daniela Monroy to Everyone:  10:06 AM
+
+presente
+
+From Silva García to Everyone:  10:06 AM
+
+Silva García Lesly Annette
+
+From Angelica Trejo Trejo to Everyone:  10:06 AM
+
+Presente
+
+From Jiménez Núñez Wesly Mariana to Everyone:  10:06 AM
+
+Presente
+
+From J. Alberto Rodriguez Mendez to Everyone:  10:06 AM
+
+Presente
+
+From Diana Serratos to Everyone:  10:07 AM
+
+Presente
+
+From Valeria Olvera Aguilar to Everyone:  10:08 AM
+
+Presente
+
+From Ian Moguel to Everyone:  10:08 AM
+
+presente
+
+From Yaotl Vizuet to Everyone:  10:09 AM
+
+Presente
+
+From Anna Viquez to Everyone:  10:09 AM
+
+Presente
+
+From Luis Cabrera to Everyone:  10:10 AM
+
+presente
+
+From Claudia gabriela Reyes lopez to Everyone:  10:10 AM
+
+presente
+
+From Dalia L. H. to Everyone:  10:12 AM
+
+Presente
+
+From Joselin Del valle to Everyone:  10:13 AM
+
+presente
+
+From Gonzalo Cruz to Everyone:  10:35 AM
+
+presente
+
+
+From Omar to Everyone:  11:32 AM
+
+Presente
+
+

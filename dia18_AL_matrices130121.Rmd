@@ -1,0 +1,256 @@
+---
+title: "Día 18 - Inversas, sistemas de ecuaciones lineales"
+author: "Dra. Norma C. Pérez Rosas"
+date: '`r format(Sys.time(), "%d/%m/%Y")`'
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+  html_document:
+    toc: yes
+    toc_depth: 2
+---
+
+
+# Propiedades algebráicas de las matrices inversas 
+
+
+$(\mathbf{AB})^{-1}=\mathbf{B}^{-1}\mathbf{A}^{-1}$ 
+
+```{python}
+#matriz inversa
+import numpy as np
+A = np.array([[3, 4], [5, 8]])
+print(A)
+A_inversa = np.linalg.inv(A)
+print(A_inversa)
+B = np.array([[1, 2], [3, 4]])
+print(B)
+B_inversa = np.linalg.inv(B)
+print(B_inversa)
+mult_A_B = np.matmul(A, B)
+mult_A_B_inversa = np.linalg.inv(mult_A_B)
+print(mult_A_B_inversa)
+mult_AInv_BInv = np.matmul(B_inversa, A_inversa)
+print(mult_AInv_BInv)
+```
+
+$(\mathbf{B}^{T})^{-1}=(\mathbf{B}^{-1})^{T}$ 
+
+```{python}
+#lado izquierdo
+import numpy as np
+B = np.array([[3, 4], [5, 8]])
+print(B)
+B_T = np.transpose(B)
+B_T_inversa = np.linalg.inv(B_T)
+print(B_T_inversa)
+```
+
+```{python}
+#lado derecho
+import numpy as np
+B = np.array([[3, 4], [5, 8]])
+print(B)
+B_T_Inv= np.linalg.inv(B)
+B_inv_T = np.transpose(B_T_Inv)
+print(B_inv_T)
+```
+
+Finalmente, es importante decir que la inversa de una matriz permutación es igual a la transpuesta de la matriz, esto es:
+
+
+$\mathbf{P}^{-1}=\mathbf{P}^{T}$ 
+
+
+```{python}
+#matriz permutación
+import numpy as np
+P = np.array([[0, 0, 1, 0], [0, 1, 0, 0], [0, 0, 0, 1], [1, 0, 0, 0]])
+print(P)
+P_T = np.transpose(P)
+print(P_T)
+P_Inv = np.linalg.inv(P)
+print(P_Inv)
+```
+
+Este resultado es debido al hecho de que las columnas de una matriz permutación son ortogonales a sus filas, esto es:
+
+$\mathbf{P}\mathbf{P}^{T}=\mathbf{I}$ 
+
+```{python}
+#matriz permutación y transpuesta de la matriz permutacion = I
+import numpy as np
+P = np.array([[0, 0, 1, 0], [0, 1, 0, 0], [0, 0, 0, 1], [1, 0, 0, 0]])
+print(P)
+P_T = np.transpose(P)
+print(P_T)
+mult_P_P_T = np.matmul(P, P_T)
+print(mult_P_P_T)
+```
+ 
+
+# Sistemas de ecuaciones lineales 
+
+En general un sistema de ecuaciones lineales tiene la forma:
+
+```{=tex}
+\begin{alignat*}{5}
+  a_{11}x_1 & {}+{} & a_{12}x_2 & {}+{} & \cdots  &  {}+{} & a_{1n}x_n  &  {}={} & b_1 \\
+  a_{21}x_1 & {}+{} & a_{22}x_2 & {}+{} & \cdots  &  {}+{} & a_{2n}x_n  &  {}={} & b_2 \\
+            &      &            &       & \cdots  &        &            &        &      \\
+  a_{m1}x_1 & {}+{} & a_{m2}x_2 & {}+{} & \cdots  &  {}+{} & a_{mn}x_n  &  {}={} & b_m \\
+\end{alignat*}
+```
+
+donde $a_{ij}$ y $b_i$ son los coeficientes y $x_i$ son las variables desconocidas. Un sistema típico de ecuacioneslineales está dado por:
+
+```{=tex}
+\begin{alignat*}{5}
+  2x & {}+{} & y  &  {}={} & 1 \\
+   x & {}-{} & y  &  {}={} & 2 \\
+\end{alignat*}
+```
+
+Estas ecuaciones son no lineales porque las incógnitas $x y $y$ aparecen elevadas a la primera potencia. Nosotros también podemos decir que son lineales porque sí se grafican estas ecuaciones son líneas rectas:
+
+
+```{r}
+curve(1-2*x, from = -5, to = 5, col = "violet", lwd = 2, ylab = "x")
+curve(x-2, col = "green", add = TRUE, lwd = 2)
+legend("topleft", legend=c("1-2*x","3-2*x"), col=c("violet","green"), lty=1,lwd=2)
+abline(h=0, v=0, col="gray")
+```
+
+Las dos líneas aparecen como líneas rectas sobre una gráfica. Cuando las líneas se intersectan en $x=1$ y $y=-1$ ambas ecuaciones se satisfacen. 
+
+
+Una **ecuación lineal** en las variables $x_1,...,x_n$ es una ecuación que puede ser escrita de la forma
+
+```{=tex}
+\begin{alignat*}{5}
+   a_{1}x_1 & {}+{} &  a_{2}x_2 & {}+{} & ... & {}+{} & a_{n}x_n & {}={} & b \label{eq:eq1}\tag{A}\\
+\end{alignat*}
+```
+donde $b$ y los **coeficientes** $a_1,...,a_n$ son números reales o complejos, usualmente conocidos por adelantado. El subíndice $n$ puede ser cualquier entero positivo o negativo. En los libros de texo y ejercicios $n$ normalmente toma los valores entre $2$ y $5$. En problemas de la vida real, $n$ puede valer entre $50$ y $5000$ o incluso más.
+
+La ecuación
+
+```{=tex}
+\begin{alignat*}{5}
+   4x_1 & {}-{} &  5x_2 & {}+{} & 2 &  {}={} & x_1\\
+\end{alignat*}
+```
+y la ecuación
+
+```{=tex}
+\begin{alignat*}{5}
+  x_2  &  {}={} & 2(\sqrt{6}-x_1)& {}+{} &x_3\\
+\end{alignat*}
+```
+son ambas lineales porque pueden ser rearregladas algebraicamente como en la ecuación (A):
+
+```{=tex}
+\begin{alignat*}{5}
+   3x_1 & {}-{} &  5x_2 &  {}={} & -2\\
+\end{alignat*}
+```
+y
+
+```{=tex}
+\begin{alignat*}{5}
+   2x_1 & {}+{} &  x_2 &   {}-{} & x_3 & {}={} & 2 \sqrt{6}\\
+\end{alignat*}
+```
+Las ecuaciones
+
+```{=tex}
+\begin{alignat*}{5}
+   4x_1 & {}-{} &  5x_2 & {}+{} & 2 &  {}={} & x_1x_2\\
+\end{alignat*}
+```
+y
+
+```{=tex}
+\begin{alignat*}{5}
+  x_2  &  {}={} & 2\sqrt{x_1}{}-{} & 6 \\
+\end{alignat*}
+```
+son no lineales por la presencia de $x_1x_2$ en la primera ecuación y $\sqrt{x_1}$ en la segunda.
+
+
+#Asistencia
+
+From Irving Barreto to Everyone:  11:32 AM
+
+Presente
+
+From Fernanda Pilón to Everyone:  11:33 AM
+
+Presente :)
+
+From Víctor Jerónimo to Everyone:  11:33 AM
+
+Presente
+
+From Melanie Mondragón to Everyone:  11:35 AM
+
+presesnte
+
+From Emmanuel GR to Everyone:  11:37 AM
+
+Presente
+
+From Diego Nicolas to Everyone:  11:37 AM
+
+Presente
+
+From Jorge Ambrosio to Everyone:  11:37 AM
+
+Presente
+
+From David Dorantes to Everyone:  11:37 AM
+
+Presente
+
+From José María Garduño to Everyone:  11:37 AM
+
+Presente
+
+From Gaeta to Everyone:  11:37 AM
+
+presente
+
+From wenddy Ballona to Everyone:  11:37 AM
+
+presente
+
+From Maria Fernanda Garcia to Everyone:  11:41 AM
+
+Presente
+
+From Ivan Delgado to Everyone:  11:42 AM
+
+Presente
+
+From Frida Cuevas to Everyone:  11:42 AM
+
+Presente
+
+From Itzel Aurora Bravo Santos to Everyone:  11:47 AM
+
+Presente
+
+From Karla Gómez to Everyone:  11:47 AM
+
+Presente
+
+From wenddy Ballona to Everyone:  11:50 AM
+
+Presente
+
+From Pérez David to Everyone:  12:14 PM
+
+
+Presente
+

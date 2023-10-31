@@ -1,0 +1,207 @@
+---
+title: "Día 24 -2do. Examen - Álgebra Lineal"
+author: "Dra. Norma C. Pérez Rosas"
+date: '`r format(Sys.time(), "%d/%m/%Y")`'
+output:
+  html_document:
+    toc: yes
+    toc_depth: 2
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+---
+
+Instrucciones: responda correctamente las siguientes preguntas. Al terminar tome fotografía a sus respuestas, genere un solo PDF con la siguiente estructura apellido_paterno_apellido_materno_nombre_examen2_grupo.pdf y envíe su examen al classroom.
+
+Al inicio de su examen coloque 
+
+**Nombre completo**
+
+**Grupo**
+
+**Boleta**
+
+**correo electrónico**
+
+Problema 1 - 10 puntos
+
+Problema 2 - 10 puntos
+
+Problema 3 - 15 puntos
+
+Problema 4 - 20 puntos
+
+Problema 5 - 20 puntos 
+
+Problema 6 - 10 puntos
+
+Problema 7 - 20 puntos 
+
+Total - 105 puntos
+
+
+1. ¿Cuál de las siguientes ecuaciones son lineales en $x$, $y$ y $z$. Sí son no lineales explique ¿por qué? (valor: 10 puntos)
+
+a) $x-y-z=3$  Lineal
+
+b) $e^{x+y+z}=1$ No lineal por la función exponencial. 
+
+c) $x=\frac{-b\pm \sqrt{b^2-4ac}}{2a}$ Lineal 
+
+d) $\sinh^{-1}(x)=\ln |x+\sqrt{x^2+1}|$ No lineal por la función cuadrática, 
+
+e) $x^{2^{0}}+y^{3^{0}}+z^{2^{0}}=0$ Lineal 
+
+f) $\sqrt{x}+y+z=6$ Lineal
+
+g) $x-2y+5y=\sqrt{3}$ Lineal 
+
+h) $cos(x)+sin(y)=1$ No lineal por las funciones trigonométricas
+
+i) $y^{(\cos^2(x)+\sin^2(x))}+x-z=9$ lineal
+
+j) $\sqrt{2}x+\frac{1}{2}y+z=0$ lineal 
+
+2. Resuelva los siguientes sistemas de ecuaciones lineales. (valor: 10 puntos)
+
+a)
+\begin{alignat*}{3}
+   \pi x & {}-{} &  5y  {}={} & 2 \\
+   \pi x & {}-{} &   y  {}={} & 1 \\
+\end{alignat*}
+
+```{r, echo=FALSE}
+curve((pi*x-2)/5, from=-5, to=5, n=200, xlab="x", ylab="y", col="blue",lwd=2, main="Solución 2a")
+curve(pi*x-1, from=-5, to=5, n=200, add = TRUE, col="red",lwd=2)
+abline(h=0, v=0, col="gray")
+```
+
+
+b)
+\begin{alignat*}{3}
+   e x & {}-{} &  ey  {}={} & 2 \\
+   e x & {}+{} &   ey  {}={} & 0 \\
+\end{alignat*}
+
+Tip: $e$ es el número irracional $e=2.71828182846$
+
+
+```{r, echo=FALSE}
+curve((pi*x-2)/5, from=-5, to=5, n=200, xlab="x", ylab="y", col="blue",lwd=2, main="Solución 2a")
+curve(pi*x-1, from=-5, to=5, n=200, add = TRUE, col="red",lwd=2)
+abline(h=0, v=0, col="gray")
+```
+
+3. Las siguientes gráficas podrían ser una posible solución de los sistemas de ecuaciones lineales $1$, $2$ y $3$. Sí hay solución, encuéntrela y relacione gráfica. (valor: 15 puntos)
+
+
+
+```{r, echo=FALSE}
+curve(3-2*x, from=-5, to=5, n=200, xlab="x", ylab="y", col="blue",lwd=2, main="Solución A")
+curve(x-7, from=-5, to=5, n=200, add = TRUE, col="red",lwd=2)
+abline(h=0, v=0, col="gray")
+```
+
+
+
+```{r, echo=FALSE}
+curve(3-2*x, from=-5, to=5, n=200, xlab="x", ylab="y", col="blue",lwd=2, main="Solución B")
+curve((12-8*x)/4, from=-5, to=5, n=200, add = TRUE, col="red",lwd=2, lty=5)
+abline(h=0, v=0, col="gray")
+```
+
+
+
+```{r, echo=FALSE}
+curve(3-2*x, from=-5, to=5, n=200, xlab="x", ylab="y", col="blue",lwd=2, main="Solución C")
+curve(5-2*x, from=-5, to=5, n=200, add = TRUE, col="red",lwd=2, lty=5)
+abline(h=0, v=0, col="gray")
+```
+
+```{r, echo=FALSE}
+curve((3*x-3)/2, from=-5, to=5, n=200, xlab="x", ylab="y", col="blue",lwd=2, main="Solución D")
+curve((3*x-6)/2, from=-5, to=5, n=200, add = TRUE, col="red",lwd=2, lty=5)
+abline(h=0, v=0, col="gray")
+```
+
+**Sistema 1**
+\begin{alignat*}{3}
+   2x & {}+{} &  y  {}={} & 3 \\
+    x & {}-{} &  y  {}={} & 7 \\
+\end{alignat*}
+
+**Sistema 2**
+\begin{alignat*}{3}
+   2x & {}+{} &  y  {}={} & 3 \\
+    8x & {}+{} &  4y  {}={} & 12 \\
+\end{alignat*}
+
+**Sistema 3**
+\begin{alignat*}{3}
+   2x & {}+{} &  y  {}={} & 3 \\
+    2x & {}+{} &  y  {}={} & 5 \\
+\end{alignat*}
+
+
+4. $\mathbf{A}$ es una matriz de $3 \times 5$, $\mathbf{B}$ es una matriz de $5 \times 3$, $\mathbf{C}$ es una matriz de $5 \times 1$ y $\mathbf{D}$ es una matriz de $3 \times 1$. Todas las entradas de las matrices son $1$. ¿Cuál de las siguientes operaciones con matrices son permitidas? y ¿cuáles son los resultados? Muestre claramente su procedimiento. (Valor: 20 puntos)
+
+a) $\mathbf{B}\mathbf{A}$
+
+b) $\mathbf{A}\mathbf{B}$
+
+c) $\mathbf{A}\mathbf{B}\mathbf{D}$
+
+d) $\mathbf{D}\mathbf{C}$
+
+e) $\mathbf{A}(\mathbf{B}+\mathbf{C})$
+
+
+5. Sea (Valor=20 puntos)
+
+
+$$
+\mathbf{A}=\left[
+\begin{array}{ccc}
+3 & -4 & 1\\
+5 &  2 & 6\\
+\end{array}
+\right], \mathbf{B}= \left[
+\begin{array}{ccc}
+-2 & 7 & 5\\
+1 & 3 & -9\\
+\end{array}
+\right]
+$$
+
+Determine:
+
+a) $(2\mathbf{A})^T-(3\mathbf{B})^T$
+
+b) $(\mathbf{A}\mathbf{B)}^T$
+
+
+6) Muestre que las matrices $\mathbf{A}$ y $\mathbf{B}$ son la inversa de cada una, dónde 
+
+$$
+\mathbf{A}=\left[
+\begin{array}{cc}
+3 & 7 \\
+2 & 5 \\
+\end{array}
+\right], \mathbf{B}= \left[
+\begin{array}{ccc}
+5 & -7 \\
+-2 & 3 \\
+\end{array}
+\right]
+$$
+(Valor: 10 puntos)
+
+
+7) Resuelva el siguiente sistema de ecuaciones lineales por el Método de Gauss-Jordan. (Valor = 20 puntos)
+
+\begin{alignat*}{4}
+   x_1 & {}-{} 2x_2 &  {}+{} 3x_3  {}={} & 11 \\
+   4x_1 & {}+{} x_2 &  {}-{} x_3  {}={} & 4 \\
+   2x_1 & {}-{} x_2 &  {}+{} 3x_3  {}={} & 4 \\
+\end{alignat*}

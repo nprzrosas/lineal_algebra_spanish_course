@@ -1,0 +1,596 @@
+---
+title: "Día 31 - Sistemas homogéneos, matriz inversa y espacios vectoriales"
+author: "Dra. Norma C. Pérez Rosas"
+date: '`r format(Sys.time(), "%d/%m/%Y")`'
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+  html_document:
+    toc: yes
+    toc_depth: 2
+---
+
+
+# Ecuaciones homogéneas 
+
+En general un sistema de ecuaciones lineales de $m$ por $n$ puede ser escrito de la forma:
+
+
+Un sistema de ecuaciones lineales de $m$ por $n$ puede ser escrito en la forma 
+
+\begin{alignat*}{5}
+   a_{11}x_1 & {}+{} &   a_{12}x_2 & {}+{} & \dots &  {}+{} & a_{1n}x_n & {}={} & b_1  \\ 
+   a_{21}x_1 & {}+{} &   a_{22}x_2 & {}+{} & \dots &  {}+{} & a_{2n}x_n & {}={} & b_2  \\
+             & {}{} &              & {}+{} & \dots &  {}{} &            & {}={} &       \\
+  a_{m1}x_1 & {}+{} &   a_{m2}x_2 & {}+{} & \dots &  {}+{} & a_{mn}x_n & {}={} & b_m  \\
+\end{alignat*}
+
+
+O puede ser representada en una versión simplificada usando matrices y vectores, sí la matriz $\mathbf{A}$ y los dos vectores $\mathbf{x}$ y $\mathbf{b}$ son definidos como:
+
+$$
+\mathbf{A} = \left [
+\begin{array}{cccc}
+a_{11} & a_{12} & \dots & a_{1n} \\ 
+a_{21} & a_{22} & \dots & a_{2n} \\ 
+\vdots & \vdots & \dots & \vdots \\ 
+a_{m1} & a_{m2} & \dots & a_{mn} \\ 
+\end{array}
+\right ] \mathbf{x} = \left [
+\begin{array}{c}
+x_{1} \\ 
+x_{2} \\ 
+\vdots \\ 
+x_{n}  \\ 
+\end{array}
+\right ] \mathbf{b} = \left [
+\begin{array}{c}
+b_{1} \\ 
+b_{2} \\ 
+\vdots \\ 
+b_{m}  \\ 
+\end{array}
+\right ] 
+$$
+
+Entonces el sistema lineal puede ser escrito de forma compacta como:
+
+$\mathbf{A}\mathbf{x}=\mathbf{b}$
+
+¿Qué si el vector $\mathbf{b}$ es cero?
+
+$\mathbf{A}\mathbf{x}=\mathbf{0}$
+
+
+Tales sistemas son conocidos como **sistemas homogéneos**. Una pregunta importante es sí un sistema homogéneo tiene soluciones, es decir, ¿hay valores de $\mathbf{x}$ que satisfacen tales sistemas?
+
+La primera cosa que se debe notar es que un sistema homogéneo nunca es inconsistente, es decir, siempre hay al menos una solución en la forma de una **solución trivial** cuando el vector $\mathbf{x}$ es cero. 
+
+
+$x_1=x_2=\dots x_n = 0$
+
+
+Sí un sistema homogéneo es consitente, entonces tendrá o una solución (la solución trivial) o un número infinito de soluciones. Por un número infinito de soluciones nos referimos que una o más de las variables (básicas) pueden ser expresadas en términos de una o más variables (variables libres).
+
+Una forma fácil de determinar si un sistema homogéneo tiene un  número infinito de soluciones es contar el número de variables (incógnitas) y el número de ecuaciones. Sí hay más variables que ecuaciones, entonces el sistema tiene un infinito número de soluciones. Sin embargo, sí incluso el número incógnitas es el mismo que número de ecuaciones, todavía es posible que el sistema tenga un número infinito de soluciones  sí una o más ecuaciones es reduntante.  La **redundancia** en un conjunto de ecuaciones lineales puede ser fácilmente determinada al mirar las filas de ceros en la matriz después de la **reducción por filas**. 
+
+
+
+
+**Ejemplo 1:**
+
+¿Cuántas soluciones tiene el siguiente sistema homogéneo?
+
+
+$$
+\left [
+\begin{array}{ccc}
+2 & 1 & 4  \\ 
+1 & 2 & 9  \\  
+\end{array}
+\right ] \left [
+\begin{array}{c}
+x_{1} \\ 
+x_{2} \\ 
+x_{3}  \\ 
+\end{array}
+\right ] = \mathbf{0} 
+$$
+
+Debido a que hay $3$ incógnitas y $2$ ecuaciones, el sistema tiene un número infinito de soluciones.
+
+**Ejemplo 2:**
+
+¿Cuántas soluciones tiene el siguiente sistema homogéneo?
+
+
+$$
+\left [
+\begin{array}{cc}
+2 & 1   \\ 
+1 & 2   \\  
+\end{array}
+\right ] \left [
+\begin{array}{c}
+x_{1} \\ 
+x_{2} \\ 
+\end{array}
+\right ] = \mathbf{0} 
+$$
+
+Debido a que hay $2$ incógnitas y $2$ ecuaciones debemos determinar si hay redundancia en el sistema de ecuaciones. Para hacer esto reducimos las matriz de coeficientes para obtener $r_2=r_2-0.5r_1$
+
+
+$$
+\left [
+\begin{array}{cc}
+2 & 1   \\ 
+0 & 1.5   \\  
+\end{array}
+\right ] 
+$$
+
+Debido a que no hay una fila de ceros en esta matriz, el sistema homogéneo solo puede admitir la solución trivial $x_1=0$ y $x_2=0$.
+
+**Ejemplo 3:**
+
+¿Cuántas soluciones tiene el siguiente sistema homogéneo?
+
+
+$$
+\left [
+\begin{array}{cc}
+2 & 1   \\ 
+-4 & -2   \\  
+\end{array}
+\right ] \left [
+\begin{array}{c}
+x_{1} \\ 
+x_{2} \\ 
+\end{array}
+\right ] = \mathbf{0} 
+$$
+
+Si la matriz de coeficientes es reducida a su forma escaloanda haciendo $r_2=r_2+2r_1$ obtenemos:
+
+$$
+\left [
+\begin{array}{cc}
+2 & 1   \\ 
+0 & 0  \\  
+\end{array}
+\right ] 
+$$
+Esta forma escalonada tiene una fila de ceros, indicando que una o más ecuaciones son redundantes. Debido a que hay una sola ecuación independiente y dos incógnitas, el sistema tiene un número infinito de soluciones. La solución puede ser establecida más precisamente que la primera fila de matriz escalonada puede ser expresada como: $x_1=-0.5x_2$. Aquí la variable básica es $x_1$ y la variable libre es $x_2$. Sí $x_2$ se fija a 1, entonces el espacio solución es definido por todos los múltiplos escalares $[-0.5, 1.0]$.
+
+En general, el número de variables básicas en un sistema homogéneo está dado por el numero de filas que no son cero después de la reducción por filas de la matriz de coeficientes:
+
+
+**Ejemplo:**
+
+Obtenga la solución del siguiente sistema homogéneo. 
+
+
+$$
+\left [
+\begin{array}{cccc}
+1 & 2 & 2 & 3   \\ 
+2 & 2 & 4 & 4   \\ 
+3 & 4 & 6 & 7   \\ 
+\end{array}
+\right ] \left [
+\begin{array}{c}
+x_{1} \\ 
+x_{2} \\ 
+x_{3} \\
+x_{4} \\ 
+\end{array}
+\right ] = \mathbf{0} 
+$$
+La reducción a la forma escalonada produce:
+
+
+$$
+\left [
+\begin{array}{cccc}
+1 & 0 & 2 & 1   \\ 
+0 & 1 & 0 & 1   \\ 
+0 & 0 & 0 & 0   \\ 
+\end{array}
+\right ] \left [
+\begin{array}{c}
+x_{1} \\ 
+x_{2} \\ 
+x_{3} \\
+x_{4} \\ 
+\end{array}
+\right ] = \mathbf{0} 
+$$
+Lo anterior nos dice que hay cuantro incógnitas y sólo dos ecuaciones (una fila de ceros), lo que significa que hay un número infinito de soluciones. Escribiendo lo anterior como un sistema de ecuaciones lineales nos queda:
+
+
+
+
+
+El número de variables básicas está dado por el número de filas que no son cero, en este caso son dos. Las variables básicas son por lo tanto $x_1$ y $x_2$, y las variables libres son $x_3$ y $x_4$. Podemos escribir el vector de variables $[x_1 \ x_2 \  x_3 \  x_4]$ en términos de las **variables libres**:
+
+\begin{alignat*}{5}
+   x_1 & {}={} & -2x_3-x_4 \\ 
+   x_2 & {}={} & -x_4 \\ 
+   x_3 & {}={} & x_3 \\
+   x_4 & {}={} & x_4 \\
+\end{alignat*}
+
+
+O en forma vectorial 
+
+$$
+\left [
+\begin{array}{c}
+x_1   \\ 
+x_2   \\ 
+x_3  \\ 
+x_4
+\end{array}
+\right ] = \left [
+\begin{array}{cc}
+-2x_{3} - x_4 \\ 
+-x_{4} \\ 
+x_{3} \\
+x_{4} \\ 
+\end{array}
+\right ] = x_3 \left [
+\begin{array}{c}
+-2\\ 
+0 \\ 
+1 \\
+0\\ 
+\end{array}
+\right ] + x_4 \left [
+\begin{array}{c}
+-1\\ 
+-1 \\ 
+0 \\
+1 \\ 
+\end{array}
+\right ]
+$$
+
+Por consecuencia las soluciones del sistema son todas las posibles **combinaciones lineales de los vectores:**
+
+
+$$
+ \left [
+\begin{array}{c}
+-2\\ 
+0 \\ 
+1 \\
+0\\ 
+\end{array}
+\right ] \   y \  \left [
+\begin{array}{c}
+-1\\ 
+-1 \\ 
+0 \\
+1 \\ 
+\end{array}
+\right ]
+$$
+
+# El rango de una matriz 
+
+El rango de una matriz $\mathbf{A}$ denotado por $\rho (\mathbf{A})$ es el número de filas no cero en una matriz cuando ha sido reducida a la forma escalonada. En la siguiente unidad llamaremos a estas filas no-cero las filas linealmente independietes de la matriz. 
+
+El rango de una matriz se calcula fácilmente al transformar una matriz a la forma escalonada y contar el número de filas no cero. Por ejemplo, la matriz: 
+
+
+$$
+ \left [
+\begin{array}{cc}
+1 & 4 \\ 
+2 & 8 \\ 
+\end{array}
+\right ] \ 
+$$
+
+$$
+ \left [
+\begin{array}{ccccc}
+1 & 4 \\ 
+2 & 8 \\
+\end{array}
+\right ]  \xrightarrow[]{r_2 = r_2-2r_1} \left [
+\begin{array}{ccc}
+1 & 4 \\ 
+0 & 0 \\
+\end{array}
+\right ]
+$$
+
+Debido a que hay una fila de no cero, el rango de la matriz debe ser igual a $1$. Si realizamos la misma operación en la transpuesta de la matriz, obtenemos la siguiente forma escalonada: 
+
+$$
+ \left [
+\begin{array}{ccccc}
+1 & 2 \\ 
+4 & 8 \\
+\end{array}
+\right ]  \xrightarrow[]{r_2 = r_2-4r_1} \left [
+\begin{array}{ccc}
+1 & 2 \\ 
+0 & 0 \\
+\end{array}
+\right ]
+$$
+
+Una vez más el número de filas no-cero es $1$ por lo tanto el rango es $1$. Un resultado importante en Álgebra Lineal es que el rango de la transpuesta de $\mathbf{A}$ es el mismo rango de $\mathbf{A}$, esto es:
+
+$\rho(\mathbf{A})=\rho(\mathbf{A}^T)$
+
+Usando el rango nosotros podemos expresar las relaciones:
+
+número de variables básicas =  $\rho(\mathbf{A})$
+
+número de variables libres = n -  $\rho(\mathbf{A})$
+
+
+# Inversa de una matriz
+
+
+Encuentre la inversa de la matriz:
+
+$$
+ \left [
+\begin{array}{ccc}
+-1 & 1 & 2  \\ 
+3 & -1 & 1  \\ 
+-1 & 3 & 4  \\ 
+\end{array}
+\right ] 
+$$
+
+Primero forme la matriz aumentada $[\mathbf{A}|\mathbf{I}]$:
+
+$$
+\left[
+  \begin{matrix}
+    -1 & 1 & 2 \\
+    3 & -1 & 1 \\
+   -1 & 3 & 4\\
+  \end{matrix}
+  \left|
+    \,
+    \begin{matrix}
+      1 & 0 & 0  \\
+      0 & 1 & 0  \\
+      0 & 0 & 1 \\
+    \end{matrix}
+  \right.
+\right]
+$$
+
+
+Aplique la eliminación de Gauss-Jordan para forma la matriz identidad en la primera parte de la matriz aumentada, mientras aplica las mismas operaciones a la segunda mitad de la matriz aumentada. 
+
+Apliando las siguientes operaciones $r_2 = r_2  + 3 r_1$, $r_3=r_3-r_1$
+
+$$
+\left[
+  \begin{matrix}
+    -1 & 1 & 2 \\
+    0 & 2 & 7 \\
+   0 & 2 & 2\\
+  \end{matrix}
+  \left|
+    \,
+    \begin{matrix}
+      1 & 0 & 0  \\
+      3 & 1 & 0  \\
+      -1 & 0 & 1  \\
+    \end{matrix}
+  \right.
+\right]
+$$
+
+
+Aplicando las operaciones $r_3=r_3-r_2$
+
+$$
+\left[
+  \begin{matrix}
+    -1 & 1 & 2 \\
+    0 & 2 & 7 \\
+   0 & 0 & 5 \\
+  \end{matrix}
+  \left|
+    \,
+    \begin{matrix}
+      1 & 0 & 0  \\
+      3 & 1 & 0   \\
+      -4 & -1 & 1  \\
+    \end{matrix}
+  \right.
+\right]
+$$
+
+
+
+Aplicando las operaciones $r_1=-r_1$,  $r_2=0.5r_1=2$,  $r_3=-0.2r_3$
+
+$$
+\left[
+  \begin{matrix}
+    0 & -1 & -2 \\
+    0 & 1 & 3.5 \\
+    0 & 0 & 1 \\
+  \end{matrix}
+  \left|
+    \,
+    \begin{matrix}
+      -1 & 0 & 0  \\
+      1.5 & 0.5 & 0  \\
+      0.8 & 0.2 & -0.2  \\
+    \end{matrix}
+  \right.
+\right]
+$$
+
+
+Aplicar $r_1=-r_1+2r_3$ y $r_2=r_2-3.5r_3$
+
+$$
+\left[
+  \begin{matrix}
+    1 & -1 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1 \\
+  \end{matrix}
+  \left|
+    \,
+    \begin{matrix}
+      0.6 & 0.4 & -0.4 \\
+      -1.3 & -0.2 & 0.7  \\
+      0.8 & 0.2 & -0.2  \\
+    \end{matrix}
+  \right.
+\right]
+$$
+
+
+
+Aplicando $r_1=r_1+r_2$
+
+$$
+\left[
+  \begin{matrix}
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1 \\
+  \end{matrix}
+  \left|
+    \,
+    \begin{matrix}
+      0.7 & 0.2 & 0.3 \\
+      -1.3 & -0.2 & 0.7  \\
+      0.8 & 0.2 & -0.2  \\
+    \end{matrix}
+  \right.
+\right]
+$$
+
+
+
+La segunda mitad de la matriz aumentada contiene la inversa de la matriz. Es simple confirmar el resultado al multiplicar $\mathbf{A}$ con la inversa para producir la matriz identidad. 
+
+
+# Espacios vectoriales 
+
+Aunque el desarrollo de las matemáticas obtiene mucha inspiración del mundo físico, sus estructuras en la forma más pura son conceptos abstractos. Mientras que el grado de abstracción puede ser intimidante para personas que no son matemáticas, la abstracción es una técnica poderosa que le permite a uno generalizar y con frecuencia ganar conocimiento en áreas complejas de las matemáticas. Un buen ejemplo de un concepto matemático abstracto es el **espacio vectorial**.
+
+Informalmente hablando, el espacio vectorial es simplemente un conjunto de objetos que obedecen ciertas reglas. Además, las operaciones en un espacio vectorial son cerradas, es decir, los objetos generados por las reglas en común pertenecen al mismo conjunto. Los participantes básicos en un espacio vectorial son vectores y escalares (números reales, complejos y otros objetos matemáticos). Las operaciones entre estos participantes son simples e involucran la noción abstracta de suma entre vectores (denotado por $\mathbf{u}+\mathbf{v}$) y multiplicación de escalares entre vectores y escalares (denotados por $\alpha \mathbf{u}$). Las reglas que gobiernan los espacios vectoriales no especifican cómo se realiza la suma o la multiplicación, sólo se dan las propiedades más generales. Cuando los participantes son seleccionados, como un vector de números reales, entonces la adición y la multiplicación toman una forma concreta. 
+
+Para hacer las oraciones anteriores más completas, considere el conjunto de vectores Euclidianos $V$, descrito por:
+
+$V=\{[x,5x]\}$
+
+asumiremos que $x$ representa un número real. Ejemplos de vectores que pertenecen a este conjunto se encuentran: $[0,0]$, $[1,5]$, $[2,10]$, $[1/2,2.5]$, $[-1,-5]$ y así sucesivamente.  Todos estos vectores caen sobre una línea en el plano $xy$.
+
+
+```{r}
+x <- c(0, 1, 2, 0.5, -1)
+y <- c(0, 5, 10, 2.5, -5)
+  
+# Plotting the graph
+plot(x, y, cex = 1, pch = 3, xlab ="x", ylab ="y", col ="black")
+```
+
+Si seleccionamos cualesquiera dos vectores de $V$, por ejemplo, $\mathbf{u}=[1,5]$ y $\mathbf{v}=[-2,-10]$. Una de las reglas de los espacios vectoriales es la adición, entonces hagamos la suma $\mathbf{u}+\mathbf{v}$. Debido a que los vectores del ejercicio contienen números reales, realizar la suma es relativamente simple:
+
+$\mathbf{u}+\mathbf{v}=[1,5]+[-2,-10]=[-1,-5]$
+
+Dado este resultado es evidente que el nuevo vector también es parte de $V$. La suma de cualesquiera dos vectores a partir de $V$ siempre debe estar en $V$. Esto es, la adición de tales vectores es **cerrada**.
+
+**Conjunto cerrado bajo (o respecto) a la suma (vectorial):** si $\mathbf{u}$ y $\mathbf{v}$ son dos vectores cualesquiera en un espaci vectorial $V$, entonces la suma  $\mathbf{u}+\mathbf{v}$ también pertenece a $V$.
+
+Algunas operaciones simples no son cerradas, es decir, la suma de dos números enteros resulta en un número entero, por consecuencia la operación es cerrada. Sin embargo, dividir un número entero por otro no genera un entero, pero genera un número real, por consecuencia la operación no es cerrada. 
+
+Ahora considere la multiplicación de un escalar, por ejemplo:
+
+$3\mathbf{u}=3[1,5]=[3,15]$
+
+Podemos ver que el nuevo está también en $V$. Debe ser claro a partir de esto que la multiplicación de un escalar por cualquier vector en $V$ produce también un vector en $V$. Se concluye entonces que la multiplicación por un escalar también es **cerrada**.
+
+
+
+
+# Asistencia 
+
+From Emmanuel GR to Everyone 11:34 AM
+
+Presente
+
+From Itzel Aurora Bravo Santos to Everyone 11:34 AM
+
+Presente
+
+From Diego Nicolas to Everyone 11:34 AM
+
+presente
+
+From Fernanda Pilón to Everyone 11:35 AM
+
+Presente :)
+
+From Karla Gómez to Everyone 11:36 AM
+
+Presente
+
+From Fernanda Cardenas to Everyone 11:36 AM
+
+Presente
+
+From Irving Barreto to Everyone 11:36 AM
+
+presente
+
+From Andrew Flores Yebra to Everyone 11:36 AM
+
+Presente
+
+From Víctor Jerónimo to Everyone 11:37 AM
+
+Presente
+
+From José María Garduño to Everyone 11:38 AM
+
+Presente
+
+From Maria Fernanda Garcia to Everyone 11:38 AM
+
+Presente
+
+From Frida Cuevas to Everyone 11:38 AM
+
+Presente
+
+From Melanie Mendieta Mondragón to Everyone 11:39 AM
+
+Presente
+
+From Gaeta to Everyone 11:39 AM
+
+Presente
+
+From Ivan Delgado to Everyone 11:45 AM
+
+presente
+
+From Wenddy Ballona to Everyone 12:39 PM
+
+Presente
+
+From Pérez David to Everyone 12:40 PM
+
+Presente
+

@@ -1,0 +1,440 @@
+---
+title: "Día 27 - Determinantes y cofactores"
+author: "Dra. Norma C. Pérez Rosas"
+date: '`r format(Sys.time(), "%d/%m/%Y")`'
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+  html_document:
+    toc: yes
+    toc_depth: 2
+---
+
+# Determinantes 
+
+
+Sea 
+
+
+$$
+\mathbf{A}=\left[
+\begin{array}{cc}
+a_{11} & a_{12} \\
+a_{21} & a_{22} \\
+\end{array}
+\right]
+$$
+
+El determinante de $\mathbf{A}$ estará dado por:
+
+$\det(\mathbf{A})=a_{11}a_{22}-a_{12}a_{21}$
+
+Con frecuencia se denotará por 
+
+$|\mathbf{A}|$ 
+
+o
+
+$$
+\det(\mathbf{A})=\left |
+\begin{array}{cc}
+a_{11} & a_{12} \\ 
+a_{21} & a_{22} \\
+\end{array}
+\right | 
+$$
+
+El determinante de una matriz $n\times n$ se definirá de manera **inductiva**. Es decir, se usará lo que se sabe de un determinante de $2\times 2$ para definir un determinante de $3\times 3$, lo que se usará para definir un determinante de $4\times 4$, etc. 
+
+
+## Determinante de 3x3
+
+Sea 
+
+$$
+\mathbf{A}=\left[
+\begin{array}{ccc}
+a_{11} & a_{12} & a_{13} \\
+a_{21} & a_{22} & a_{23} \\
+a_{31} & a_{32} & a_{33} \\
+\end{array}
+\right]
+$$
+
+Entonces 
+
+
+$$
+\det(\mathbf{A})= |\mathbf{A}| =\left |
+\begin{array}{ccc}
+a_{11} & a_{12} & a_{13} \\
+a_{21} & a_{22} & a_{23} \\
+a_{31} & a_{32} & a_{33} \\
+\end{array}
+\right | = a_{11} \left |
+\begin{array}{cc}
+a_{22} & a_{23} \\ 
+a_{32} & a_{33} \\
+\end{array}
+\right | - a_{12} \left |
+\begin{array}{cc}
+a_{21} & a_{23} \\ 
+a_{31} & a_{33} \\
+\end{array}
+\right | + a_{13} \left |
+\begin{array}{cc}
+a_{21} & a_{22} \\ 
+a_{31} & a_{32} \\ 
+\end{array}
+\right | - - - (1)
+$$
+
+
+Observe el signo menos antes del segundo término del lado derecho de (1) 
+
+
+**Ejemplo:** Calcule el determinante de $3\times 3$
+
+Sea 
+
+
+$$
+\mathbf{A}=\left[
+\begin{array}{ccc}
+3 & 5 & 2 \\
+4 & 2 & 3\\
+-1 & 2 & 4 \\
+\end{array}
+\right]
+$$
+
+Calcule $\det(\mathbf{A})$.
+
+
+Solución:
+
+$$
+\det(\mathbf{A})= |\mathbf{A}| =\left |
+\begin{array}{ccc}
+3 & 5 & 2 \\
+4 & 2 & 3\\
+-1 & 2 & 4 \\
+\end{array}
+\right | = 3 \left |
+\begin{array}{cc}
+2 & 3 \\ 
+2 & 4 \\
+\end{array}
+\right | - 5 \left |
+\begin{array}{cc}
+4 & 3 \\ 
+-1 & 4 \\
+\end{array}
+\right | + 2 \left |
+\begin{array}{cc}
+4 & 2\\ 
+-1 & 2 \\ 
+\end{array}
+\right | 
+$$
+
+
+$$
+\det(\mathbf{A})= |\mathbf{A}| =3[(2)(4)-(3)(2)]-5[(4)(4)-(3)(-1)]+2[(4)(2)-(2)(-1)]
+$$
+
+
+$$
+\det(\mathbf{A})= |\mathbf{A}|=3[8-6]-5[16+3]+2[8+2]=3(2)-5(19)+2(10)=6-95+20=-69
+$$
+
+## Cálculo del determinante con Python 
+
+```{python}
+import numpy as np
+a = np.array([[3,5,2], [4,2,3], [-1,2,4]]) 
+b = np.linalg.det(a)
+print(b)
+```
+
+Antes de definir los determinantes de $n\times n$ debe observarse de la ecuación (1) que
+
+$$
+\left[
+\begin{array}{cc}
+ a_{22} & a_{23} \\
+ a_{32} & a_{33} \\
+\end{array}
+\right]
+$$
+
+es obtenida al eliminar el primer renglón y la primera columna de $\mathbf{A}$ y que la matriz 
+
+$$
+\left[
+\begin{array}{cc}
+ a_{21} & a_{23} \\
+ a_{31} & a_{33} \\
+\end{array}
+\right]
+$$
+
+es obtenida al elimnar el primer renglón y la segunda columna de $\mathbf{A}$ y 
+
+$$
+\left[
+\begin{array}{cc}
+ a_{21} & a_{22} \\
+ a_{31} & a_{32} \\
+\end{array}
+\right]
+$$
+
+es obtenida al eliminar el primer renglón y la tercera columna de $\mathbf{A}$. Sí estas matrices se denotan por $\mathbf{M}_{11}$,  $\mathbf{M}_{12}$ y  $\mathbf{M}_{13}$ y si $\mathbf{C}_{11}=\det(\mathbf{M}_{11})$, $\mathbf{C}_{12}=-\det(\mathbf{M}_{12})$ y $\mathbf{C}_{13}=\det(\mathbf{M}_{13})$ entonces la ecución $(1)$ puede escribirse como:
+
+$\det(\mathbf{A})=|\mathbf{A}| =a_{11}\mathbf{C}_{11}+a_{12}\mathbf{C}_{12}+ a_{13}\mathbf{C}_{13}$
+
+## Menor
+
+**Menor**. Sea $\mathbf{A}$ una matriz de $n\times n$ y sea $\mathbf{M}_{ij}$ la matriz de $(n-1)\times (n-1)$ obtenida de $\mathbf{A}$ eliminando el renglón $i$ y la columna $j$.  $\mathbf{M}_{ij}$  se llama **el menor ij** de $\mathbf{A}$.
+
+**Ejemplo: ** Cálculo de dos menores de una matriz de $3 \times 3$.
+
+Ejemplo:
+
+Sea $\mathbf{A}$
+
+
+$$
+\mathbf{A}=\left[
+\begin{array}{ccc}
+2 & -1 & 4 \\
+0 & 1 & 5 \\
+6 & 3 & -4 \\
+\end{array}
+\right]
+$$
+
+Encuentre  $\mathbf{M}_{13}$ y $\mathbf{M}_{32}$.
+
+
+Solución:
+
+
+Para calcular el menor $\mathbf{M}_{13}$ se elimina el primer renglón y la tercera columna de $\mathbf{A}$:
+
+
+$$
+\mathbf{M}_{13}=\left[
+\begin{array}{cc}
+0 & 1  \\
+6 & 3 \\
+\end{array}
+\right]
+$$
+
+Para obtener el menor $\mathbf{M}_{32}$ se elimina el tercer renglón y la segunda columna de $\mathbf{A}$:
+
+
+$$
+\mathbf{M}_{32}=\left[
+\begin{array}{cc}
+2 & 4  \\
+0 & 5 \\
+\end{array}
+\right]
+$$
+
+
+**Ejemplo: ** Cálculo de dos menores de una matriz de $4 \times 4$.
+
+Ejemplo:
+
+Sea
+
+
+$$
+\mathbf{A}=\left[
+\begin{array}{cccc}
+1 & -3 & 5 & 6 \\
+2 & 4 & 0 & 3 \\
+1 & 5 & 9 & -2 \\
+4 & 0 & 2 & 7 \\
+\end{array}
+\right]
+$$
+
+Encuentre  $\mathbf{M}_{32}$ y $\mathbf{M}_{24}$.
+
+
+Solución:
+
+
+Para calcular el menor $\mathbf{M}_{32}$ se elimina el tercer renglón y la segunda columna de $\mathbf{A}$:
+
+
+$$
+\mathbf{M}_{32}=\left[
+\begin{array}{ccc}
+1 & 5 & 6  \\
+2 & 0 & 3 \\
+4 & 2 & 7 \\
+\end{array}
+\right]
+$$
+
+Para obtener el menor $\mathbf{M}_{24}$ se elimina el segundo renglón y la cuarta columna de $\mathbf{A}$:
+
+
+$$
+\mathbf{M}_{24}=\left[
+\begin{array}{ccc}
+1 & -3 & 5 \\
+1 & 5 & 9 \\
+4 & 0 & 2 \\
+\end{array}
+\right]
+$$
+
+### Cálculo de los menores con Python 
+
+```{python}
+import numpy as np
+def menor(A,i,j):
+    #sub_A es el menor 
+    sub_A = np.delete(A,i-1,0)     # Elimina la i-ésima fila 
+    sub_A = np.delete(sub_A,j-1,1) # Elimina la j-ésima columna 
+    M_ij = np.linalg.det(sub_A)    # Cálculo del determinante del menor sub_A
+    return np.around(M_ij,decimals=3)  # redondeo 
+
+
+A = np.array([[2,-1,4],[0,1,5],[6,3,-4]])
+print('Matriz A:')
+print(A)
+print('Menor de la matriz de la primera fila y tercera columna:')
+print(menor(A,1,3))
+print('Menor de la matriz de la tercera fila y segunda columna:')
+print(menor(A,3,2))
+```
+
+
+
+## Cofactor
+
+Sea $\mathbf{A}$ una matriz de $n \times n$. El **cofactor ij** de $\mathbf{A}$, denotado por $\mathbf{C}_{ij}$ está dado por:
+
+
+$\mathbf{C}_{ij}=(-1)^{i+j}\det(\mathbf{M}_{ij})$
+
+Esto es,  el cofactor $ij$ de $\mathbf{A}$ se obtiene tomando el determinante del menor $ij$ y multiplicándolo por $(-1)^{i+j}$. Observe que $(-1)^{i+j}=1$ si $i+j$ es par y  $(-1)^{i+j}=-1$ si $i+j$ es impar.
+
+**Ejemplo:** Cálculo de los cofactores de una matriz de $4\times 4$.
+
+
+Sea
+
+
+$$
+\mathbf{A}=\left[
+\begin{array}{cccc}
+1 & -3 & 5 & 6 \\
+2 & 4 & 0 & 3 \\
+1 & 5 & 9 & -2 \\
+4 & 0 & 2 & 7 \\
+\end{array}
+\right]
+$$
+
+Encuentre  $\mathbf{C}_{32}$ y $\mathbf{C}_{24}$.
+
+Solucion:
+
+$$
+\mathbf{C}_{32}= (-1)^{3+2}|\mathbf{M}_{32}| = (-1)^5\left |
+\begin{array}{ccc}
+1 & 5 & 6 \\
+2 & 0 & 3\\
+4 & 2 & 7 \\
+\end{array}
+\right | = (-1)[(1)(0*7-3*2)-5(2*7-3*4)+6(2*2-0*4)]=(-1)[-6-10+24] =-8 
+$$
+
+$$
+\mathbf{C}_{24}= (-1)^{2+4}|\mathbf{M}_{24}| = (-1)^6\left |
+\begin{array}{ccc}
+1 & -3 & 5 \\
+1 & 5 & 9\\
+4 & 0 & 2 \\
+\end{array}
+\right | = (1)[(1)(5*2-9*0)-(-3)(1*2-9*4)+5(1*0-5*4)]=(1)[10-102-100] =-192 
+$$
+
+
+
+# Asistencia 
+
+From Karla Gómez to Everyone:  11:32 AM
+
+presente
+
+From José María Garduño to Everyone:  11:33 AM
+
+Presente
+
+From Pérez David to Everyone:  11:33 AM
+
+No presente
+
+From Fernanda Cardenas to Everyone:  11:33 AM
+
+Presente
+
+From Gaeta to Everyone:  11:33 AM
+
+Presente
+
+From David Dorantes to Everyone:  11:33 AM
+
+presente
+
+From Andrew Flores Yebra to Everyone:  11:33 AM
+
+Presente
+
+From Irving Barreto to Everyone:  11:33 AM
+
+Presente
+
+From Víctor Jerónimo to Everyone:  11:34 AM
+
+Presente
+
+From Fernanda Pilón to Everyone:  11:34 AM
+
+Presente :)
+
+From Diego Nicolas to Everyone:  11:34 AM
+
+presente
+
+From Frida Cuevas to Everyone:  11:34 AM
+
+Presente
+
+From Jorge A to Everyone:  11:34 AM
+
+Presente
+
+From Emmanuel GR to Everyone:  11:34 AM
+
+Presente
+
+From Melanie Mendieta Mondragón to Everyone:  11:35 AM
+
+Presente
+
+From Wenddy Ballona to Everyone:  11:36 AM
+
+Presente
+

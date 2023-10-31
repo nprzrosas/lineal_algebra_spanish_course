@@ -1,0 +1,280 @@
+---
+title: "dia14_AL_Matrices_290921"
+author: "NCPR"
+date: "9/27/2021"
+output: html_document
+---
+
+# Declaración de matrices en Python 
+
+En Python las matrices son representados con módulo **array**:
+
+
+```{python}
+import numpy as np 
+A = np.array([[1,7], [2, 3], [5, 0]]) #creación de la matriz A
+B = np.array([[2, 6, 3, 1], [1, 2, 3, 4]])# creación de la matriz B
+print(A)# Mostrar A
+print(B)#Mostrar B
+A.shape# shape nos ayuda a obtener las dimensiones de la matriz 3 x 2 (3 filas, 2 columnas)
+B.shape# dimensiones de B = 2 x 4 (2 filas, 4 columnas)
+```
+
+
+# Matriz identidad y matriz cero 
+
+Hay dos matrices especiales que ocurren con frencuencia en álgebra y estás son la **matriz identidad** y la **matriz cero**. La matriz identidad es equivalente al número uno en una escala normal aritmética y se comporta como tal, como uno. Por convención, la matriz identidad es denotada por : 
+
+
+
+
+$$
+\mathbf{I}=\left[
+\begin{array}{cccc}
+   1 & 0 & \cdots &  0 \\
+   0 & 1 & \cdots &  0 \\
+   \vdots &  &  &   \vdots \\
+   0 & 0 & \cdots &  1 \\
+\end{array}
+\right]
+$$
+
+
+
+$$
+\mathbf{I}_{2\times 2}=\left[
+\begin{array}{cc}
+   1 & 0  \\
+   0 & 1  \\
+\end{array}
+\right]
+$$
+
+```{r}
+diag(rep(1,5))
+```
+
+La matriz identidad es definida de forma que al multiplicar la matriz por $\mathbf{I}$ deja a la matriz original sin cambios. 
+
+$\mathbf{A}\mathbf{I}=\mathbf{A}$
+
+La matriz cero es simplemente una matriz $m\times n$ con todas las entradas con el valor de cero , por ejemplo:
+
+$$
+\mathbf{0}_{2\times 2}=\left[
+\begin{array}{cc}
+   0 & 0  \\
+   0 & 0  \\
+\end{array}
+\right]
+$$
+
+Una matriz multiplicada por una matriz cero, producirá una matriz de ceros:
+
+$\mathbf{A}\mathbf{0}=\mathbf{0}$
+
+```{r}
+diag(rep(0,5))
+```
+
+# Matrices triangulares
+
+Las matrices triangulares son matrices cuadradas donde los elementos por arriba o por debajo de la diagonal principal, son cero. Por ejemplo:
+
+
+$$
+\left[
+\begin{array}{ccc}
+   1 & 0 & 0 \\
+   3 & 9 & 0 \\
+   0 & 4 & 1 \\
+\end{array}
+\right]
+$$
+
+$$
+\left[
+\begin{array}{ccc}
+   1 & 2 & 5 \\
+   0 & 9 & 8 \\
+   0 & 0 & 1 \\
+\end{array}
+\right]
+$$
+
+Las matrices triangulares son útiles porque ciertas operaciones sobre ellas son más simples, como las operaciones aritméticas, transposición, cálculo de eigenvalores. 
+
+
+## Matrices diagonales 
+
+Una matriz diagonal son las matrices cuadradas donde todos los elementos son cero excepto para la principal de elementos $a_{ii}$. La matriz identidad es un ejemplo de matriz diagonal. Los siguientes ejemplos muestran algunas matrices diagonales.
+
+$$
+\left[
+\begin{array}{ccc}
+   1 & 0 & 0 \\
+   0 & 6 & 0 \\
+   0 & 0 & -2 \\
+\end{array}
+\right]
+$$
+
+$$
+\left[
+\begin{array}{cccc}
+   0.78 & 0 & 0 & 0 \\
+   0 & -1.2 & 0 & 0 \\
+   0 & 0 & -2 & 0\\
+   0 & 0 & 0 & 3.4\\
+\end{array}
+\right]
+$$
+
+```{r}
+diag(c(4,6,5))
+```
+
+## Transpuesta de una matriz
+
+Una operación común que es aplicada a una matriz es obtener su transpuesta, esto es intercambiar las filas y las columnas de forma tal que $i-ésima$ fila de una matriz $\mathbf{A}$ se vuelve la $i-ésima$ columna de la matriz transpuesta. Nosotros hemos encontrado este concepto antes con la transpuesta de un vector. Por convención la transpuesta de una matriz se denota por $\mathbf{A}^T$. Cada elemento $a_{ij}$ en $\mathbf{A}$ se conviente en el elemento $a_{ji}$ en $\mathbf{A}^T$. Las dimensiones de una transpuesta naturalmente se intercambian en el proceso. Debe ser evidente que la transpuesta de una matriz transpuesta es igual a la matriz original:
+
+$(\mathbf{A}^T)^{T}=\mathbf{A}$
+
+Dada una matriz donde $\mathbf{A}^T=\mathbf{A}$, la matriz $\mathbf{A}$ es llamada matriz simétrica
+
+#### Transpuesta de una matriz con R
+
+
+Algunas funciones útiles que operan sobre matrices incluyen `rownames`, `colnames` y la función de transposición `t`, que transforma las columnas en filas y vicerversa. 
+
+```{r}
+x <- matrix(1:12, nrow=3,byrow=T)
+x
+rownames(x)  <- LETTERS[1:3]
+x
+t(x)
+t(t(x))
+```
+
+
+La variable `LETTERS` es una variable interna que contiene las letras mayúsculas A-Z. 
+
+Se pueden unir vectores para formar matrices con las funciones `cbind` y `r`bind`
+
+```{r}
+cbind(A=1:4, B=5:8, C=9:12)
+```
+
+```{r}
+rbind(A=1:4, B=5:8, C=9:12)
+```
+
+
+### Adición y sustracción de matrices 
+
+La suma y resta de matrices es directa. Dadas dos matrices $\mathbf{A}$ y  $\mathbf{B}$, la suma está dada por: 
+
+$$
+\mathbf{A+B}=\left[
+\begin{array}{ccc}
+a_{11}+b_{11} & \cdots &  a_{1n}+b_{1n} \\
+\vdots & \vdots  &    \vdots \\
+a_{m1}+b_{n1} & \cdots &  a_{mn}+b_{mn} \\
+\end{array}
+\right]
+$$
+$$
+\mathbf{A-B}=\left[
+\begin{array}{ccc}
+a_{11}-b_{11} & \cdots &  a_{1n}-b_{1n} \\
+\vdots & \vdots  &    \vdots \\
+a_{m1}-b_{n1} & \cdots &  a_{mn}-b_{mn} \\
+\end{array}
+\right]
+$$
+
+
+
+```{r}
+x <- matrix(1:12, nrow=3,byrow=T)
+x
+y <- matrix(1:12, nrow=3,byrow=T)
+y
+suma_matriz <- x + y
+suma_matriz
+```
+
+Ahora, restemos dos matrices.
+
+```{r}
+x <- matrix(1:12, nrow=3,byrow=T)
+x
+y <- matrix(1:12, nrow=3,byrow=T)
+y
+resta_matriz <- x - y
+resta_matriz
+```
+
+
+
+
+# Matrices y vectores
+
+Para dar una idea del por qué las matrices y los vectores son útiles en matemáticas, ingeniería y ciencias, considere el siguiente sistema de ecuaciones lineales:
+
+\begin{alignat*}{5}
+  a_{11}x_1 & {}+{} & a_{12}x_2 & {}+{} & \cdots  &  {}+{} & a_{1n}x_n  &  {}={} & b_1 \\
+  a_{21}x_1 & {}+{} & a_{22}x_2 & {}+{} & \cdots  &  {}+{} & a_{2n}x_n  &  {}={} & b_2 \\
+            &      &            &       & \cdots  &        &            &        &      \\
+  a_{m1}x_1 & {}+{} & a_{m2}x_2 & {}+{} & \cdots  &  {}+{} & a_{mn}x_n  &  {}={} & b_m \\
+\end{alignat*}
+
+donde $x_i$ son las variables, $a_{ij}$ son los coeficientes, y $b_i$ las igualaciones de cada ecuación que están de lado derecho. Esta notación tan compleja puede ser reducida en tamaño al usar simple notación algebraica como la que sigue:
+
+
+$\Sigma_{j=1}^na_{ij}x_{j}=b_i$,  $i = 1,2,...,m$
+
+
+
+Mucho mejor, la notación puede ser simplificada usando matrices y vectores. Sí la matriz se representa como $\mathbf{A}$, y los dos vectores se representan como $\mathbf{x}$ y $\mathbf{b}$, el sistema de ecuaciones lineales quedará representado como:
+
+$$
+\mathbf{A}=\left[
+\begin{array}{cccc}
+a_{11} & a_{21} & \cdots &  a_{1n}\\
+a_{21} & a_{22} & \cdots &  a_{2n}\\
+\vdots & \vdots  &  &   \vdots \\
+a_{m1} & a_{m2} & \cdots &  a_{mn}\\
+\end{array}
+\right]
+$$
+
+$$
+\mathbf{x}=\left[
+\begin{array}{c}
+   x_1\\
+   x_2 \\
+   \vdots \\
+  x_3 \\
+\end{array}
+\right]
+$$
+
+$$
+\mathbf{b}=\left[
+\begin{array}{c}
+   b_1\\
+   b_2 \\
+   \vdots \\
+  b_m \\
+\end{array}
+\right]
+$$
+
+Entonces, el sistema lineal puede ser escrito como:
+
+$\mathbf{A}\mathbf{x}=\mathbf{b}$
+
+No es sólo por conveniencia de salvar espacio que esta notación es atractiva. Hay completo sistema algebraico asociado con matrices y vectores que pueden ser explotados para hacer los cálculos simples:
+
+

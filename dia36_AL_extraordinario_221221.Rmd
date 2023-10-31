@@ -1,0 +1,211 @@
+---
+title: "Día 36 - Examen Extrordinario - Álgebra Lineal"
+author: "Dra. Norma C. Pérez Rosas"
+date: '`r format(Sys.time(), "%d/%m/%Y")`'
+output:
+  html_document:
+    toc: yes
+    toc_depth: 2
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+---
+
+
+Instrucciones: responda correctamente las siguientes preguntas. Al terminar tome fotografía a sus respuestas, genere un solo PDF con la siguiente estructura apellido_paterno_apellido_materno_nombre_examen3_grupo.pdf y envíe su examen al classroom.
+
+Al inicio de su examen coloque 
+
+**Nombre completo**
+
+**Grupo**
+
+**Boleta**
+
+**correo electrónico**
+
+
+1. Sea $u=[3,-1]$. 
+
+a) Muestre los vectores $\mathbf{u}$, $\mathbf{2u}$ y $-\frac{2}{3}\mathbf{u}$ gráficamente. 
+
+b) Calcule la magnitud y dirección de cada uno de los vectores. 
+
+c) Calcule el vector unitario de $u$.
+
+(Valor: 15 puntos.) 
+
+
+
+
+
+2. Sea 
+
+
+$$
+\mathbf{A}_{2\times 2}=\left [
+\begin{array}{cc}
+1 & -3  \\ 
+-2 & 4 \\
+\end{array}
+\right ], \  \  \mathbf{x}_{3\times 1}=\left [
+\begin{array}{c}
+1  \\ 
+-2 \\
+-5  \\
+\end{array}
+\right ] 
+$$
+
+
+Calcule 
+
+a) $(\mathbf{Ax})^T$
+
+
+b) $\mathbf{x}^T\mathbf{A}^T$
+
+
+c) $\mathbf{xx}^T$
+
+
+d) $\mathbf{x}^T\mathbf{x}$
+
+
+
+
+e) $\mathbf{A}^T\mathbf{x}^T$
+
+
+(Valor: 25 puntos )
+
+3. Resuelva el siguiente sistema 
+
+\begin{alignat*}{5}
+   x_1 & {}-{} &  2x_2 & {}+{} & x_3 &  {}={} & 0 \\
+       & {} {} &  2x_2 & {}-{} & 8x_3 &  {}={} & 8 \\
+  5x_1 & {} {} &       & {}-{} & 5x_3 &  {}={} & 10 \\
+\end{alignat*}
+
+(Valor: 25 puntos)
+
+
+4. Sea 
+
+$$
+\mathbf{A}=\left [
+\begin{array}{cc}
+5 & 1  \\ 
+3 & -2 \\
+\end{array}
+\right ] \ y \ \mathbf{B}=\left [
+\begin{array}{cc}
+2 & 0  \\ 
+4 & 3 \\
+\end{array}
+\right ] 
+$$
+Muestre que las matrices no conmutan. Es decir $\mathbf{AB}\neq\mathbf{BA}$
+
+(Valor: 15 puntos)
+
+
+5. Sea 
+
+$$
+\mathbf{u}_1=\left [
+\begin{array}{c}
+1  \\ 
+-2 \\
+-5  \\
+\end{array}
+\right ] , \mathbf{u}_2=\left [
+\begin{array}{c}
+2  \\ 
+5 \\
+6  \\
+\end{array}
+\right ] \ y \ \mathbf{v}=\left [
+\begin{array}{c}
+7  \\ 
+4 \\
+-3  \\
+\end{array}
+\right ]
+$$
+
+Determine si $\mathbf{v}$ puede ser generado como una combinación lineal de $u_1$ y $u_2$. Es decir, determine sí existe una $c_1$ y $c_2$ de forma tal que:
+
+$c_1\mathbf{u}_1+c_2\mathbf{u}_2=\mathbf{v}$
+
+Sí la ecuación anterior tiene solución encúentrela. 
+
+(Valor: 25 puntos)
+
+
+6. Use expansión de cofactores a través de la tercera fila para calcular $\det{A}$ donde 
+
+$$
+\mathbf{A}=\left [
+\begin{array}{ccc}
+1 & 5 & 0 \\ 
+2 & 4 & -1 \\
+0 & -2 & 0 \\
+\end{array}
+\right ] 
+$$
+
+(Valor: 20 puntos)
+
+7. Sea 
+
+$$
+\mathbf{A}=\left [
+\begin{array}{cc}
+1 & 6 \\ 
+5 & 2 \\
+\end{array}
+\right ] , \mathbf{u}=\left [
+\begin{array}{c}
+6  \\ 
+-5  \\
+\end{array}
+\right ] \ y \ \mathbf{v}=\left [
+\begin{array}{c}
+3  \\ 
+-2  \\
+\end{array}
+\right ] 
+$$
+
+¿$\mathbf{u}$ y $\mathbf{v}$ son eigenvectores de  $\mathbf{A}$ ?
+
+(Valor: 10 puntos)
+
+8. Muestre que $\{ \mathbf{u}_1, \mathbf{u}_2, \mathbf{u}_3 \}$ es un conjunto de vectores ortogonales. 
+
+$$
+\mathbf{u}_1=\left [
+\begin{array}{c}
+3 \\ 
+1 \\
+1 \\
+\end{array}
+\right ] , \mathbf{u}_2=\left [
+\begin{array}{c}
+-1  \\ 
+2  \\
+1  \\
+\end{array}
+\right ] , \mathbf{u}_3=\left [
+\begin{array}{c}
+-1/2  \\ 
+-2  \\
+7/2  \\
+\end{array}
+\right ] 
+$$
+(Valor: 10 puntos)
+
+
+

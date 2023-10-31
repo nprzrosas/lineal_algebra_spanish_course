@@ -1,0 +1,175 @@
+---
+title: "Programación-Algebra Lineal"
+author: "NCPR"
+date: "7/18/2021"
+output: html_document
+---
+
+# Día 1 - Lunes - 16 de Agosto 
+
+Unidad 1 Matrices y determinantes
+
+1.1 Matrices y su notación utilizando subíndices 
+
+1.2 Operaciones fundamentales: suma, resta, multiplicación por un escalar, producto de matrices y sus propiedades algebraicas 
+
+# Día 2 - Miércoles - 18 de Agosto 
+
+1.3 Tipos de matrices: renglón, columna, cuadrada, identidad, nula, diagonal, escalar, triangular, transpuesta, simétrica, inversa, escalonada y escalonada reducida. 
+
+# Día 3 - Lunes - 23 de Agosto 
+
+1.4 Operaciones elementales entre renglones y método de Gauss - Jordan 
+
+# Día 4 - Miércoles - 25 de Agosto 
+
+1.5 Cálculo de la matriz inversa
+
+# Día 5 - Lunes - 30 de Agosto 
+
+1.5.1 Propiedades de la matriz inversa
+
+# Día 6 - Miércoles - 1 de Septiembre 
+
+1.6 Determinantes y su notación 
+
+# Día 7 - Lunes - 6 de septiembre 
+
+1.6 Determinantes y su notación 
+
+# Día 8 - Miércoles - 8 de Septiembre 
+
+1.6.1 Propiedades de los determinantes
+
+# Día 9 - Lunes - 13 de Septiembre
+
+1.6.2 Menores y cofactores
+
+# Día 10 - Miércoles - 15 de Septiembre
+
+1.6.3 Aplicación de las propiedades de los determinantes
+
+# Día 11 - Lunes - 20 de Septiembre  
+
+Unidad II . Sistemas de ecuaciones lineales
+
+2.1 Sistemas de ecuaciones lineales 
+
+# Día 12 - Miércoles - 22 de Septiembre - 1er. examen parcial 
+
+# Día 13 - Lunes - 27 de Septiembre - Revisión del 1er. examen parcial 
+
+# Día 14 - Miércoles - 29 de Septiembre 
+
+2.1.1 Representación matricial de un sistema de ecuaciones lineales 
+
+# Día 15 - Lunes - 4 de Octubre 
+
+2.2 Tipos de sistemas de ecuaciones lineales homogéneas, no-homogéneas, consistentes e incosistentes
+
+# Día 16 - Miércoles - 6 de Octubre 
+
+2.3 Solución de un sistema de ecuaciones lineales 
+
+# Día 17 - Lunes - 11 de Octubre 
+
+2.3.1 Método de Gauss y de Gauss Jordan 
+
+# Día 18 - Miércoles - 13 de Octubre 
+
+2.3.2 Mediante la inversa de una matriz 
+
+# Día 19 - Lunes - 18 de Octubre 
+
+2.3.3 Regla de Cramer 
+
+# Día 20 - Miércoles - 20 de Octubre 
+
+2.4 Aplicaciones de los sistemas de ecuaciones lineales
+
+# Día 21 - Lunes - 25 de Octubre 
+
+Unidad III - Espacios vectoriales 
+
+3.1 Cantidad vectorial 
+
+3.1.1 Operaciones en $R^n$, suma, resta, producto por un escalar, producto interior 
+
+# Día 22 - Miércoles - 27 de Octubre 
+
+3.1.2 Producto escalar, producto interior 
+
+3.1.3  Producto cruz o producto vectorial 
+
+# Día 23 - Miércoles - 3 de Noviembre 
+
+3.1.4  Vectores unitarios, colineales, ortogonales, ortonormales
+
+# Día 24 - Lunes - 8 de Noviembre 
+
+3.2 Espacios vectoriales 
+
+# Día 25 - Miércoles - 10 de Noviembre Examen 2do parcial 
+
+# Día 26 - Miércoles - 17 de Noviembre Revisión 2do. parcial 
+
+# Día 27 - Lunes - 22 de Noviembre 
+
+3.2.1 Espacios vectoriales especiales, espacio euclidiano de n dimensiones 
+
+# Día 28 - Miércoles 24 de Noviembre
+
+3.2.2 Subespacio vectorial
+
+# Día 29 - Lunes 29 de Noviembre 
+
+3.3 Combinación lineal, dependencia lineal e independencia lineal 
+
+# Día 30 - Miércoles 1 de Diciembre 
+
+3.4 Espacios generados en espacios vectoriales 
+
+# Día 31 - Lunes 6 de Diciembre 
+
+3.5 Bases, dimensión, cambio de base de un espaci vectorial 
+
+# Día 32 - Miércoles 8 de Diciembre 
+
+Unidad IV - Transformaciones lineales 
+
+4.1 Transformaciones
+
+4.1.1 Transformaciones lineales
+
+4.1.2 Transformaciones no lineales 
+
+
+# Día 33 - Lunes 13 de Diciembre
+
+4.1.3 Propierades de las transformaciones lineales (núcleo, recorrido, rango y nulidad)
+
+4.2 Representación matricial de una transformación lineal 
+
+4.3 Obtención de una transformación lineal 
+
+4.4 Matrices de las transformaciones lineales 
+
+4.5 Aplicaciones 
+
+# Día 34 - Miércoles 15 de Diciembre
+
+Unidad 5. Diagonalización 
+
+5.1 Valores propios y vectores propios
+
+5.2 Obtención de la ecuación y del polinomio características
+
+5.3 Diagonalización de matrices 
+
+5.4 Aplicaciones 
+
+# Día 35 - Lunes 20 de Diciembre Examen 3er parcial
+
+# Día 36 - Miércoles 23 de Diciembre Revisión examen 3er parcial 
+
+

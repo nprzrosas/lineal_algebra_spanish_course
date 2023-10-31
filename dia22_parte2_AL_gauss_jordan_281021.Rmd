@@ -1,0 +1,107 @@
+---
+title: "Día 22 (parte 2) - Método de Gauss-Jordan"
+author: "Dra. Norma C. Pérez Rosas"
+date: '`r format(Sys.time(), "%d/%m/%Y")`'
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+  html_document:
+    toc: yes
+    toc_depth: 2
+---
+
+
+# Operaciones elementales con renglones 
+
+Del ejercicio de la clase anterior se ha visto que multiplicar (o dividir) los dos lados de una ecuación por un número diferente de cero da por resultado una nueva ecuación equivalente. Más aún, si se suma un múltiplo de una ecuación a otra del sistema se obtiene una ecuación equivalente. Por último, si se intercambian dos ecuaciones en un sistema de ecuaciones se obtiene un sistema equivalente. Estas tres operaciones, cuando se aplican a los renglones de la matriz aumentada que representa un sistema de ecuaciones se denominan **operaciones elementales con renglones**.
+
+i) Multiplicar (o dividir) un renglón por un número diferente de cero. 
+
+ii) Sumar un múltiplo de un renglón a otro renglón.  
+
+iii) Intercambiar dos renglones. 
+
+El proceso de aplicar las operaciones elementales con renglones para simplicar una matriz aumentada se llama **reducción por renglones**.
+
+
+# Notación 
+
+1. $R_i \rightarrow cR_i$ que quiere decir "reemplaza el $i-$ésimo renglón por ese mismo renglón por $c$". [Para multiplicar el $i-$ésimo renglón por $c$ se multiplica cada número en el $i-$ésimo renglón por $c$.]
+
+2. $R_j \rightarrow R_j+ cR_i$ significa sustitutye el $j-$ésimo renglón por la suma del renglón $j$ más el renglón $i$ multiplicado por $c$.
+
+3. $R_i \rightleftarrows R_j$ que quiere decir "intercambiar los renglones $i$ y $j$".
+
+4. $A \rightarrow B$ indica que las matrices aumentadas $A$ y $B$ son equivalentes; es decir, los sistemas que representan tienen la misma solución. 
+
+En el ejemplo, se vio que al usar operaciones elementales con renglones i) y ii) varias veces, se puede obtener un sistema cuyas soluciones estén dadas en forma explícita. Ahora se repiten los pasos del ejemplo 1 usando la notación que se acaba de introducir:
+
+
+![Reducción Gauss - Jordan.](gauss_solucion.png)
+
+De nuevo se puede "ver" de inmediato que la solución es $x_1=4$, $x_2=-2$, $x_3=3$.
+
+
+
+From Melanie Mendieta Mondragón to Everyone:  07:03 AM
+
+Presente
+
+From Irving Barreto to Everyone:  07:03 AM
+
+presente
+
+From Gaeta to Everyone:  07:08 AM
+
+Presente
+
+From Fernanda Pilón to Everyone:  07:08 AM
+
+Buenos días. 
+Presente :)
+
+From Frida Cuevas to Everyone:  07:08 AM
+
+Presente
+
+From Itzel Aurora Bravo Santos to Everyone:  07:09 AM
+
+Presente
+
+From Jorge Ambrosio to Everyone:  07:09 AM
+
+Presente
+
+From Víctor Jeronimo to Everyone:  07:09 AM
+
+Presente
+
+From Fernanda Cardenas to Everyone:  07:20 AM
+
+Presente
+
+From Karla Gómez to Everyone:  07:40 AM
+
+Presente
+
+From José María Garduño to Everyone:  07:40 AM
+
+presente
+
+From wenddy Ballona to Everyone:  07:40 AM
+
+presente
+
+From Andrew Flores Yebra to Everyone:  07:41 AM
+
+Presente
+
+From David Dorantes to Everyone:  07:49 AM
+
+Presente
+
+From Diego Nicolas to Everyone:  07:49 AM
+
+Presente
+

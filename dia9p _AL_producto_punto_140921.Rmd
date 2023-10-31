@@ -1,0 +1,407 @@
+---
+title: "Día 9 parte 2 - Producto punto"
+author: "Dra. Norma C. Pérez Rosas"
+date: '`r format(Sys.time(), "%d/%m/%Y")`'
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+  html_document:
+    toc: yes
+    toc_depth: 2
+---
+
+# Propiedades del producto punto (continuación)
+
+$(\mathbf{u}-\mathbf{v})^T(\mathbf{u}-\mathbf{v})=\mathbf{u}^T\mathbf{u}-2(\mathbf{u}^T\mathbf{v})+\mathbf{v}^T\mathbf{v}$
+
+```{python}
+import numpy as np
+u = np.array([1,2,3])
+v = np.array([4,5,6])
+r1 = u - v
+r1_t = np.transpose(r1)
+result_left = np.dot(r1_t, r1)
+u_t = np.transpose(u)
+v_t = np.transpose(v)
+result_right = np.dot(u_t, u) - 2 * np.dot(u_t, v) + np.dot(v_t, v)
+print(result_left)
+print(result_right)
+```
+
+
+# Aplicaciones del producto punto 
+
+Un resultado importante que será despues usado sobre el producto punto es el de un vector con uno de los vectores cartesianos unitarios. Considere el vector unitario cartesiano $\mathbf{i}$ y el vector $\mathbf{u}$:
+
+
+\begin{equation*}
+\mathbf{u}^T\mathbf{i} = [x \, y \, z]
+\begin{pmatrix}
+1  \\
+0 \\
+0
+\end{pmatrix} = x
+\end{equation*}
+
+El producto punto de un vector y un vector cartesiano puede ser usado para seleccionar un elemento particular del vector. 
+
+
+### Interpretación 
+
+La definición de producto punto tiene una interpretación geométrica muy útil. Para comenzar, el producto punto de un vector con respecto a sí mismo es la distancia Euclidiana al cuadrado.
+
+ $\lVert \mathbf{x} \rVert^2=\mathbf{x}^T\mathbf{x} = x_1^2+x_2^2+...$
+ 
+ Del cual la norma euclidiana queda expresada como:
+
+ $\lVert \mathbf{x} \rVert=\sqrt{\mathbf{x}^T\mathbf{x}}=\sqrt{x_1^2+x_2^2+\dots}$
+ 
+¿Qué signifca el producto punto de dos vectores diferentes? Primero considere dos vectores $\mathbf{u}$ y $\mathbf{v}$ que forman un ángulo recto entre ellos, recuerde que   $\lVert \mathbf{u} - \mathbf{v} \rVert^2$ es la distancia entre los puntos finales $\mathbf{u}$ y $\mathbf{v}$. Debido a que los vectores tiene un ángulo recto, la distancia también es la suma de los cuadrados de longitudes $\mathbf{u}$ y $\mathbf{v}$. Por lo tanto:
+ 
+ $\lVert \mathbf{u} \rVert^2+\lVert \mathbf{v} \rVert^2=\lVert \mathbf{u} - \mathbf{v} \rVert^2$ <-- (ecuac. A)
+ 
+De la ecuación  $\lVert \mathbf{x} \rVert^2=\mathbf{x}^T\mathbf{x} = x_1^2+x_2^2+...$, podemos obtener los siguiente 
+
+$\lVert \mathbf{u} - \mathbf{v} \rVert^2=(\mathbf{u} - \mathbf{v})^T(\mathbf{u} - \mathbf{v})$
+
+$\lVert  \mathbf{v} \rVert^2= \mathbf{v}^T\mathbf{v}$
+
+$\lVert  \mathbf{u} \rVert^2= \mathbf{u}^T\mathbf{u}$
+
+Y considerando las siguientes propiedades del producto punto 
+
+$\mathbf{u}^T\mathbf{v}=\mathbf{v}^T\mathbf{u}$
+
+$(\mathbf{u}-\mathbf{v})^T(\mathbf{u}-\mathbf{v})=\mathbf{u}^T\mathbf{u}-2(\mathbf{u}^T\mathbf{v})+\mathbf{v}^T\mathbf{v}$
+
+
+Sí (A) la igualamos a cero tenemos:
+ 
+$\lVert \mathbf{u} \rVert^2+\lVert \mathbf{v} \rVert^2 - \lVert \mathbf{u} - \mathbf{v} \rVert^2 = 0$
+
+$\mathbf{u}^T\mathbf{u}+\mathbf{v}^T\mathbf{v}-(\mathbf{u}^T\mathbf{u}-2(\mathbf{u}^T\mathbf{v})+\mathbf{v}^T\mathbf{v})=0$
+
+$\mathbf{u}^T\mathbf{u}+\mathbf{v}^T\mathbf{v}-\mathbf{u}^T\mathbf{u}+2(\mathbf{u}^T\mathbf{v})-\mathbf{v}^T\mathbf{v}=0$
+
+$2(\mathbf{u}^T\mathbf{v})=0$
+
+$\mathbf{u}^T\mathbf{v}=0$
+
+En otras palabras, el producto punto de dos vectores que forman un ángulo recto entre sí, es cero. Tales vectores son llamados **vectores ortogonales**
+
+# Vectores ortogonales
+
+**Dos vectores son ortogonales sí** $\mathbf{u}^T\mathbf{v}=0$ 
+
+**Ejemplo:**
+
+Muestre que los siguientes dos vectores son ortogonales entre sí:
+
+
+\begin{equation*}
+\mathbf{u} = 
+\begin{pmatrix}
+1  \\
+0 \\
+-1
+\end{pmatrix} 
+\end{equation*}
+
+
+\begin{equation*}
+\mathbf{v} = 
+\begin{pmatrix}
+1  \\
+\sqrt{2} \\
+1
+\end{pmatrix} 
+\end{equation*}
+
+\begin{equation*}
+\mathbf{u}^T\mathbf{v} = [1 \, 0 \, -1]
+\begin{pmatrix}
+1  \\
+\sqrt{2} \\
+1
+\end{pmatrix} = (1)(1) + (0)( \sqrt{2}) + (-1)(1)  = 0
+\end{equation*}
+
+```{python}
+import numpy as np
+import math
+a = math.sqrt(2)
+u = np.array([1,0,-1])
+v = np.array([1, math.sqrt(2), 1])
+producto_punto = np.dot(v, u)
+print (producto_punto)
+```
+
+
+**Ejemplo:**
+
+Muestre que $[6,3]$ y $[1,-2]$ son ortogonales entre sí:
+
+```{python}
+import numpy as np
+import math
+u = np.array([6,3])
+v = np.array([1,-2])
+producto_punto = np.dot(v, u)
+print(producto_punto)
+```
+
+
+```{r, echo = FALSE}
+etiquetas <- c('u', 'v' )
+xlim <- c(0,7)
+ylim <- c(-2,5)
+plot( xlim, ylim, type="n", xlab="x", ylab="y", asp=1)
+arrows(0,0,6,3, col = 'red' )
+arrows(0,0,1,-2, col = 'blue') 
+text(c(3,1),c(2,-1),etiquetas,col = c("red", "blue"))
+abline(v=0, h=0, col = 'gray' )
+```
+
+# Vectores ortonormales 
+
+Un conjunto especial de vectores son los llamados **vectores ortonormales**. Dos vectores,  $\mathbf{u}$ y $\mathbf{v}$ son ortonormales si los vectores son ortogonales y cada uno es de longitud 1. 
+
+**Definición:** sí dos vectores son ortogonales entre sí $\mathbf{u}^T\mathbf{v}=0$ y ambos son de longitud 
+$\lVert  \mathbf{u} \rVert= 1$ y $\lVert  \mathbf{v} \rVert= 1$, estos dos vectores son llamados **vectores ortonormales**. 
+
+$\mathbf{a} = \frac{u}{\lVert u \rVert}$
+
+$\mathbf{b} = \frac{v}{\lVert v \rVert}$
+
+
+**Ejercicio.** Encuentre los vectores ornormales de $\mathbf{u} = [6,3]$ y $\mathbf{v} = [1,-2]$.
+
+
+Paso 1. Graficar $\mathbf{u} = [6,3]$ y $\mathbf{v} = [1,-2]$
+
+
+```{r, echo = FALSE}
+etiquetas <- c('(0,0)', 'u =(6,3)')
+plot(c(1,6),c(-2,3), xlab = 'x', ylab='y', main="Paso 1. Graficar u y v", col.main='blue', xlim = c(-0.5, 7))
+arrows(0,0,6,3, col = 'red' )
+arrows(0,0,1,-2, col = 'blue')
+text(c(0.0,4.5),c(0.1,2.9),etiquetas,col='red')
+etiquetas2 <- c('(0,0)', 'v =(1,-2)')
+text(c(0.0,0.3),c(0.1,-1.5),etiquetas2,col='blue')
+longitud_1 <- c('l_v=2.2360', 'l_u=6.7082')
+text(c(1.5,2.5),c(-0.5,2.0),longitud_1,col = c("blue", "red"))
+```
+
+
+Paso 2. Obtener la longitud de los vectores de $\mathbf{u} = [6,3]$ y $\mathbf{v} = [1,-2]$
+
+La distancia Euclidiana del vector $\mathbf{u} = [6,3]$  es $l=\sqrt{6^2+3^2}=6.708203932499369$.
+
+```{python}
+import math
+l = math.sqrt(6**2 + 3**2)
+print(l)
+```
+
+La distancia Euclidiana del vector $\mathbf{v} = [1,-2]$  es $l=\sqrt{1^2+(-2)^2}=2.23606797749979$.
+
+```{python}
+import math
+l = math.sqrt(1**2 + (-2)**2)
+print(l)
+```
+
+Paso 3. Obtener la dirección de $\mathbf{u} = [6,3]$ y $\mathbf{v} = [1,-2]$ con respecto al eje $x$.
+
+La dirección del vector $\mathbf{u} = [6,3]$ relativo al eje $x$ es $tan^{-1}(3/6)$, ya que se encuentra en el primer cuadrante.
+
+
+```{python}
+#codigo en Python para calcular el angulo 
+#para usar las funciones trigonómetricas importamos la librería math
+#por default Python calcula el ángulo en radianes
+import math
+radianes = math.atan(3/6)
+radianes
+#con math.degrees  pasamos de radianes a angulo 
+angulo = math.degrees(radianes)
+angulo 
+```
+
+La dirección del vector $\mathbf{v} = [1,-2]$ relativo al eje $x$ es $tan^{-1}(-2/1)$, ya que se encuentra en el cuarto cuadrante.
+
+
+```{python}
+#codigo en Python para calcular el angulo 
+#para usar las funciones trigonómetricas importamos la librería math
+#por default Python calcula el ángulo en radianes
+import math
+radianes = math.atan(-2/1)
+radianes
+#con math.degrees  pasamos de radianes a angulo 
+angulo = math.degrees(radianes)
+angulo 
+```
+
+
+Paso 4. Normalizar los vectores $\mathbf{u} = [6,3]$ y $\mathbf{v} = [1,-2]$
+
+$\mathbf{a} = \frac{u}{\lVert u \rVert}$
+
+$\mathbf{b} = \frac{v}{\lVert v \rVert}$
+
+La distancia Euclidiana del vector $\mathbf{u} = [6,3]$  es $l=\sqrt{6^2+3^2}=6.708203932499369$.
+
+```{python}
+import math
+l = math.sqrt(6**2 + 3**2)
+print(l)
+```
+
+El vector equivalente con longitud unitaria:
+
+$\mathbf{a} = [\frac{6}{6.708203932499369},\frac{3}{6.708203932499369}]$
+
+```{python}
+import numpy as np
+m = np.array([6/6.708203932499369,3/6.708203932499369])
+print(np.linalg.norm(m))
+```
+
+La distancia Euclidiana del vector $\mathbf{v} = [1,-2]$  es $l=\sqrt{1^2+(-2)^2}=2.23606797749979$.
+
+```{python}
+import math
+l = math.sqrt(1**2 + (-2)**2)
+print(l)
+```
+
+
+El vector equivalente con longitud unitaria:
+
+$\mathbf{b} = [\frac{1}{2.23606797749979},\frac{-2}{2.23606797749979}]$
+
+```{python}
+import numpy as np
+m = np.array([1/2.23606797749979,-2/2.23606797749979])
+print(np.linalg.norm(m))
+```
+
+2. Encontrar la dirección de $\mathbf{a} = [\frac{6}{6.708203932499369},\frac{3}{6.708203932499369}]$ y $\mathbf{b} = [\frac{1}{2.23606797749979},\frac{-2}{2.23606797749979}]$
+
+La dirección del vector $\mathbf{a} = [\frac{6}{6.708203932499369},\frac{3}{6.708203932499369}]$ relativo al eje $x$ es $tan^{-1}((3/6.7082)/(6/6.7082))$.
+
+
+```{python}
+#codigo en Python para calcular el angulo 
+#para usar las funciones trigonómetricas importamos la librería math
+#por default Python calcula el ángulo en radianes
+import math
+radianes = math.atan((3/6.708203932499369)/(6/6.708203932499369))
+radianes
+#con math.degrees  pasamos de radianes a angulo 
+angulo = math.degrees(radianes)
+angulo 
+```
+
+La dirección del vector $\mathbf{b} = [\frac{1}{2.23606797749979},\frac{-2}{2.23606797749979}]$ relativo al eje $x$ es $tan^{-1}((-2/2.23606797749979)/(1/2.23606797749979))$.
+
+
+```{python}
+#codigo en Python para calcular el angulo 
+#para usar las funciones trigonómetricas importamos la librería math
+#por default Python calcula el ángulo en radianes
+import math
+radianes = math.atan((-2/2.23606797749979)/(1/2.23606797749979))
+radianes
+#con math.degrees  pasamos de radianes a angulo 
+angulo = math.degrees(radianes)
+angulo 
+```
+
+
+Note que la dirección de $\mathbf{u}$ y $\mathbf{a}$ permanecen sin cambios, así como la dirección $\mathbf{v}$ y $\mathbf{b}$.
+
+
+4. Graficar los vectores ortonormales. 
+
+
+```{r, echo = FALSE}
+etiquetas <- c('(0,0)', 'u =(6,3)')
+plot(c(1,6),c(-2,3), xlab = 'x', ylab='y', main="Graficar los vectores ortonormales", col.main='blue', xlim = c(-0.5, 7))
+arrows(0,0,6,3, col = 'red' )
+arrows(0,0,6/6.708203932499369,3/6.708203932499369, col = 'green' )
+arrows(0,0,1,-2, col = 'blue')
+arrows(0,0,1/2.23606797749979,-2/2.23606797749979, col = 'pink' )
+text(c(0.0,4.5),c(0.1,2.9),etiquetas,col='red')
+etiquetas2 <- c('(0,0)', 'v =(1,-2)')
+text(c(0.0,0.3),c(0.1,-1.5),etiquetas2,col='blue')
+longitud_1 <- c('l_v=2.2360', 'l_u=6.7082')
+text(c(1.5,2.5),c(-0.5,2.0),longitud_1,col = c("blue", "red"))
+```
+
+Paso 5. Demostración de ortogonalidad para $\mathbf{u}=[6,3]$ y $\mathbf{v}=[1,-2]$
+
+```{python}
+import numpy as np
+import math
+u = np.array([6,3])
+v = np.array([1,-2])
+producto_punto = np.dot(v, u)
+print(producto_punto)
+```
+
+
+Demostración de ortogonalidad para $\mathbf{a} = [\frac{6}{6.708203932499369},\frac{3}{6.708203932499369}]$ y $\mathbf{b} = [\frac{1}{2.23606797749979},\frac{-2}{2.23606797749979}]$
+
+
+```{python}
+import numpy as np
+import math
+a = np.array([6/6.708203932499369,3/6.708203932499369])
+b = np.array([1/2.23606797749979,-2/2.23606797749979])
+producto_punto = np.dot(v, u)
+print(producto_punto)
+```
+
+# Asistencia
+
+From Emmanuel Gonzalez to Everyone:  07:04 AM
+
+presente
+
+From Irving Barreto to Everyone:  07:04 AM
+
+presente
+
+From Melanie Mondragón to Everyone:  07:04 AM
+
+presente
+
+From Fernanda Pilón to Everyone:  07:04 AM
+
+Presente
+
+From Víctor Jerónimo to Everyone:  07:05 AM
+
+Presente
+
+From Gaeta to Everyone:  07:05 AM
+
+presente
+
+From Fernanda Cardenas to Everyone:  07:05 AM
+
+Presente
+
+From Pérez Tadeo to Everyone:  07:33 AM
+
+presente
+
+From Ivan Delgado to Everyone:  07:34 AM
+
+Presente
+
+
+

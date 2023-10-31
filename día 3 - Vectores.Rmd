@@ -1,0 +1,171 @@
+---
+title: "Día 3 - Vectores"
+author: "Dra. Norma C. Pérez Rosas"
+date: '`r format(Sys.time(), "%d/%m/%Y")`'
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+  html_document:
+    toc: yes
+    toc_depth: 2
+---
+
+Ingrese a [Google colab](https://colab.research.google.com/notebooks/intro.ipynb?utm_source=scs-index) y practique los ejercicios de su clase.
+
+
+# Declaración de un vector en Python
+
+Para crear un vector en Python generaremos primero una lista. La lista en Python es generada como una lista de valores separados por una $,$ y encerrado entre corchetes. 
+
+
+
+```{python}
+lista = [1,2,3,4]
+lista 
+```
+
+Para acceder a uno de los valores de la lista, coloque el nombre de la lista seguida de corchetes, y entre los corchetes coloque la posición del valor de interés 
+
+```{python}
+lista = [1,2,3,4]
+lista[3] 
+```
+Para acceder a un conjunto de valores de la lista utilice dos puntos, ejemplo:
+
+
+```{python}
+lista = [1,2,3,4,5,6,7,8,9,10]
+lista[3:6] 
+```
+
+Para crear un vector en Python, tenemos que decirle a Python que vamos a hacer operaciones con álgebra lineal mandando a traer a la librería numpy. Para crear un vector usamos la palabra arreglo en ingles `array` encerrado entre paréntesis.
+
+
+```{python}
+import numpy as np
+v = np.array([1,2,3,4])
+v
+```
+
+
+
+# Vectores apilados
+
+
+**Vectores apilados:** con frecuencia es útil definir vectores apilando o concatenando vectores, como en 
+
+\begin{equation*}
+\mathbf{a} = 
+\begin{pmatrix}
+\mathbf{b}  \\
+\mathbf{c} \\
+\mathbf{d} \\
+\end{pmatrix}
+\end{equation*}
+
+
+donde $\mathbf{a}$, $\mathbf{b}$ y $\mathbf{c}$ son vectores. Sí $\mathbf{b}$ es un $m-vector$, $\mathbf{c}$ es un $n-vector$ y $\mathbf{d}$ es un $p-vector$, esto define al $(m+n+p)-vector$
+
+
+$\mathbf{a}=(b_1,b_2,...,b_m,c_1,c_2,...,c_n,d_1,d_2,...,d_p)$
+
+El vector apilado $\mathbf{a}$ también es escrito como $\mathbf{a}=(b,c,d)$
+
+Los vectores apilados pueden incluir escalares (números). Por ejemplo si $\mathbf{a}$ es un 3-vector, (1,a) es el 4-vector $(1,a_1,a_2,a_3)$.
+
+
+## Subvectores 
+
+En la ecuación anterior, decimos que $b$, $c$ y $d$ son subvectores o rebanadas de $\mathbf{a}$, con tamaños $m$, $n$, y $p$, respectivamente. La notación de dos puntos $:$ es usada para denotar subvectores. 
+
+Sí $\mathbf{a}$ es un vector, entonces $\mathbf{a}_{r:s}$ es un vector de tamaño $s-r+1$, con entradas $a_r,...,a_s$:
+
+$\mathbf{a}_{r:s}=(a_r,...,a_s)$
+
+El subíndice $r:s$ es llamado rango de índice (index range). En nuestro ejemplo anterior tenemos:
+
+$b = a_{1:m}$
+
+$c = a_{(m+1):(m:n)}$
+
+$d=a_{(m+n+1):(m+n+p)}$
+
+Un ejemplo más concreto, si $\mathbf{z}$ es un 4-vector $(1,-1,2,0)$, el subvector $z_{2:3}=(-1,2)$.
+
+
+# Asistencia 
+
+
+From Karla Gómez to Everyone:  11:31 AM
+
+Presente
+
+From Andrew Flores Yebra to Everyone:  11:32 AM
+
+Presente
+
+From Melanie Mondragón to Everyone:  11:32 AM
+
+Presente
+
+From Wenddy Ballona Martinez to Everyone:  11:32 AM
+
+presente
+
+From Diego Nicolas to Everyone:  11:32 AM
+
+Prsente, buenos días.
+
+From Fernanda Pilón to Everyone:  11:32 AM
+
+Presente
+
+Mejía Pilón
+
+From Irving Barreto to Everyone:  11:32 AM
+
+Presente
+
+From Adriana Gaeta to Everyone:  11:32 AM
+
+presente
+
+From Pérez Tadeo to Everyone:  11:32 AM
+
+Presente
+
+From Emmanuel Gonzalez Rulfo to Everyone:  11:32 AM
+
+Presente
+
+From Itzel Aurora Bravo Santos to Everyone:  11:33 AM
+
+Presente
+
+From Fernanda Cardenas to Everyone:  11:33 AM
+
+Presente
+
+From David Dorantes to Everyone:  11:34 AM
+
+Presente
+
+From José María Garduño to Everyone:  11:34 AM
+
+Presente
+
+From Jorge Ambrosio to Everyone:  11:34 AM
+
+presente
+
+From Víctor Jerónimo to Everyone:  11:43 AM
+
+Presente 
+
+From Frida Cuevas to Everyone:  11:44 AM
+
+Presente.
+
+
+

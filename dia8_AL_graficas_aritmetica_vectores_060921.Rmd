@@ -1,0 +1,224 @@
+---
+title: "Día 8 - Aritmética de vectores "
+author: "Dra. Norma C. Pérez Rosas"
+date: '`r format(Sys.time(), "%d/%m/%Y")`'
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+  html_document:
+    toc: yes
+    toc_depth: 2
+---
+
+# Resumen de aritmética de vectores 
+
+$\mathbf{u}+\mathbf{v} = \mathbf{v}+\mathbf{u}$
+
+```{python}
+#codigo en Python para sumar dos vectores u + v
+import numpy as np
+u = np.array([3,2,1])
+v = np.array([6,5,4])
+resultado_1 = u + v
+print(resultado_1)
+resultado_2 = v + u 
+print(resultado_2)
+```
+
+
+
+
+$\mathbf{u}+(\mathbf{v}+\mathbf{w}) = (\mathbf{u}+\mathbf{v})+\mathbf{w}$
+
+```{python}
+#codigo en Python para sumar dos vectores v + u
+import numpy as np
+u = np.array([3,2,1])
+v = np.array([6,5,4])
+w = np.array([2,3,8])
+resultado1 = u + (v + w)
+print(resultado1)
+resultado2 = (u + v) + w
+print(resultado2)
+```
+
+
+$\mathbf{u}^{T}(\alpha\mathbf{v})=\alpha\mathbf{u}^T\mathbf{v}$
+
+```{python}
+#codigo en Python para calcular u^T*(alpha*v)
+import numpy as np
+alpha = 5
+u = np.array([3,2,1])
+v = np.array([6,5,4])
+u_transpuesta = np.transpose(u)
+resultado1 = u_transpuesta * (alpha * v)
+print(resultado1)
+resultado2 = alpha * u_transpuesta * v
+print(resultado2)
+```
+
+
+$\mathbf{u}+\mathbf{0}=\mathbf{0}+\mathbf{u} = \mathbf{u}$
+
+
+```{python}
+#codigo en Python para generar un vector de ceros
+import numpy as np
+ceros = np.zeros(3)
+print(ceros)
+```
+
+
+```{python}
+#codigo en Python para comprobar que  u + 0 = 0 + u = u
+import numpy as np
+u = np.array([3,2,1])
+ceros = np.zeros(3)
+resultado_1 = u + ceros
+resultado_2 = ceros + u 
+print(resultado_1)
+print(resultado_2)
+print(u)
+```
+
+$\mathbf{u}+(-\mathbf{u})=\mathbf{0}$
+
+```{python}
+#codigo en Python para comprobar que  u + 0 = 0 + u = u
+import numpy as np
+u = np.array([3,2,1])
+ceros = np.zeros(3)
+resultado_1 = u + ceros
+resultado_2 = ceros + u 
+print(resultado_1)
+print(resultado_2)
+print(u)
+```
+
+$\mathbf{u}+(-\mathbf{u})=\mathbf{0}$
+
+```{python}
+#codigo en Python para comprobar que  u + (-u) = 0 
+import numpy as np
+u = np.array([3,2,1])
+resultado_1 = u + (-u)
+print(resultado_1)
+```
+
+$1\mathbf{u}=\mathbf{u}$
+
+```{python}
+#codigo en Python para comprobar que  1(escalar) * u = u (vector) 
+import numpy as np
+u = np.array([3,2,1])
+resultado_4 = 1 * u
+print(resultado_4)
+```
+
+$0\mathbf{u}=\mathbf{0}$
+
+```{python}
+#codigo en Python para comprobar que  0(escalar) * u = 0 (vector) 
+import numpy as np
+u = np.array([3,2,1])
+resultado_5 = 0 * u
+print(resultado_5)
+```
+
+$\alpha(\mathbf{u}+\mathbf{v})=\alpha\mathbf{u}+\alpha\mathbf{v}$
+
+```{python}
+#codigo en Python para calcular u^T*(alpha*v)
+import numpy as np
+alpha = 5
+u = np.array([3,2,1])
+v = np.array([6,5,4])
+resultado_1 = alpha * (u + v)
+resultado_2 = alpha * u + alpha * v
+print(resultado_1)
+print(resultado_2)
+```
+
+
+# Asistencia
+
+From Víctor Jerónimo to Everyone:  11:32 AM
+
+Presente
+
+From Emmanuel Gonzalez to Everyone:  11:32 AM
+
+Presente
+
+From Itzel Aurora Bravo Santos to Everyone:  11:34 AM
+
+Presente.
+
+From Fernanda Pilón to Everyone:  11:34 AM
+
+Presente
+
+From Pérez Tadeo to Everyone:  11:35 AM
+
+presente
+
+From Gaeta to Everyone:  11:35 AM
+
+presente
+
+From Irving Barreto to Everyone:  11:35 AM
+
+Presente
+
+From Jorge Ambrosio to Everyone:  11:35 AM
+
+Presente
+
+From Frida Cuevas to Everyone:  11:35 AM
+
+Presente
+
+From Ivan Delgado to Everyone:  11:35 AM
+
+Presente
+
+From Karla Gómez to Everyone:  11:35 AM
+
+Presente
+
+From Diego Nicolas to Everyone:  11:35 AM
+
+presente
+
+From Andrew Flores Yebra to Everyone:  11:35 AM
+
+Presente
+
+From Fernanda Cardenas to Everyone:  11:37 AM
+
+Presente
+
+From Wenddy Ballona Martinez to Everyone:  11:37 AM
+
+si
+
+Presente
+
+From Wenddy Ballona Martinez to Everyone:  12:01 PM
+
+si
+
+From José María Garduño to Everyone:  12:02 PM
+
+Presente
+
+From David Dorantes to Everyone:  12:09 PM
+
+Presente
+
+From Melanie Mendieta Mondragón to Everyone:  01:29 PM
+
+Presente
+

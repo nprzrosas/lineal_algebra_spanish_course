@@ -1,0 +1,324 @@
+---
+title: "Ejercicios - Serie 1"
+author: "Dra. Norma C. Pérez Rosas"
+date: '`r format(Sys.time(), "%d/%m/%Y")`'
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+  html_document:
+    toc: yes
+    toc_depth: 2
+---
+
+# Instrucciones
+
+
+Elabore un notebook en  [Google colab](https://colab.research.google.com/notebooks/intro.ipynb?utm_source=scs-index) que resuelva los siguientes ejercicios.  
+
+Nombre su notebook como: apellidopaterno_materno_nombre_grupo.ipynb. Ejemplo: perez_rosas_norma_3MM1.ipynb
+
+Al inicio de su archivo coloque lo siguiente: 
+
+* Nombre completo 
+
+* Notebook 1 
+
+* Grupo
+
+* Número de Boleta 
+
+* Direccion de correo electronico institucional
+
+* Mencione las condiciones en las que realizó su notebook:
+
+  * "Yo trabajé esta tarea sola/solo usando sólo los materiales visto en clase"
+
+  * "Yo discutí esta tarea con nombre completo de la persona con la que discutió los ejercicios (si así lo hizo)"
+
+  * Sí corresponde el caso, reporte los sitios de internet de donde obtuvo información. 
+  
+
+Nota 1: el notebook me lo compartirá en las fechas cercanas al examen para su evaluación. 
+
+Nota 2: todos los códigos deberán estar ejecutandose correctamente para considerar el 20% de su evaluación 
+
+Nota 3: sí bien para la elaboración del notebook puede discutir los ejercicios con sus colegas, le recomiendo ampliamente lo razone de forma individual, ya que esto es su entrenamiento para el examen. 
+
+Nota 4: notebooks iguales quedarán cancelados. 
+
+# Ejercicio 1 
+
+Grafique con Python los siguientes vectores 
+
+
+a) $[2,5]$
+
+
+```{python}
+# Código en Python para graficar un vector en 2D
+import matplotlib.pyplot as plt
+u = [2, 5]
+origen = [0, 0]
+plt.quiver(origen[0], origen[1],  u[0], u[1], color = 'r', angles='xy', scale_units='xy', scale=1)
+plt.xlim([0, 3])
+plt.ylim([0, 6])
+plt.show()
+```
+
+
+b) $[-3,8]$
+
+```{python}
+# Código en Python para graficar un vector en 2D
+import matplotlib.pyplot as plt
+w = [-3, 8]
+origen = [0, 0]
+plt.quiver(origen[0], origen[1],  w[0], w[1], color = 'b', angles='xy', scale_units='xy', scale=1)
+plt.xlim([-4, 0])
+plt.ylim([0, 9])
+plt.show()
+```
+
+c) $[-6,-3]$
+
+```{python}
+# Código en Python para graficar un vector en 2D
+import matplotlib.pyplot as plt
+v = [-6, -3]
+origen = [0, 0]
+plt.quiver(origen[0], origen[1],  v[0], v[1], color = 'g', angles='xy', scale_units='xy', scale=1)
+plt.xlim([-7, 0])
+plt.ylim([-3.5, 0])
+plt.show()
+```
+
+d) $[5,-4]$
+
+```{python}
+# Código en Python para graficar un vector en 2D
+import matplotlib.pyplot as plt
+p = [5, -4]
+origen = [0, 0]
+plt.quiver(origen[0], origen[1],  p[0], p[1], color = 'm', angles='xy', scale_units='xy', scale=1)
+plt.xlim([0, 5])
+plt.ylim([-4, 0])
+plt.show()
+```
+
+e) Progonga un vector en el cuarto cuadrante y grafíquelo.
+
+```{python}
+# Código en Python para graficar un vector en 2D
+import matplotlib.pyplot as plt
+q = [3, -2]
+origen = [0, 0]
+plt.quiver(origen[0], origen[1],  q[0], q[1], color = 'y', angles='xy', scale_units='xy', scale=1)
+plt.xlim([0, 3])
+plt.ylim([-2, 0])
+plt.show()
+```
+
+f) Proponga un vector en el tercer cuadrante y grafíquelo. 
+
+```{python}
+import matplotlib.pyplot as plt
+r = [-3, -2]
+origen = [0, 0]
+plt.quiver(origen[0], origen[1],  r[0], r[1], color = 'r', angles='xy', scale_units='xy', scale=1)
+plt.xlim([-3.5, 0])
+plt.ylim([-2.5, 0])
+plt.show()
+```
+
+
+# Ejercicio 2.
+
+Encuentre la magnitud y el ángulo relativo respecto al eje $x$ de los siguientes vectores.
+
+a) $[2,5]$
+
+$\left\Vert  \mathbf{v} \right\Vert=\sqrt{(2)^2+(5)^2}=\sqrt{29}=5.385164807134504 \ unidades$
+
+$\tan^{-1}(y/x)=\tan^{-1}(5/2)=0.6435011087932844 \ radianes$
+
+$grados=radianes*(\frac{180}{\pi})=0.6435011087932844*(\frac{180}{\pi})=36.86989764584402°$
+
+
+```{python}
+import numpy as np
+m = np.array([2,5])
+print(np.linalg.norm(m))
+```
+
+
+```{python}
+#codigo en Python para calcular el angulo 
+#para usar las funciones trigonómetricas importamos la librería math
+#por default Python calcula el ángulo en radianes
+import math
+radianes = math.atan((3/5)/(4/5))
+radianes
+#con math.degrees  pasamos de radianes a angulo 
+angulo = math.degrees(radianes)
+angulo 
+```
+
+b) $[-3,8]$
+
+$\left\Vert  \mathbf{v} \right\Vert=\sqrt{(-3)^2+(8)^2}=\sqrt{29}=8.54400374531753 \ unidades$
+
+$\pi+\tan^{-1}(y/x)=\pi + \tan^{-1}(8/3)=0.6435011087932844 \ radianes$
+
+$grados=radianes*(\frac{180}{\pi})=0.6435011087932844*(\frac{180}{\pi})=36.86989764584402°$
+
+
+```{python}
+import numpy as np
+m = np.array([-3,8])
+print(np.linalg.norm(m))
+```
+
+
+```{python}
+#codigo en Python para calcular el angulo 
+#para usar las funciones trigonómetricas importamos la librería math
+#por default Python calcula el ángulo en radianes
+import math
+radianes = math.atan((3/5)/(4/5))
+radianes
+#con math.degrees  pasamos de radianes a angulo 
+angulo = math.degrees(radianes)
+angulo 
+```
+
+c) $[-6,-3]$
+
+d) $[5,-4]$
+
+e) Calcule la magnitud del vector del inciso e) del ejercicio 1.
+
+f) Calcule la magnitud del vector del inciso f) del ejercicio 1.
+
+
+$\mathbf{u}-\mathbf{v} = [u_1-v_1,u_2-v_2]$
+
+$\left\Vert  \mathbf{u}-\mathbf{v} \right\Vert=\sqrt{(u_1-v_1)^2+(u_2-v_2)^2}$
+
+$\left\Vert  \mathbf{u}-\mathbf{v} \right\Vert=\sqrt{(1-4)^2+(2-3)^2}=\sqrt{(-3)^2-(-1)^2}=\sqrt{9+1}=\sqrt{10}$
+
+
+
+# Ejercicio 3.
+
+Asuma que $\mathbf{x}=[5,0,1,2]$, $\mathbf{u}=[2,-1,3,4]$ y $\mathbf{w}=[-2,-2,5,6]$. Evalue las siguientes operaciones vectoriales que se muestran a continuación. Nota: En la línea de texto describa detalladamente su razonamiento. 
+
+a) $2\mathbf{x}+7\mathbf{u}$
+
+b) $3\mathbf{x}-5\mathbf{u}$
+
+c) $4(\mathbf{u}+5(\mathbf{w}-2\mathbf{u}))$
+
+d) $-\mathbf{w}+\mathbf{x}$
+
+
+# Ejercico 4. 
+
+Calcula la magnitud de los siguientes vectores. Muestre el gráfico de cada vector. 
+
+$\mathbf{v_1}=[3,4]$
+
+$\mathbf{v_2}=[1,1]$
+
+$\mathbf{v_3}=[1,2,3]$
+
+
+# Ejercicio 5.
+
+Calcule la suma $(\mathbf{u}+\mathbf{v})$ y la diferencia de los siguientes pares de vectores:
+
+a) $\mathbf{u}=[3,4,5]$, $\mathbf{v}=[-4,2,4]$
+
+b) $\mathbf{u}=[0,2,3]$, $\mathbf{v}=[-1,0,2]$
+
+# Ejercicio 6.
+
+Use los vectores del ejercicio 5 para calcular $-\mathbf{u}$, $3\mathbf{u}$,  $2\mathbf{u}-\mathbf{v}$, $4\mathbf{u}-2\mathbf{v}$
+
+
+# Ejercicio 7.
+
+Calcule los cosenos directores de $\mathbf{v}=[4,-1,6]$. Muestre su gráfica. 
+
+# Ejercicio 8. 
+
+Calculo de un vector en $R^3$ dados su magnitud y sus cosenos directores. Encuentre el vector $\mathbf{v}$ de magnitud $7$ cuyos cosenos directores son $1/ \sqrt{6}$, $1/ \sqrt{3}$ y $1/ \sqrt{2}$.
+
+# Ejercicio 9.
+
+Proponga un vecto en $R^{10}$ y expréselo en términos de sus bases canónicas.  
+
+# Ejercio 10. 
+
+$\mathbf{j}-(4\mathbf{k}-3\mathbf{i})$ es: ____ . Justifique su respuesta.
+
+a) [1, -4, -3]
+
+b) [1, -4, 3]
+
+c) [-3, 1, -4]
+
+d) [3, 1, -4]
+
+
+
+Complete su notebook con los siguientes ejercicios
+
+**Ejercicio 1.** Encuentre el producto punto de los siguientes vectores (explique sus resultados):
+
+a) $$
+\left[
+\begin{array}{c}
+1 \\
+2 \\
+\end{array}
+\right], \left[
+\begin{array}{c}
+4 \\
+7 \\
+\end{array}
+\right]
+$$
+
+
+
+b) $$
+\left[
+\begin{array}{c}
+8 \\
+4 \\
+\end{array}
+\right], \left[
+\begin{array}{c}
+1 \\
+-2 \\
+\end{array}
+\right]
+$$
+
+**Ejercicio 2.** Calcule el producto punto de $\mathbf{i}$ y $\mathbf{j}$. Explique sus resultados
+
+**Ejercicio 3.**  Normalice el vector $\mathbf{v}=[2,-1,3]$
+
+**Ejercicio 4.**  ¿Cuál de los siguientes vectores son ortogonales?
+
+$\mathbf{v}_{1}=[-2,-2,1]$, $\mathbf{v}_{2}=[4,0,4]$, $\mathbf{v}_{3}=[-1,-1,1]$ 
+
+
+**Ejercicio 5.** Asuma que $\mathbf{u}$, $\mathbf{v}$ y $\mathbf{w}$ son vectores con al menos dos elementos, explique ¿por qué los siguientes cálculos no tienen sentido?
+
+a) $\mathbf{v}^{T}\mathbf{u} + \mathbf{w}$
+
+b) $\mathbf{v}+\mathbf{u}^{T}$
+
+

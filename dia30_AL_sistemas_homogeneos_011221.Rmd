@@ -1,0 +1,584 @@
+---
+title: "Día 30 - Sistemas homogéneos"
+author: "Dra. Norma C. Pérez Rosas"
+date: '`r format(Sys.time(), "%d/%m/%Y")`'
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+  html_document:
+    toc: yes
+    toc_depth: 2
+---
+
+# Sistemas de ecuaciones lineales 
+
+## Notación matricial 
+
+La información esencial de un sistema lineal puede ser registrada en forma compacta en un arreglo rectangular llamado **matriz**. Por ejemplo, considere el siguiente sistema 
+
+
+\begin{alignat*}{5}
+   x_1 & {}-{} &  2x_2  &  {}+{} &  x_3  & {}={} & 0 \label{eq:eq3}\tag{C}\\
+       & {} {} &  2x_2  &  {}-{} &  8x_3  & {}={} & 8\\   
+       5x_1 & {} {} &        &  {}-{} &  5x_3  & {}={} & 10\\
+\end{alignat*}
+
+
+con los coeficientes de cada variable alineados en columnas, la matriz:
+
+\begin{equation*}
+\begin{pmatrix}
+1 & -2 & 1  \\
+0 &  2 & -8  \\
+5 &  0 & -5 
+\end{pmatrix}
+\end{equation*}
+
+es llamada la **matriz de coeficientes** del sistema (C), y 
+
+\begin{equation*}
+\begin{pmatrix}
+1 & -2 & 1  & 0 \label{eq:eq4}\tag{D}\\
+0 &  2 & -8 & 8 \\
+5 &  0 & -5 & 10
+\end{pmatrix}
+\end{equation*}
+
+es llamada la **matriz aumentada** del sistema. La segunda fila aquí contiene un cero porque la segunda ecuación puede ser escrita como $0x_1+2x_2-8x_3=8$. Una matriz aumentada de un sistema consiste en los coeficientes de la matriz con una columna agregada conteniendo las constantes del lado derecho de las ecuaciones. 
+
+
+El **tamaño** de la matriz nos dice cuántas filas y columnas tiene. La matriz aumentada (D) tiene $3$ filas y $4$ columnas y es llamada una matriz $3\times 4$ (se lee $3$ por $4$). Si $m$  y $n$ son enteros positivos, una **matriz** $m \times n$ es un arreglo rectangular de número con $m$ filas y $n$ columnas. El número de filas siempre viene primero. 
+
+
+# Eliminación Gaussiana
+
+El problema 
+
+
+\begin{alignat*}{3}
+   2x &  {}+{} & y  & {}={} & 1  \\
+   x &  {}-{} & y  & {}={} & 2  \\
+\end{alignat*}
+
+involucra encontrar los valores de las incógnitas $x$ y $y$ que satisfagan ambas ecuaciones simultáneamente. 
+
+En este caso las ecuaciones son muy simples y rápidamente se puede resolver para $x$ y $y$. Las soluciones para este sistema son  $x=1$ y $y=-1$.
+
+Para problemas más complicados involucrando más ecuaciones, hay un método sistemático para resolver sistemas de ecuaciones lineales, este el método de **eliminación Gaussiana**.
+
+La idea detrás de la eliminación Gaussiana es tranformar el problema en un problema más simple y equivalente al problema inicial al eliminar sucesivamente las variables desconocidas. El procedimiento tiene dos fases: **la eliminación hacia adelante** seguido de la **eliminación hacia atrás**. La **eliminación hacia adelante** inicial al tratar de eliminar una de las variables de la variable de la primera ecuación ya sea por sumar o restar la ecuación a partir de otras. Por ejemplo, del sistema anterior, se puede multiplicar la última ecuación por dos y sustraerla de la primera ecuación de esta última, guiando al siguiente sistema equivalente:
+
+\begin{alignat*}{3}
+   2x &  {}+{} & y  & {}={} & 1  \\
+    &  {}-{} & 3y  & {}={} & 3  \\
+\end{alignat*}
+
+Alternativamente, se pueden sumar ambas ecuaciones y reemplazar la segunda ecuación por $3x=3$. La eliminación hacia adelante se continúa hasta que el sistema adquiere una forma triangular en ese punto el método cambia hacia la **eliminación hacia atrás**. Entonces, cuando el sistema está en la forma triangular, se puede continuar con la sustitución hacia atrás. 
+
+La sustitución hacia atrás se usa para resolver una ecuación a la vez desde la base hacia arriba. Es claro que $y=-1$, se puede sustituir $y$ en la primera ecuación para producir $2x-1=1$ a partir de la cual se puede decir que $x=1$.
+
+El siguiente conjunto de ecuaciones muestra un ejemplo más complicado involucrando múltiples eliminaciones y sustituciones hacia atrás. 
+
+\begin{alignat*}{4}
+   x &  {}+{} & y &  {}+{} & z  & {}={} & 1\\
+   x &  {}-{} & 2y &  {}+{} & 2z  & {}={} & 2\\
+   x &  {}+{} & 2y &  {}-{} & z  & {}={} & 4\\
+\end{alignat*}
+
+La eliminación gaussiana comienza como sigue:
+
+1. Reste la primera ecuación de la tercera:
+
+
+\begin{alignat*}{4}
+   x &  {}+{} & 2y &  {}-{} & z  & {}={} & 4\\
+   -(x &  {}+{} & y &  {}+{} & z  & {}={} & 1)\\[-11pt]
+      \cline{1-8}
+     &  {} {} &  y &  {}-{} & 2z  & {}={} & 3\\
+\end{alignat*}
+
+Sustituimos la tercera ecuación $x+2y-z=4$ por $y-2z=3$ y construimos un sistema de ecuaciones equivalente:
+
+\begin{alignat*}{4}
+   x &  {}+{} & y &  {}+{} & z  & {}={} & 1\\
+   x &  {}-{} & 2y &  {}+{} & 2z  & {}={} & 2\\
+     &  {} {} &  y &  {}-{} & 2z  & {}={} & 3\\
+\end{alignat*}
+
+2. Extraiga la primera ecuación de la segunda:
+
+
+\begin{alignat*}{4}
+   x &  {}-{} & 2y &  {}+{} & 2z  & {}={} & 2\\
+   -(x &  {}+{} & y &  {}+{} & z  & {}={} & 1)\\[-11pt]
+      \cline{1-8}
+     &  {}-{} &  3y &  {}-{} & z  & {}={} & 1\\
+\end{alignat*}
+
+Sustituimos $x-2y+2z=2$ por $-3y-z=1$ y generamos un sistema de ecuaciones lineales equivalente:
+
+\begin{alignat*}{4}
+   x &  {}+{} & y &  {}+{} & z  & {}={} & 1\\
+    &  {}-{} & 3y &  {}+{} & z  & {}={} & 1\\
+     &  {} {} &  y &  {}-{} & 2z  & {}={} & 3\\
+\end{alignat*}
+
+
+3. Multiplica la tercera ecuación por tres:
+
+
+\begin{alignat*}{4}
+     3( &  {} {} &  y &  {}-{} & 2z  & {}={} & 3)\\
+\end{alignat*}
+
+Y obtenemos $3y-6z=9$, esta expresión la sustituimos en la tercera ecuación del sistema de ecuaciones lineales para generar un sistema de ecuaciones lineales equivalente:
+
+\begin{alignat*}{4}
+   x &  {}+{} & y &  {}+{} & z  & {}={} & 1\\
+    &  {}-{} & 3y &  {}+{} & z  & {}={} & 1\\
+     &  {} {} &  3y &  {}-{} & 6z  & {}={} & 9\\
+\end{alignat*}
+
+
+4. Agrega la segunda ecuación a la tercera:
+
+\begin{alignat*}{4}
+   &  {}-{} & 3y &  {}+{} & z  & {}={} & 1\\
+   +( &  {} {} &  3y &  {}-{} & 6z  & {}={} & 9)\\[-11pt]
+      \cline{1-8}
+     &  {} {} &   &  {}-{} & 5z  & {}={} & 10\\
+\end{alignat*}
+
+Sustituimos $-5z=10$ en la tercera ecuación del sistema de ecuaciones lineales y generamos un sistema de ecuaciones lineales equivalente: 
+
+\begin{alignat*}{4}
+   x &  {}+{} & y &  {}+{} & z  & {}={} & 1\\
+    &  {}-{} & 3y &  {}+{} & z  & {}={} & 1\\
+     &  {} {} &   &  {}-{} & 5z  & {}={} & 10\\
+\end{alignat*}
+
+El sistema está ahora en la forma triangular, esto es la última fila tiene una sola variable desconocida, la siguiente fila tiene dos variables desconocidas, y la fila de hasta arriba tiene la tres variables desconocidas. Entonces, una vez que se alcanza este patrón, se puede encontrar una solución. La sustitución hacia atrás se puede usar ahora para resolver primero la última ecuación. Este resultado se usa para resolver la segunda ecuación y así sucesivamente. Por ejemplo, de la última ecuación podemos ver que $z=-2$. Sustituyendo este resultado en la segunda ecuación tenemos que se puede encontrar una solución para $y$, es decir, $y=-1$. Finalmente $z$ y $y$ pueden ser sustituidos en la primera ecuación para producir una solución para $x=4$. La eliminación hacia adelante y hacia atrás puede ser calculada en un programa de computadora.
+
+```{python}
+# Resolver la matriz Ax=b 
+# La indexacion de la matriz es a partir de 1
+import numpy as np
+A = np.matrix([[1.0, 1.0, 1.0],[1.0, -2.0, 2.0],[1.0, 2.0, -1.0]])
+b = np.array([1.0, 2.0, 4.0])
+x = np.matrix(([[0.0],[0.0],[0.0]]))
+
+#Pida las dimensiones de la matriz cuadrada
+
+n = A.shape[0]
+# Eliminación hacia adelante
+
+for k in range (n-1):
+  for i in range (k+1, n):
+    theta = A[i,k]/A[k,k]
+    for j in range (k+1, n):
+      A[i,j] = A[i,j] - theta*A[k,j]
+    b[i] = b[i] - theta * b[k]
+    
+# Eliminación hacia atrás
+
+x[n-1] = b[n-1]/A[n-1,n-1]
+for i in range (n-1, -1, -1):
+  sum = 0 
+  for j in range (i+1, n):
+    sum = sum + A[i,j]*x[j]
+  x[i] = (b[i] - sum)/A[i,i]
+  
+  
+print ("Solución =", x)
+```
+
+# Operaciones elementales 
+
+Las operaciones simples usadas durante la elimación hacia adeltante se llaman **operaciones elementales**. Estas operaciones son especiales porque ellas simplifican las ecuaciones **paso por paso** sin perturbar las soluciones del sistema de ecuaciones lineales. 
+
+Las tres operaciones básicas incluyen:
+
+* Multiplicar ambos lados de una ecuación por una constante. 
+
+* Intercambiar dos ecuaciones 
+
+* Agregar un múltiplo de una ecuación a otra. 
+
+Las operaciones elementales son aplicadas repetidamente al sistema de ecuaciones hasta que se alcanza la forma triangular. Para hacerlo este análisis más simple, las ecuaciones lineales con frecuencia son expresadas en forma matricial. Por ejemplo el sistema lineal 
+
+
+
+\begin{alignat*}{4}
+   x &  {}+{} & y &  {}+{} & z  & {}={} & 1\\
+   x &  {}-{} & 2y &  {}+{} & 2z  & {}={} & 2\\
+   x &  {}+{} & 2y &  {}-{} & z  & {}={} & 4\\
+\end{alignat*}
+
+puede ser escrito en una forma más compacta como:
+
+$$
+ \left [
+\begin{array}{ccc}
+1 & 1 & 1 \\ 
+1 & -2 & 2 \\ 
+1 & 2 & -1 \\ 
+\end{array}
+\right ] \left [
+\begin{array}{c}
+x \\ 
+y \\ 
+z \\ 
+\end{array}
+\right ] = \left [
+\begin{array}{c}
+1 \\ 
+2 \\ 
+4 \\ 
+\end{array}
+\right ] 
+$$
+
+La formulación en forma matricial tiene una ventaja, observe que las variables está separadas de los coeficientes, y la eliminación puede enfocarse en manipular únicamente los coeficientes. En la forma matricial las operaciones elementales son las mismas, pero se expresan un poco diferente:
+
+* Multiplicar una fila por una constante. 
+
+* Intercambiar dos filas.
+
+* Agregar el múltiplo de una fila por otra.
+
+Algunas veces es escrito como:
+
+$E_i = \alpha E_i$
+
+$E_i \Leftrightarrow E_j$
+
+$E_i = E_i + \alpha E_j$
+
+Es importante que las operaciones elementales se apliquen a ambos lados de la ecuación simultáneamente. Por lo tanto, se agrega el vector al que está igualado el sistema a la forma matricial para producir la **matriz aumentada**:
+
+
+$$
+ \left [
+\begin{array}{cccc}
+1 & 1 & 1 & 1 \\ 
+1 & -2 & 2 & 2\\ 
+1 & 2 & -1 & 4\\ 
+\end{array}
+\right ]  - - - (A)
+$$
+
+
+El conjunto de operaciones elementales que usaron para resolver el sistema de ecuaciones lineales 
+
+
+\begin{alignat*}{4}
+   x &  {}+{} & y &  {}+{} & z  & {}={} & 1\\
+   x &  {}-{} & 2y &  {}+{} & 2z  & {}={} & 2\\
+   x &  {}+{} & 2y &  {}-{} & z  & {}={} & 4\\
+\end{alignat*}
+
+
+pueden ser codificadas en la siguiente lista:
+
+
+$r_2 = r_2 -r_1$
+
+$r_3 = r_3 - r_1$
+
+$r_3 = r_3 + \frac{1}{3}r_2$
+
+$r_3=3 r_3$
+
+Aplicando estas operaciones a la matriz (A) generamos la siguiente matriz reducida:
+
+
+$$
+ \left [
+\begin{array}{cccc}
+1 & 1 & 1 & 1 \\ 
+0 & -3 & 1 & 1\\ 
+0 & 0 & -5 & 10\\ 
+\end{array}
+\right ]  
+$$
+
+# Solución de sistemas de ecuaciones lineales
+
+* **Solución única:** existe un sólo conjunto de valores que satisfacen todas las ecuaciones del sistema de ecuaciones lineales simultáneamente.
+
+* **Infinito número de soluciones:** hay un infinito número de valores para las incógnitas que satisfacen las ecuaciones simultáneamente.
+
+* **No hay solución:** no hay un conjunto de valores que satisfagan todas las ecuaciones simultáneamente. 
+
+El tipo de soluciones que emergen de un sistema de ecuaciones lineales es determinado por la existencia de una fila de ceros en la eliminación hacia adelante o sí la matriz aumentada es cero o no. Sí no hay una fila de ceros, entonces la solución es única. Sí hay un cero en la posición aumentada, pero al menos un valor no cero en la fila principal entonces el sistema es incosistente. Finalmente, si hay una o más filas de ceros, entonces hay un número infinito de soluciones. 
+
+## Reglas para la matriz aumentada:
+
+* **Solución única:** no hay filas de ceros.
+
+
+$$
+ \left [
+\begin{array}{ccccc}
+1 & 1 & 1 & | & 1 \\ 
+0 & -3 & 1 & | & 1\\ 
+0 & 0 & -5 & | & 10\\ 
+\end{array}
+\right ]  
+$$
+
+* **Infinito número de soluciones**: hay una o más filas de ceros en la matriz aumentada. 
+
+$$
+ \left [
+\begin{array}{ccccc}
+1 & 1 & 1 & | & 1 \\ 
+0 & 0 & 0 & | & 0\\ 
+0 & 0 & -5 & | & 10\\ 
+\end{array}
+\right ]  
+$$
+
+* **No hay solución (incosistente):** hay una fila de ceros en la matriz, pero una fila de no ceros en la correspondiente matriz aumentada.
+
+$$
+ \left [
+\begin{array}{ccc}
+1 & 1 & 1  \\ 
+0 & 0 & 0 \\ 
+1 & 3 & -5\\ 
+\end{array}
+\right ]  
+$$
+
+
+$$
+ \left [
+\begin{array}{ccccc}
+1 & 1 & 1 & | & 1 \\ 
+0 & 0 & 0 & | & 1\\ 
+1 & 3 & -5 & | & 10\\ 
+\end{array}
+\right ]  
+$$
+
+
+## Matriz escalonada y matriz escalonada reducida por renglones
+
+El proceso de eliminación hacia adelante produce una matriz con una estructura particular que parece una escalera. Esta estructura es bien definida y es llamada **forma escalonada**. La palabra escalonada viene del fránces **echelle** que significa escalera. Una matriz en forma escalonada tiene las siguientes características:
+
+* La fila de ceros está localizada en la base de la matriz.
+
+
+$$
+\left[
+\begin{array}{ccccc}
+0 & 1 & 2 & 0 & 3  \\
+0 & 0 & 0 & 1 & 2  \\
+0 & 0 & 0 & 0 & 0  \\
+\end{array}
+\right]
+$$
+
+
+* La primera entrada (es decir, el primer valor no cero) es en el lado derecho de cada fila está más a la derecha que la entrada previa. 
+
+$$
+\left[
+\begin{array}{ccc}
+1 & 2 & -5  \\
+0 & 4 & 3  \\
+0 & 0 & 1  \\
+\end{array}
+\right]
+$$
+
+
+* Todas las entradas de la columna debajo de la entrada principal son cero. 
+
+$$
+\left[
+\begin{array}{ccccc}
+0 & 1 & 2 & 0 & 3  \\
+0 & 0 & 0 & 1 & 2  \\
+0 & 0 & 0 & 0 & 0  \\
+\end{array}
+\right]
+$$
+
+
+Algunas veces la entrada lider (la que es diferente de cero) de cada fila es normalizada a uno. Esto significa que cada entrada a lo largo de una fila en particular es dividida por la entrada lider. 
+
+Cualquier matriz puede ser acomodada en la forma de una matriz escalonada con una apropiada selección de las operaciones elementales. Sin embargo, la elección particular de operaciones elementales (múltiplicar una fila por una constante, intercambiar cualesquiera dos filas, agregar un múltiplo de una fila a otra) y su secuencia de aplicación puede conducir a diferentes matrices, es decir, **la matriz en forma escalonada no es única**.
+
+
+Una matriz en forma escalonada tiene ceros debajo de la diagonal principal y no ceros por arriba. Es posible continuar aplicando operaciones elementales para eliminar las entradas que no son cero debajo de la diagonal principal. 
+
+![Matriz en forma escalonada](escalon.PNG)
+
+Una matriz que ha sido reducida completamente de forma tal que todos los elementos por arriba y por debajo de la diagonal principal son cero es llamada **matriz en la forma escalonada reducida por renglones**. A diferencia de la fila escalonada, una matriz escalonada reducida por renglones es **única**. La reducción a la forma escalonada reducida por renglones es alcanzada a través del **método de la eliminación por Gauss-Jordan**.
+
+Ejemplos de matrices escalonadas reducidas por renglones:
+
+$$
+\left[
+\begin{array}{cccc}
+1 & 0 & 0 & -6  \\
+0 & 1 & 0 & 1   \\
+0 & 0 & 1 & 4  \\
+\end{array}
+\right]
+$$
+
+
+$$
+\left[
+\begin{array}{cccc}
+1 & 0 & 0   \\
+0 & 1 & 0    \\
+0 & 0 & 1    \\
+\end{array}
+\right]
+$$
+
+$$
+\left[
+\begin{array}{cccc}
+1 & 2 & 0   \\
+0 & 0 & 1    \\
+0 & 0 & 0    \\
+\end{array}
+\right]
+$$
+
+
+
+
+# Ecuaciones homogéneas 
+
+En general un sistema de ecuaciones lineales de $m$ por $n$ puede ser escrito de la forma:
+
+
+Un sistema de ecuaciones lineales de $m$ por $n$ puede ser escrito en la forma 
+
+\begin{alignat*}{5}
+   a_{11}x_1 & {}+{} &   a_{12}x_2 & {}+{} & \dots &  {}+{} & a_{1n}x_n & {}={} & b_1  \\ 
+   a_{21}x_1 & {}+{} &   a_{22}x_2 & {}+{} & \dots &  {}+{} & a_{2n}x_n & {}={} & b_2  \\
+             & {}{} &              & {}+{} & \dots &  {}{} &            & {}={} &       \\
+  a_{m1}x_1 & {}+{} &   a_{m2}x_2 & {}+{} & \dots &  {}+{} & a_{mn}x_n & {}={} & b_m  \\
+\end{alignat*}
+
+
+O puede ser representada en una versión simplificada usando matrices y vectores, sí la matriz $\mathbf{A}$ y los dos vectores $\mathbf{x}$ y $\mathbf{b}$ son definidos como:
+
+$$
+\mathbf{A} = \left [
+\begin{array}{cccc}
+a_{11} & a_{12} & \dots & a_{1n} \\ 
+a_{21} & a_{22} & \dots & a_{2n} \\ 
+\vdots & \vdots & \dots & \vdots \\ 
+a_{m1} & a_{m2} & \dots & a_{mn} \\ 
+\end{array}
+\right ] \mathbf{x} = \left [
+\begin{array}{c}
+x_{1} \\ 
+x_{2} \\ 
+\vdots \\ 
+x_{n}  \\ 
+\end{array}
+\right ] \mathbf{b} = \left [
+\begin{array}{c}
+b_{1} \\ 
+b_{2} \\ 
+\vdots \\ 
+b_{m}  \\ 
+\end{array}
+\right ] 
+$$
+
+Entonces el sistema lineal puede ser escrito de forma compacta como:
+
+$\mathbf{A}\mathbf{x}=\mathbf{b}$
+
+¿Qué si el vector $\mathbf{b}$ es cero?
+
+$\mathbf{A}\mathbf{x}=\mathbf{0}$
+
+
+Tales sistemas son conocidos como **sistemas homogéneos**. Una pregunta importante es sí un sistema homogéneo tiene soluciones, es decir, ¿hay valores de $\mathbf{x}$ que satisfacen tales sistemas?
+
+La primera cosa que se debe notar es que un sistema homogéneo nunca es inconsistente, es decir, siempre hay al menos una solución en la forma de una **solución trivial** cuando el vector $\mathbf{x}$ es cero. 
+
+
+$x_1=x_2=\dots x_n = 0$
+
+
+Sí un sistema homogéneo es consitente, entonces tendrá o una solución (la solución trivial) o un número infinito de soluciones. Por un número infinito de soluciones nos referimos que una o más de las variables (básicas) pueden ser expresadas en términos de una o más variables (variables libres).
+
+Una forma fácil de determinar si un sistema homogéneo tiene un  número infinito de soluciones es contar el número de variables (incógnitas) y el número de ecuaciones. Sí hay más variables que ecuaciones, entonces el sistema tiene un infinito número de soluciones. Sin embargo, sí incluso el número incógnitas es el mismo que número de ecuaciones, todavía es posible que el sistema tenga un número infinito de soluciones  sí una o más ecuaciones es reduntante.  La **redundancia** en un conjunto de ecuaciones lineales puede ser fácilmente determinada al mirar las filas de ceros en la matriz después de la **reducción por filas**. 
+
+
+
+# Asistencia 
+
+From David Dorantes to Everyone 11:34 AM
+
+presente
+
+From Pérez David to Everyone 11:35 AM
+
+Presenté
+
+From Gaeta to Everyone 11:35 AM
+
+Presente
+
+From Irving Barreto to Everyone 11:35 AM
+
+Presente
+
+From Itzel Aurora Bravo Santos to Everyone 11:35 AM
+
+Presente
+
+From Emmanuel GR to Everyone 11:35 AM
+
+Presente
+
+From Fernanda Pilón to Everyone 11:35 AM
+
+Presente :)
+
+From Víctor Jerónimo to Everyone 11:36 AM
+
+Presente
+
+From Frida Cuevas to Everyone 11:36 AM
+
+Presente
+
+From Fernanda Cardenas to Everyone 11:37 AM
+
+Presente
+
+From Wenddy Ballona to Everyone 11:37 AM
+
+Presente
+
+From Melanie Mendieta Mondragón to Everyone 11:38 AM
+
+Presente
+
+From José María Garduño to Everyone 11:38 AM
+
+Presente
+
+From Karla Gómez to Everyone 11:38 AM
+
+Presente
+
+From Diego Nicolas to Everyone 11:38 AM
+
+presente
+

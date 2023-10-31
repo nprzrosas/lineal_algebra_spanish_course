@@ -1,0 +1,368 @@
+---
+title: "Día 32 - Espacios vectoriales y subespacios"
+author: "Dra. Norma C. Pérez Rosas"
+date: '`r format(Sys.time(), "%d/%m/%Y")`'
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+  html_document:
+    toc: yes
+    toc_depth: 2
+---
+
+
+# Espacios vectoriales 
+
+Aunque el desarrollo de las matemáticas obtiene mucha inspiración del mundo físico, sus estructuras en la forma más pura son conceptos abstractos. Mientras que el grado de abstracción puede ser intimidante para personas que no son matemáticas, la abstracción es una técnica poderosa que le permite a uno generalizar y con frecuencia ganar conocimiento en áreas complejas de las matemáticas. Un buen ejemplo de un concepto matemático abstracto es el **espacio vectorial**.
+
+Informalmente hablando, el espacio vectorial es simplemente un conjunto de objetos que obedecen ciertas reglas. Además, las operaciones en un espacio vectorial son cerradas, es decir, los objetos generados por las reglas en común pertenecen al mismo conjunto. Los participantes básicos en un espacio vectorial son vectores y escalares (números reales, complejos y otros objetos matemáticos). Las operaciones entre estos participantes son simples e involucran la noción abstracta de suma entre vectores (denotado por $\mathbf{u}+\mathbf{v}$) y multiplicación de escalares entre vectores y escalares (denotados por $\alpha \mathbf{u}$). Las reglas que gobiernan los espacios vectoriales no especifican cómo se realiza la suma o la multiplicación, sólo se dan las propiedades más generales. Cuando los participantes son seleccionados, como un vector de números reales, entonces la adición y la multiplicación toman una forma concreta. 
+
+Para hacer las oraciones anteriores más completas, considere el conjunto de vectores Euclidianos $V$, descrito por:
+
+$V=\{[x,5x]\}$
+
+asumiremos que $x$ representa un número real. Ejemplos de vectores que pertenecen a este conjunto se encuentran: $[0,0]$, $[1,5]$, $[2,10]$, $[1/2,2.5]$, $[-1,-5]$ y así sucesivamente.  Todos estos vectores caen sobre una línea en el plano $xy$.
+
+
+```{r}
+x <- c(0, 1, 2, 0.5, -1)
+y <- c(0, 5, 10, 2.5, -5)
+  
+# Plotting the graph
+plot(x, y, cex = 1, pch = 3, xlab ="x", ylab ="y", col ="black")
+```
+
+Si seleccionamos cualesquiera dos vectores de $V$, por ejemplo, $\mathbf{u}=[1,5]$ y $\mathbf{v}=[-2,-10]$. Una de las reglas de los espacios vectoriales es la adición, entonces hagamos la suma $\mathbf{u}+\mathbf{v}$. Debido a que los vectores del ejercicio contienen números reales, realizar la suma es relativamente simple:
+
+$\mathbf{u}+\mathbf{v}=[1,5]+[-2,-10]=[-1,-5]$
+
+Dado este resultado es evidente que el nuevo vector también es parte de $V$. La suma de cualesquiera dos vectores a partir de $V$ siempre debe estar en $V$. Esto es, la adición de tales vectores es **cerrada**.
+
+**Conjunto cerrado bajo (o respecto) a la suma (vectorial):** si $\mathbf{u}$ y $\mathbf{v}$ son dos vectores cualesquiera en un espaci vectorial $V$, entonces la suma  $\mathbf{u}+\mathbf{v}$ también pertenece a $V$.
+
+Algunas operaciones simples no son cerradas, es decir, la suma de dos números enteros resulta en un número entero, por consecuencia la operación es cerrada. Sin embargo, dividir un número entero por otro no genera un entero, pero genera un número real, por consecuencia la operación no es cerrada. 
+
+Ahora considere la multiplicación de un escalar, por ejemplo:
+
+$3\mathbf{u}=3[1,5]=[3,15]$
+
+Podemos ver que el nuevo está también en $V$. Debe ser claro a partir de esto que la multiplicación de un escalar por cualquier vector en $V$ produce también un vector en $V$. Se concluye entonces que la multiplicación por un escalar también es **cerrada**.
+
+
+
+
+Si seleccionamos $0$ como el escalar, es decir, $0\mathbf{u}=\mathbf{0}$ podemos ver que el vector de ceros también es parte de $V$.
+
+A partir de estas descripciones uno puede concluir que cualquier conjunto de vectores obedecen las reglas de cerrado bajo la suma o la multiplicación, sin embargo, esto no siempre es cierto como se ilustra a continuación con el conjunto de vectores $U$:
+
+$U = \{[x, 4x+2] \}$
+
+no obedece ninguna de las reglas. 
+
+Para resolver esto, demos valores a $x$:
+
+Si $x=-1$, $[-1, 4(-1)+2]=[-1,-2]$
+
+Si $x=0$, $[0, 4(0)+2]=[0,2]$
+
+Si $x=1$, $[1, 4(1)+2]=[1,6]$
+
+Si $x=2$, $[2, 4(2)+2]=[2,10]$
+
+Si $x=3$, $[3, 4(3)+2]=[3,14]$
+
+Si $x=4$, $[4, 4(4)+2]=[2,18]$
+
+
+Por ejemplo, no hay un vector de ceros en $U$. Es decir, si fijamos $x=0$, obtenemos el vector $[0,2]$ que claramente no es un vector de ceros. De forma similar, la suma y la multiplicación por un escalar no son cerrados. En el caso de la multiplicación por un escalar, si multiplicamos el vector $[1,6]$ que es parte de $U$ por $2$, obtenemos $[2,12]$, que no es parte del conjunto $U$.
+
+En resumen, podemos definir un espacio vectorial en términos de adición de vectores y multiplicación por un escalar, pero con un conjunto adicional de propiedades relacionadas como la cerradura.
+
+Para demostrar estas propiedades retomaremos el espacio vectorial $U=\{[x,5x]\}$
+
+Demos algunos valores a $x$ para conocer su espacio vectorial
+
+Si $x=-6$, $[-6, 5(-6)]=[-6,-30]$
+
+Si $x=-5$, $[-5, 5(-5)]=[-5,-25]$
+
+Si $x=-4$, $[-4, 5(-4)]=[-4,-20]$
+
+Si $x=-3$, $[-3, 5(-3)]=[-3,-15]$
+
+Si $x=-2$, $[-2, 5(-2)]=[-2,-10]$
+
+Si $x=-1$, $[-1, 5(-1)]=[-1,-5]$
+
+Si $x=0$, $[0, 5(0)]=[0,0]$
+
+Si $x=1$, $[1, 5(1)]=[1,5]$
+
+Si $x=2$, $[2, 5(2)]=[2,10]$
+
+Si $x=3$, $[3, 5(3)]=[3,15]$
+
+Si $x=4$, $[4, 5(4)]=[4,20]$
+
+En total hay diez propiedades que definen un espacio vectorial. Estas propiedades se dividen en dos grupos: reglas de adición y reglas de multiplicación. Cabe mencionar que diversos objetos matemáticos cumplen con estas propiedades.
+
+**Definición:** un espacio vectorial es un conjunto no vacío de objetos $V$ llamados vectores, en el cual hay dos operaciones definidas, suma y multiplicación por escalares. Estas operaciones están sujetas a las siguientes propiedades:
+
+**Propiedades del espacio vectorial**
+
+**Suma**
+
+1. $\mathbf{u+v}$ están en $V$ (cerrado bajo la suma). Ejemplo:
+
+$\mathbf{u}+\mathbf{v}=[1,5]+[-2,-10]=[-1,-5]$
+
+De lo anterior podemos ver que $[-1,-5]$ pertenece a $U$.
+
+2. $\mathbf{u+(v+w)=(u+v)+w}$ (asociatividad)
+
+$\mathbf{u}+(\mathbf{v}+\mathbf{w})=[1,5]+([-2,-10]+[2,10])=[1,5]+[0,0]=[1,5]$
+
+$(\mathbf{u}+\mathbf{v})+\mathbf{w}=([1,5]+[-2,-10])+[2,10]=[-1,-5]+[2,10]=[1,5]$
+
+3. $\mathbf{u+v=v+u}$ (conmutatividad)
+
+$\mathbf{u+v}=[1,5]+[-2,-10]=[-1,-5]$
+
+$\mathbf{v+u}=[-2,-10]+[1,5]=[-1,-5]$
+
+4. Hay un vector $\mathbf{0}$ de tal forma que $\mathbf{v+0=v}$ para cualquier $\mathbf{v}$ en $V$.
+
+$\mathbf{u+0}=[1,5]+[0,0]=[1,5]$
+
+
+5. Para cada $\mathbf{v}$ en $V$, hay un vector $\mathbf{-v}$ en $V$ de tal forma que $\mathbf{v+(-v)=0}$
+
+$\mathbf{v}=[2,10]$
+
+$\mathbf{-v}=[-2,-10]$
+
+$\mathbf{v+(-v)}=[2,10]+[-2,-10]=\mathbf{0}$
+
+**Multiplicación**
+
+6. $\alpha \mathbf{u}$ está en $V$ (cerrado bajo o respecto a la multiplicación por escalares).
+
+$\mathbf{u}=[2,10]$
+
+$\alpha=-1$
+
+$\alpha \mathbf{u}=-1[2,10]=[-2,-10]$
+
+7. $(\alpha+\beta)\mathbf{u}=\alpha\mathbf{u}+\beta\mathbf{u}$ (distributiva)
+
+$\alpha=-1$
+
+$\beta=3$
+
+$\mathbf{u}=[2,10]$
+
+$(\alpha+\beta)\mathbf{u}=(-1+3)[2,10]=2[2,10]=[4,20]$
+
+$\alpha\mathbf{u}+\beta\mathbf{u}=(-1)[2,10]+(3)[2,10]=[-2,-10]+[6,30]=[4,20]$
+
+8. $\alpha(\mathbf{u+v})=\alpha \mathbf{u}+ \alpha \mathbf{v}$ (distributiva)
+
+$\alpha=-1$
+
+$\mathbf{u}=[2,10]$
+
+$\mathbf{v}=[1,5]$
+
+$\alpha(\mathbf{u+v})=(-1)([2,10]+[1,5])=(-1)[3,15]=[-3,-15]$
+
+$\alpha \mathbf{u}=(-1)[2,10]=[-2,-10]$
+
+$\alpha \mathbf{v}=(-1)[1,5]=[-1,-5]$
+
+$\alpha \mathbf{u}+ \alpha \mathbf{v}=[-2,-10]+[-1,-5]=[-3,-15]$
+
+9. $\alpha(\beta \mathbf{u})=(\alpha \beta) \mathbf{u}$ (distributiva)
+
+$\alpha=-1$
+
+$\beta=3$
+
+$\mathbf{u}=[2,10]$
+
+$\alpha(\beta \mathbf{u})=(-1)(3[2,10])=(-1)[6,30]=[-6,-30]$
+
+$(\alpha \beta) \mathbf{u}=(-1*3)[2,10]=-3[2,10]=[-6,-30]$
+
+10. $1\mathbf{v}=\mathbf{v}$ para cada $\mathbf{v}$ en $V$.
+
+$(1)[-6,-30]=[-6,-30]$
+
+$(1)[-5,-25]=[-5,-25]$
+
+$(1)[-4,-20]=[-4,-20]$
+
+$(1)[-3,-15]=[-3,-15]$
+
+$(1)[-2,-10]=[-2,-10]$
+
+$(1)[-1,-5]=[-1,-5]$
+
+$(1)[0,0]=[0,0]$
+
+$(1)[1,5]=[1,5]$
+
+$(1)[2,10]=[2,10]$
+
+$(1)[3,15]=[3,15]$
+
+$(1)[4,20]=[4,20]$
+
+La adición de vectores y la multiplicación por un escalar están dado por las propiedades $1$ y $6$. La propiedad $4$ introduce el concepto de cero vector y la propiedad $5$ introduce la noción de operación negativa. El resto de las propiedades nos dicen que el espacio vectorial tiene un álgebra interesante. Auqnue estas propiedades tienen realizaciones concretas en el álgebra Euclidiana, estas se extienen a otros objetos matemáticos como matrices, polinomios y ecuaciones diferenciales lineales no homogéneas. Por lo tanto, la definición de un espacio vectorial abstracto extiende la noción de un vector más allá de su interpretación de que es un objeto (matemático) que tiene dirección y sentido. En la ingeniería y ciencias nos ocuparemos de los espacios vectoriables $n-dimensionales$.
+
+Como se introdujo al inicio del curso, la notación estándar de un espacio vectorial $n-dimensional$ es el símbolo $R^n$. Cada vector en $R^n$ es ordenado como una lista de $n$ números reales:
+
+
+\begin{equation*}
+\mathbf{v} = 
+\begin{pmatrix}
+v_1 \\
+v_2 \\
+\vdots \\
+v_n \\
+\end{pmatrix}
+\end{equation*}
+
+
+
+Si $n=3$ entonces el espacio es $\mathbf{R}^3$, es decir, el espacio de vectores está en un espacio tridimensional, mientras que $\mathbf{R}^2$, el espacio de vectores está en un espacio de dos dimensiones.
+
+
+\begin{equation*}
+\mathbf{R}^3: \ \mathbf{v} = 
+\begin{pmatrix}
+v_1 \\
+v_2\\
+v_3 \\
+\end{pmatrix}
+\end{equation*}
+
+
+
+
+
+
+
+\begin{equation*}
+\mathbf{R}^2: \ \mathbf{v} = 
+\begin{pmatrix}
+v_1 \\
+v_2\\
+\end{pmatrix}
+\end{equation*}
+
+
+Algunos espacios vectoriales incluyen un gran número de vectores. Por ejemplo: vectores en un plano de dos dimensiones no incluyen vectores fuera del plano. Esto introduce la noción de subespacio vectorial, que un espacio vectorial contenido dentro de otro. 
+
+# Subespacios
+
+De interés particular son los espacios vectoriales contenidos en otros espacios. Tales espacios son llamados **subespacios vectoriales**. Como otros espacios vectoriales, los subespacios deben satisfacer las propiedades básicas de un espacio vectorial. 
+
+Un ejemplo típico de un subespacio es un plano a través del origen en un espacio tridimensional ($\mathbf{R}^3$). Note que el plano debe cruzar el origen (cero) de forma tal que $\mathbf{0}$ es parte del espacio, asegurando que la cuarta propiedad $\mathbf{v+0=v}$ se satisface. Como todos los espacios vectoriales, las operaciones vectoriales en un subespacio deben de cumplirse, es decir, debe ser cerrado por la suma y por la multiplicación de un escalar. Por ejemplo, si sumamos dos vectores que están en el plano por el método del paralelogramo, obtenemos un vector que está en el **mismo plano**, es decir en el mismo subespacio. Además, un vector en el plano cuando se multiplica por un escalar también genera un nuevo vector en el plano. Esto significa que vectores que resultan de una suma o un multiplicación por un escalar están confinados al plano. Por lo tanto se satisfacen las propiedades $1$ y $6$. Por lo tanto, concluimos que el plano que a través del origen es un subespacio vectorial. 
+
+Usando argumentos similares es posible demostrar que una línea que corre a través del origen también es un subespacio de $\mathbf{R}^3$.
+
+Para mostrar otros planos que no son subespacios de $\mathbf{R}^3$, considere un plano $x_1,x_2$ en $\mathbf{R}^3$ posicionado en $x_3=1$, llamado espacio $W$. La primera cosa que se nota es que cero no es parte de $W$ porque aunque podemos fijar los dos primeros elementos en cero, el tercer elemento no puede ser fijado a cero. Segundo, $W$ no es consistente con las propiedades $1$ y $6$. La propiedad $1$ no se cumple porque la suma de dos vectores en el plano resulta en un vector localizado en un plano paralelo. El nuevo vector debe residir en el plano original para satisfacer la propiedad de cerrado bajo la suma. La propiedad $6$ tampoco se cumple porque el nuevo vector queda fuera del espacio $W$.
+
+**Propiedad 1:** $[a_1,a_2,1]+[b_1,b_2,1]=[a_1+b_1,a_2+b_2,2]$
+
+**Propiedad 2:** $\alpha[a_1,a_2,1]=[\alpha a_1,\alpha a_2,2\alpha]$
+
+En conclusión, $W$ no es un subespacio de $\mathbf{R}^3$. Podemos definir entonces a un subespacio $W$ de $V$ si las siguientes oraciones son verdaderas para cada $\mathbf{u}$ y $\mathbf{v}$ en $W$.
+
+1. El vector $\mathbf{0}$ es en $W$.
+
+2. El vector $\mathbf{u}+\mathbf{v}$ es en $W$.
+
+3. El vector $\alpha \mathbf{u}$ es en $W$.
+
+En la práctica uno sólo necesita demostrar las propiedades $1$ y $6$ se satisfacen para mostrar que un subconjunto de un espacio vectorial es un subespacio. Las propiedades $2$, $3$ y desde la $7$ hasta la $10$ son automáticamente verdaderas porque la suma y la multiplicación no cambian el nuevo espacio. Sólo las propiedades $4$  y $5$ pueden ser un poco problemáticas. Podemos satisfacer la propiedad $4$ al establecer que un subespacio debe contener al vector de ceros. Algunos textos definen al subespacio vectorial diferente al reemplazar la propiedad de ceros con una oración equivalente que el subespacio vectorial no debe estar vacío. Sí el subespacio contiene incluso un sólo vector, es decir, $\mathbf{v}$, entonces debe contener $\mathbf{0v}$ lo que es el vector de ceros. La propiedad $5$ que define la operación negativa es verdadera siempre y cuando la propiedad $\alpha \mathbf{u}$ con $\alpha=-1$ se satisface dentro de $w$.
+
+
+# Asistencia
+
+From David Dorantes to Everyone 11:36 AM
+
+Presente
+
+From Melanie Mendieta Mondragón to Everyone 11:36 AM
+
+Presente
+
+From Frida Cuevas to Everyone 11:36 AM
+
+Presente
+
+From Itzel Aurora Bravo Santos to Everyone 11:36 AM
+
+Presente
+
+From Gaeta to Everyone 11:36 AM
+
+presente
+
+From Diego Nicolas to Everyone 11:36 AM
+
+Presente
+
+From Maria Fernanda Garcia to Everyone 11:36 AM
+
+Presente
+
+From Víctor Jeronimo to Everyone 11:36 AM
+
+Presente
+
+From Emmanuel GR to Everyone 11:37 AM
+
+Presente
+
+From Irving Barreto to Everyone 11:37 AM
+
+Presente
+
+From Fernanda Pilón to Everyone 11:37 AM
+
+Presente :)
+
+From Andrew Flores Yebra to Everyone 11:37 AM
+
+Presente
+
+From Jorge Ambrosio to Everyone 11:37 AM
+
+Presente
+
+From Wenddy Ballona to Everyone 11:37 AM
+
+Present
+
+From Fernanda Cardenas to Everyone 11:38 AM
+
+Presente
+
+From Wenddy Ballona to Everyone 11:38 AM
+
+presente
+
+From Karla Gómez to Everyone 11:42 AM
+
+Presente
+
+
+
+
+
+
+
+

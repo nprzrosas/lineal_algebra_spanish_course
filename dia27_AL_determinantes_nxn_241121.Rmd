@@ -1,0 +1,432 @@
+---
+title: "Día 28 - Determinantes de nxn, matriz de cofactores y regla de Cramer"
+author: "Dra. Norma C. Pérez Rosas"
+date: '`r format(Sys.time(), "%d/%m/%Y")`'
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+  html_document:
+    toc: yes
+    toc_depth: 2
+---
+
+
+## Determinante de nxn 
+
+
+
+Sea 
+
+
+$$
+\mathbf{A}=\left[
+\begin{array}{cccc}
+a_{11} & a_{12} & \dots & a_{1n}  \\
+a_{21} & a_{22} & \dots & a_{2n}  \\
+\vdots & \vdots &       & \vdots  \\
+a_{n1} & a_{n2} & \dots & a_{nn}  \\
+\end{array}
+\right]
+$$
+
+una matriz de $n \times n$. Entonces el determinante de $\mathbf{A}$, denotado por $\det(\mathbf{A})$ o $|\mathbf{A}|$ está dado por:
+
+$\det(\mathbf{A})=|\mathbf{A}|=a_{11}\mathbf{C}_{11}+a_{12}\mathbf{C}_{12}+a_{13}\mathbf{C}_{13}+\dots+a_{1n}\mathbf{C}_{1n} = \sum _{k=1} ^ n a_{1k}\mathbf{C}_{1k}$
+
+La expresión de lado derecho se llama **expansión por cofactores**
+
+Observe que en la ecuación anterior se define el determinante mediante la expansión por cofactores en el primer renglón de $A$.
+
+Esta relación aplica a cualquier fila de la matriz $\mathbf{A}$, es decir:
+
+$\det(\mathbf{A})=a_{i1}\mathbf{C}_{i1}+a_{i2}\mathbf{C}_{i2}+a_{i3}\mathbf{C}_{13}+\dots+a_{in}\mathbf{C}_{in}$
+
+
+**Ejemplo:** Calcule el determinante para la siguiente matriz:
+
+
+$$
+\mathbf{A}=\left[
+\begin{array}{ccc}
+3 & 2 & 1  \\
+2 & 1 & -3 \\
+4 & 0 & 1 \\
+\end{array}
+\right]
+$$
+
+
+el determinante está dado por:
+
+
+$\det(\mathbf{A})=a_{11}\mathbf{C}_{11}+a_{12}\mathbf{C}_{12}+a_{13}\mathbf{C}_{13}$
+
+
+$$
+\det(\mathbf{A})= |\mathbf{A}| = 3 \left |
+\begin{array}{cc}
+1 & -3 \\ 
+0 & 1\\
+\end{array}
+\right | - 2 \left |
+\begin{array}{cc}
+2 & -3 \\ 
+4 & 1 \\
+\end{array}
+\right | + 1\left |
+\begin{array}{cc}
+2 & 1 \\ 
+4 & 0 \\ 
+\end{array}
+\right | = 29
+$$
+
+
+# Matriz de cofactores
+
+Dada la matriz $\mathbf{A}$, podemos calcular el cofactor $\mathbf{C}_{ij}$ por cada entrada en la matriz $\mathbf{A}$. La colección de todos los cofacores forma la **matriz de cofactores,** $\mathbf{C}$. Además, la transpuesta de la matriz de cofactores se le llama la **matriz adjunta** de $\mathbf{A}$.
+
+**Definición:** dada una matriz cuadrada $\mathbf{A}$ con la matriz de cofactores  $\mathbf{C}$, la transpuesta de la matriz de cofactores de se llama la matriz adjunta y está denotada por:
+
+$\mathrm{adj}(\mathbf{A})=\mathbf{C}^T$
+
+Sin demostrarlo aquí, se puede observar que el siguiente resultado es verdadero:
+
+$\mathbf{A}\mathrm{adj}(\mathbf{A})=\det(\mathbf{A})\mathbf{I}$
+
+Dividiendo ambos lados por $\det(\mathbf{A})$ y multiplicando ambos lados por la inversa de $\mathbf{A}$ nos da:
+
+$\mathbf{A}^{-1}=\frac{\mathrm{adj}(\mathbf{A})}{\det(\mathbf{A})}$
+
+Aunque no es un valor muy práctico, la fórmula anterior refuerza el punto de que si el determinante es cero, entonces la inversa de una matriz no existe, es decir, que la matriz es singular.
+
+# Regla de Cramer 
+
+Un sistema de ecuaciones lineales de $m$ por $n$ puede ser escrito en la forma 
+
+\begin{alignat*}{5}
+   a_{11}x_1 & {}+{} &   a_{12}x_2 & {}+{} & \dots &  {}+{} & a_{1n}x_n & {}={} & b_1  \\ 
+   a_{21}x_1 & {}+{} &   a_{22}x_2 & {}+{} & \dots &  {}+{} & a_{2n}x_n & {}={} & b_2  \\
+             & {}{} &              & {}+{} & \dots &  {}{} &            & {}={} &       \\
+  a_{m1}x_1 & {}+{} &   a_{m2}x_2 & {}+{} & \dots &  {}+{} & a_{mn}x_n & {}={} & b_m  \\
+\end{alignat*}
+
+
+O puede ser representada en una versión simplificada usando matrices y vectores, sí la matriz $\mathbf{A}$ y los dos vectores $\mathbf{x}$ y $\mathbf{b}$ son definidos como:
+
+$$
+\mathbf{A} = \left [
+\begin{array}{cccc}
+a_{11} & a_{12} & \dots & a_{1n} \\ 
+a_{21} & a_{22} & \dots & a_{2n} \\ 
+\vdots & \vdots & \dots & \vdots \\ 
+a_{m1} & a_{m2} & \dots & a_{mn} \\ 
+\end{array}
+\right ] \mathbf{x} = \left [
+\begin{array}{c}
+x_{1} \\ 
+x_{2} \\ 
+\vdots \\ 
+x_{n}  \\ 
+\end{array}
+\right ] \mathbf{b} = \left [
+\begin{array}{c}
+b_{1} \\ 
+b_{2} \\ 
+\vdots \\ 
+b_{n}  \\ 
+\end{array}
+\right ] 
+$$
+
+Entonces el sistema lineal puede ser escrito de forma compacta como:
+
+$\mathbf{A}\mathbf{x}=\mathbf{b}$
+
+La **regla de Cramer** relaciona la solución de un sistema lineal de la forma $\mathbf{A}\mathbf{x}=\mathbf{b}$. El resultado establece que sí $\mathbf{A}$ es una matriz invertible de $n$ por $n$ para el sistema $\mathbf{A}\mathbf{x}=\mathbf{b}$, entonces la solución $x_i$ en $x$ está dada por 
+
+$x_i=\frac{\det{\mathbf{A}_i}}{\det{\mathbf{A}}}$
+
+donde $\mathbf{A}_i$ es obtenido al reemplazar la columna $i$ de $\mathbf{A}$ con $\mathbf{b}$.
+
+**Ejemplo:** Obtenga los valores de $x_1$, $x_2$ y $x_3$ del siguiente sistema de ecuaciones lineales usando la regla de Cramer. 
+
+\begin{alignat*}{4}
+   2x_1 & {}+{} &   x_2 & {}-{} &   x_3  & {}={} & 1  \\ 
+   3x_1 & {}+{} &   2x_2 & {}-{} &   2x_3  & {}={} & 13  \\ 
+   4x_1 & {}-{} &   2x_2 & {}+{} &   3x_3  & {}={} & 9  \\ 
+\end{alignat*}
+
+**Solución**
+
+El sistema de ecuaciones lineales tiene la siguiente estructura:
+
+\begin{alignat*}{4}
+   a_1x_1 & {}+{} &   b_1x_2 & {}+{} &   c_1x_3  & {}={} & d_1  \\ 
+   a_2x_1 & {}+{} &   b_2x_2 & {}+{} &   c_2x_3  & {}={} & d_2  \\ 
+   a_3x_1 & {}+{} &   b_3x_2 & {}+{} &   c_3x_3  & {}={} & d_3  \\ 
+\end{alignat*}
+
+
+y los valores de $x_1$, $x_2$ y $x_3$ se calcularán a partir de las siguientes ecuaciones:
+
+$x_1=\frac{\det{\mathbf{A}_1}}{\det{\mathbf{A}}}$
+
+$x_2=\frac{\det{\mathbf{A}_2}}{\det{\mathbf{A}}}$
+
+$x_3=\frac{\det{\mathbf{A}_3}}{\det{\mathbf{A}}}$
+
+
+$$
+\mathbf{A} = \left [
+\begin{array}{ccc}
+a_{1} & b_{1}  & c_{1} \\ 
+a_{2} & b_{2}  & c_{2} \\ 
+a_{3} & b_{3}  & c_{3} \\ 
+\end{array}
+\right ] \mathbf{A} = \left [
+\begin{array}{ccc}
+2 & 1 & -1\\ 
+3 & 2 & 2\\ 
+4 & -2  & 3 \\ 
+\end{array}
+\right ] 
+$$
+
+
+$$
+\det(\mathbf{A})= |\mathbf{A}| =  \left |
+\begin{array}{ccc}
+2 & 1 & -1\\ 
+3 & 2 & 2\\ 
+4 & -2  & 3 \\ 
+\end{array}
+\right |
+$$
+
+
+$$
+\det(\mathbf{A})= 2 \left |
+\begin{array}{cc}
+2 & 2 \\ 
+-2 & 3\\
+\end{array}
+\right | - 1 \left |
+\begin{array}{cc}
+3 & 2 \\ 
+4 & 3 \\
+\end{array}
+\right | + (-1)\left |
+\begin{array}{cc}
+3 & 2 \\ 
+4 & -2 \\ 
+\end{array}
+\right | = 2(2(3)-2(-2))-1(3(3)-2(4))-1(3(-2)-2(4))=20-1+14=33
+$$
+
+
+$$
+\mathbf{A}_1 = \left [
+\begin{array}{ccc}
+d_{1} & b_{1}  & c_{1} \\ 
+d_{2} & b_{2}  & c_{2} \\ 
+d_{3} & b_{3}  & c_{3} \\ 
+\end{array}
+\right ] \mathbf{A}_1 = \left [
+\begin{array}{ccc}
+1 & 1 & -1\\ 
+13 & 2 & 2\\ 
+9 & -2  & 3 \\ 
+\end{array}
+\right ] 
+$$
+
+
+$$
+\det(\mathbf{A}_1)= 1 \left |
+\begin{array}{cc}
+2 & 2 \\ 
+-2 & 3\\
+\end{array}
+\right | - 1 \left |
+\begin{array}{cc}
+13 & 2 \\ 
+9 & 3 \\
+\end{array}
+\right | + (-1)\left |
+\begin{array}{cc}
+13 & 2 \\ 
+9 & -2 \\ 
+\end{array}
+\right | = 1(2(3)-(-2)(2))-1(13(3)-2(9))-1(13(-2)-2(9))=10-21+44=33
+$$
+
+
+$$
+\mathbf{A}_2 = \left [
+\begin{array}{ccc}
+a_{1} & d_{1}  & c_{1} \\ 
+a_{2} & d_{2}  & c_{2} \\ 
+a_{3} & d_{3}  & c_{3} \\ 
+\end{array}
+\right ] \mathbf{A}_2 = \left [
+\begin{array}{ccc}
+2 & 1 & -1\\ 
+3 & 13 & 2\\ 
+4 & 9  & 3 \\ 
+\end{array}
+\right ] 
+$$
+
+$$
+\det(\mathbf{A}_2)= 2 \left |
+\begin{array}{cc}
+13 & 2 \\ 
+9 & 3\\
+\end{array}
+\right | - 1 \left |
+\begin{array}{cc}
+3 & 2 \\ 
+4 & 3 \\
+\end{array}
+\right | + (-1)\left |
+\begin{array}{cc}
+3 & 13 \\ 
+4 & 9 \\ 
+\end{array}
+\right | = 2(13(3)-(2)(9))-1(3(3)-2(4))-1(3(9)-13(4))=42-1+25=66
+$$
+
+$$
+\mathbf{A}_3 = \left [
+\begin{array}{ccc}
+a_{1} & b_{1}  & d_{1} \\ 
+a_{2} & b_{2}  & d_{2} \\ 
+a_{3} & b_{3}  & d_{3} \\ 
+\end{array}
+\right ] \mathbf{A}_3 = \left [
+\begin{array}{ccc}
+2 & 1 & 1\\ 
+3 & 2 & 13\\ 
+4 & -2  & 9 \\ 
+\end{array}
+\right ] 
+$$
+
+
+$$
+\det(\mathbf{A}_3)= 2 \left |
+\begin{array}{cc}
+2 & 13 \\ 
+-2 & 9\\
+\end{array}
+\right | - 1 \left |
+\begin{array}{cc}
+3 & 13 \\ 
+4 & 9 \\
+\end{array}
+\right | + (1)\left |
+\begin{array}{cc}
+3 & 2 \\ 
+4 & -2 \\ 
+\end{array}
+\right | = 2(2(9)-(13)(-2))-1(3(9)-13(4))+1(3(-2)-2(4))=88+25-14=99
+$$
+
+Sustituyendo $\det{\mathbf{A}_1}$, $\det{\mathbf{A}_2}$, $\det{\mathbf{A}_3}$ y $\det{\mathbf{A}}$ en $x_1$, $x_2$ y $x_3$ se obtiene: 
+
+$x_1=\frac{\det{\mathbf{A}_1}}{\det{\mathbf{A}}}=\frac{33}{33}=1$
+
+$x_2=\frac{\det{\mathbf{A}_2}}{\det{\mathbf{A}}}=\frac{66}{33}=2$
+
+$x_3=\frac{\det{\mathbf{A}_3}}{\det{\mathbf{A}}}=\frac{99}{33}=3$
+
+
+# Matrices triangulares
+
+Un resultado interesante surge al calcular el determinante de una matriz triangular. Considere la matriz triangular de $2$ por $2$.
+
+$$
+\mathbf{A} = \left [
+\begin{array}{cc}
+2 & 0  \\ 
+5 & 1 \\ 
+\end{array}
+\right ] 
+$$
+El determinante está dado por $\det(\mathbf{A})=(2)(1)-(0)(5)=2$. Note que el cero elimina la diagonal que cruza, entonces el determinante es simplemente el producto de las diagonales. Esto puede ser extendido a cualquier tamaño de matriz:
+
+$\det({\mathbf{matriz\ triangular}})= a_{11}a_{22}\dots a_{nn}$
+
+Dado el resultado anterior, se puede calcular muy fácilmente el determinante de la matriz identidad. 
+
+$\det({\mathbf{I}})= 1 \times 1 \times 1 \dots 1=1$
+
+# Asistencia 
+
+From David Dorantes to Everyone:  11:34 AM
+
+Presente
+
+From Irving Barreto to Everyone:  11:35 AM
+
+Presente
+
+From Gaeta to Everyone:  11:35 AM
+
+presente
+
+From José María Garduño to Everyone:  11:35 AM
+
+presente
+
+From Fernanda Pilón to Everyone:  11:35 AM
+
+Presente :)
+
+From Víctor Jeronimo to Everyone:  11:35 AM
+
+Presente
+
+From Wenddy Ballona to Everyone:  11:35 AM
+
+prsente
+
+From Diego Nicolas to Everyone:  11:35 AM
+
+presente
+
+From Fernanda Cardenas to Everyone:  11:35 AM
+
+Presente
+
+From Andrew Flores Yebra to Everyone:  11:36 AM
+
+Presente
+
+From Jorge A to Everyone:  11:36 AM
+
+Presente
+
+From Frida Cuevas to Everyone:  11:40 AM
+
+Presente
+
+From Melanie Mendieta Mondragón to Everyone:  11:58 AM
+
+Presente
+
+From Karla Gómez to Everyone:  11:58 AM
+
+Presente
+
+From Itzel Aurora Bravo Santos to Everyone:  12:07 PM
+
+Presente
+
+From Emmanuel GR to Everyone:  12:15 PM
+
+Presente
+
+

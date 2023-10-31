@@ -1,0 +1,317 @@
+---
+title: "Día 29 - Propiedades de los determinantes"
+author: "Dra. Norma C. Pérez Rosas"
+date: '`r format(Sys.time(), "%d/%m/%Y")`'
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+  html_document:
+    toc: yes
+    toc_depth: 2
+---
+# Propiedades de los determinantes
+
+Hay una variedad de propiedades útiles de los determinantes. De interés particular es cómo un determinante es afectado por las operaciones entre filas. Anteriormente se habían introducido tres filas básicas: intercambio de filas, escalamiento de filas y combinación de filas. 
+
+**Intercambio de filas:** considere ahora el efecto de intercambiar dos filas. Para una matriz de $2 \times 2$
+
+
+$$
+\mathbf{A}=\left[
+\begin{array}{cc}
+a & b  \\
+c & d \\
+\end{array}
+\right]
+$$
+
+el determinante de esta matriz está dado por $\det (\mathbf{A})=ad-bc$. Si se intercambian dos filas,
+
+
+$$
+\mathbf{A}=\left[
+\begin{array}{cc}
+c & d  \\
+a & b \\
+\end{array}
+\right]
+$$
+
+el determinante ahora es $\det (\mathbf{A})=cb-da$, a partir del cual notamos que el determinante ha cambiado de signo comparado con el primer determinante, esto es:
+
+
+$ad-cb=(-)(cb-da)$
+
+Sin adentrarnos en detalles, es posible demostrar que una matriz de cualquier tamaño, si se intercambian dos filas cualesquiera, el determinante cambia de signo. 
+
+**Si se intercambian dos filas cualquiera de la matriz entonces el determinante cambia de signo.**
+
+```{python}
+import numpy as np
+a = np.array([[3,5], [4,2]])
+b = np.linalg.det(a)
+print(b)
+```
+```{python}
+import numpy as np
+a = np.array([[4,2], [3,5]])
+b = np.linalg.det(a)
+print(b)
+```
+
+
+**Escalamiento de una fila:** si se múltiplica una fila por un factor $\alpha$, el determinante es multiplicado por $\alpha$.
+
+
+$$
+\det\left [
+\begin{array}{cc}
+\alpha a & \alpha  b \\ 
+c & d\\
+\end{array}
+\right ] = (\alpha a)d-(\alpha b)c= \alpha (ad-bc)
+$$
+
+Otra vez, sin ahondar en detalles, es posible demostrar que para una matriz de cualquier tamaño, si una fila es multiplicada por un factor $\alpha$, entonces el determinante es multiplicado por el mismo factor. Un resultado útil a partir de esta propiedad es que si todos los elementos de una fila son ceros, entonces el $\det (\mathbf {A})=0$, tener una fila de ceros implicó que $\alpha=0$.
+
+
+**Si una fila en una matriz es multiplicada por un factor** $\alpha$ **, entonces el determinante es también multiplicadO por** $\alpha$.
+
+
+```{python}
+import numpy as np
+a = np.array([[2*4,2*2], [3,5]])
+b = np.linalg.det(a)
+print(b)
+```
+
+**Una consecuencia de esta propiedad es que si una matriz tiene una fila de puros ceros, entonces el determinante también es cero**.
+
+
+```{python}
+import numpy as np
+a = np.array([[0*4, 0*2], [3,5]])
+b = np.linalg.det(a)
+print(b)
+```
+
+**Combinación de filas:** la última operación a considerar es sí se suma un múltiplo de una fila a otra. Sin una demostración formal aquí, pero que puede ser consultada en la literatura, se establece que si un múltiplo de una fila es agregado a otra, el determinante no se afecta. 
+
+**Sí un múltiplo de una fila se agrega a otra fila, el determinante no se afecta.**
+
+$R_{i} \rightarrow R_{i}+\alpha R _{j}+\beta R_k$
+
+Ejemplo:
+
+Matriz inicial 
+
+```{python}
+import numpy as np
+a = np.array([[4, 2], [3,5]])
+b = np.linalg.det(a)
+print(b)
+```
+
+
+$R_{1} \rightarrow R_{1}+2 R _{2}$
+
+
+```{python}
+import numpy as np
+a = np.array([[4+2*3, 2+2*5], [3,5]])
+b = np.linalg.det(a)
+print(b)
+```
+
+$\det{(\mathbf{I})}=1$
+
+```{python}
+import numpy as np
+a = np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]])
+b = np.linalg.det(a)
+print(b)
+```
+
+
+$\det{(\mathbf{A})}=\det{(\mathbf{A}^T)}$
+
+```{python}
+import numpy as np
+a = np.array([[4, 5, 9], [2, 1, 6], [4, 9, 2]])
+b = np.linalg.det(a)
+print(b)
+a_t = np.transpose(a)
+b_t = np.linalg.det(a_t)
+print(b_t)
+```
+
+$\det{(\mathbf{A}^{-1})}=\frac{1}{\det{(\mathbf{A})}}$
+
+
+```{python}
+import numpy as np
+a = np.array([[4, 5, 9], [2, 1, 6], [4, 9, 2]])
+a_inv = np.linalg.inv(a)
+print(a_inv)
+b_det_inv = np.linalg.det(a_inv)
+print(b_det_inv)
+a_det = np.linalg.det(a)
+print(a_det)
+div_det = 1/a_det
+div_det
+```
+
+$\det{(\mathbf{A}\mathbf{B})}=\det{(\mathbf{A})}\det{(\mathbf{B})}$
+
+```{python}
+import numpy as np
+a = np.array([[4, 5, 9], [2, 1, 6], [4, 9, 2]])
+b = np.array([[4, 5, 9], [2, 1, 6], [4, 9, 2]])
+a_mult_b = np.matmul(a,b)
+a_mult_b 
+det_ab = np.linalg.det(a_mult_b)
+det_ab
+det_a = np.linalg.det(a)
+det_b = np.linalg.det(b)
+da_db = det_a * det_b
+da_db
+```
+
+
+# Cálculo del determinante
+
+El método para calcular el determinante por computadora usando menores y cofactores es impráctico para matrices más grande $17$ por $17$. Por ejemplo, una computadora PC (circa 2015) que corre a $57$ GFLOPS (mil millones de operaciones por segundo) le tomará aproximadamente 25 días calcular un determinante para una matriz $19$ por $19$, asumiendo que la expasión de cofactores toma multiplicaciones $n!$. En su lugar la matriz puede ser reducida a una forma **escalonada**, después será fácil calcular su determinante. Debido a que siempre es posible reducir filas usando intercambio y combinaciones de filas el determinante puede ser calculado usando:
+
+$\det{(\mathbf{A})}=(-1)^r\det{(\mathbf{U})}$
+
+donde $r$ es el número de filas intercambiadas (recuerde que el intercambio de filas cambia el signo del determinante) y $\mathbf{U}$ es la matriz reducida en forma triangular. Recuerde que el determinante de una matriz triangular es simplemente el producto de las entradas de la diagonal principal. 
+
+**Ejemplo**
+
+
+$$
+\mathbf{A}=\left[
+\begin{array}{ccc}
+2 & 2 & 3  \\
+4 & 3 & 9  \\
+1 & 0 & 1  \\
+\end{array}
+\right]
+$$
+
+
+Para reducir las filas de esta matriz podemos aplicar las siguientes operaciones:
+
+
+$r_2 = r_2-2r_1$
+
+$r_3 = r_3-0.5r_1$
+
+$r_3 = r_3-r_2$
+
+Note que cada uno de estas operaciones es una combinación es una combinación de filas que no cambia el determinante. La matriz final reducida es la siguiente:
+
+
+$$
+\left[
+\begin{array}{ccc}
+2 & 2 & 3  \\
+0 & -1 & 3  \\
+0 & 0 & -3.5  \\
+\end{array}
+\right]
+$$
+
+
+Debido a que no hubo intercambio de filas (que podrían haber cambiado de signo), se puede ahora calcular el determinante a partir del producto de la diagonal principal $2 \times -1 \times -3.5=7$
+
+
+# Conferencia "Datos, información y conocimiento - Retos y soluciones" 
+
+Conferencia impartida por el Dr. Augustin Luna de la Universidad de Harvard en el Congreso Internacional de Ingenierías 2021 "Economía creativa" TECNM Campus Misantla 
+
+Liga para la ponencia 
+
+https://www.facebook.com/Tecnm-campus-Misantla-2284527044942971/videos/cii-sala-2/851210978878461/
+
+Diapositivas de la ponencia 
+
+https://docs.google.com/presentation/d/1xH9-A4l9o9PRGPW77z1IZB4DwcGAMWenBc9RhVlO3Jc/edit#slide=id.g60447c50d7_0_41
+
+
+
+# Asistencia 
+
+From Emmanuel GR to Everyone 11:31 AM
+
+Presente
+
+From Fernanda Pilón to Everyone 11:32 AM
+
+Presente :)
+
+From Andrew Flores Yebra to Everyone 11:32 AM
+
+Presente
+
+From Fernanda Cardenas to Everyone 11:32 AM
+
+Presente
+
+From Diego Nicolas to Everyone 11:32 AM
+
+presente
+
+From Irving Barreto to Everyone 11:32 AM
+
+presente
+
+From Víctor Jerónimo to Everyone 11:32 AM
+
+Presente
+
+From Gaeta to Everyone 11:32 AM
+
+presente
+
+From Frida Cuevas to Everyone 11:33 AM
+
+Presente
+
+From José María Garduño to Everyone 11:33 AM
+
+Presente
+
+From Maria Fernanda Garcia to Everyone 11:33 AM
+
+Presente
+
+From David Dorantes to Everyone 11:34 AM
+
+Presente
+
+From Jorge Ambrosio to Everyone 11:35 AM
+
+Presente
+
+From Karla Gómez to Everyone 11:37 AM
+
+Presente
+
+From Itzel Aurora Bravo Santos to Everyone 12:38 PM
+
+Presente
+
+From Wenddy Ballona to Everyone 12:41 PM
+
+presente
+
+From Melanie Mendieta to Everyone 12:41 PM
+
+presente
+
+From Me to Everyone 01:20 PM
+
+
+

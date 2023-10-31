@@ -1,0 +1,515 @@
+---
+title: "Día 34 -3er. Examen Sol. - Álgebra Lineal"
+author: "Dra. Norma C. Pérez Rosas"
+date: '`r format(Sys.time(), "%d/%m/%Y")`'
+output:
+  html_document:
+    toc: yes
+    toc_depth: 2
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+---
+
+Instrucciones: responda correctamente las siguientes preguntas. Al terminar tome fotografía a sus respuestas, genere un solo PDF con la siguiente estructura apellido_paterno_apellido_materno_nombre_examen3_grupo.pdf y envíe su examen al classroom.
+
+Al inicio de su examen coloque 
+
+**Nombre completo**
+
+**Grupo**
+
+**Boleta**
+
+**correo electrónico**
+
+1. ¿Cuál de los siguientes es $0$ para todo $x$ y $y$? Justifique su respuesta. (Valor: 10 puntos)
+
+a)
+
+$$
+\left |
+\begin{array}{cc}
+x & y \\ 
+-y & x \\ 
+\end{array}
+\right | = (x)(x)-(y)(-y)= x^2+y^2
+$$
+
+**b)**
+
+$$
+\left |
+\begin{array}{cc}
+x & -y \\ 
+-x & y \\ 
+\end{array}
+\right | = (x)(y)-(-y)(-x)= xy-yx
+$$
+
+
+
+c)
+
+$$
+\left |
+\begin{array}{cc}
+x & x \\ 
+y & -y \\ 
+\end{array}
+\right | = (x)(-y)-(x)(y)= -xy-xy=-2xy
+$$
+
+3. Si 
+
+$$
+\mathbf{A}=\left [
+\begin{array}{cccc}
+2 & -1 & 5 & 6\\ 
+ 0 & 3 & 2 & 4\\
+ 0 & 0 & -2 & 15\\
+  0 & 0 & 0 & 1\\
+\end{array}
+\right ] 
+$$
+
+encuentre el $\det (\mathbf{A})$. Justifique su respuesta. (Valor: 15 puntos)
+
+Observando la matriz, vemos que es una matriz triangular y el determinante de una matriz triangular se calcula de la siguiente forma:
+
+$\det({\mathbf{matriz\ triangular}})= a_{11}a_{22}\dots a_{nn}$
+
+Por lo tanto,
+
+$2\cdot 3 \cdot (-2) \cdot (1)=-12$
+
+3. Resuelva el siguiente sistema usando la regla de Cramer (Valor: 15 puntos)
+
+\begin{alignat*}{5}
+   2x_1 & {}+{} &  4x_2 & {}+{} & 6x_3 &  {}={} & 18\\
+   4x_1 & {}+{} &  5x_2 & {}+{} & 6x_3 &  {}={} & 24\\
+   3x_1 & {}+{} &  x_2 & {}-{} & 2x_3 &  {}={} & 4\\
+\end{alignat*}
+
+$$
+\mathbf{A}=\left [
+\begin{array}{ccc}
+2 & 4 & 6 \\ 
+4 & 5 & 6\\
+3 & 1 & -2 \\
+\end{array}
+\right ] 
+$$
+
+$$
+\det({A})=\left |
+\begin{array}{ccc}
+2 & 4 & 6 \\ 
+4 & 5 & 6\\
+3 & 1 & -2 \\
+\end{array}
+\right | = 6 \neq 0
+$$
+
+
+$$
+\det(\mathbf{A})= 2 \left |
+\begin{array}{cc}
+5 & 6 \\ 
+1 & -2\\
+\end{array}
+\right | - 4 \left |
+\begin{array}{cc}
+4 & 6 \\ 
+3 & -2 \\
+\end{array}
+\right | + 6\left |
+\begin{array}{cc}
+4 & 5 \\ 
+3 & 1 \\ 
+\end{array}
+\right | = 2(5(-2)-6(1))-4(4(-2)-6(3))+6(4(1)-5(3))=-32+104-66=6
+$$
+
+$$
+\det({A}_1)=\left |
+\begin{array}{ccc}
+18 & 4 & 6 \\ 
+24 & 5 & 6\\
+4 & 1 & -2 \\
+\end{array}
+\right | = 24
+$$
+
+$$
+\det(\mathbf{A}_1)= 18 \left |
+\begin{array}{cc}
+5 & 6 \\ 
+1 & -2\\
+\end{array}
+\right | - 4 \left |
+\begin{array}{cc}
+24 & 6 \\ 
+4 & -2 \\
+\end{array}
+\right | + 6\left |
+\begin{array}{cc}
+24 & 5 \\ 
+4 & 1 \\ 
+\end{array}
+\right | = 18(5(-2)-6(1))-4(24(-2)-6(4))+6(24(1)-5(4))=-288+288+24=24
+$$
+
+
+$$
+\det({A}_2)=\left |
+\begin{array}{ccc}
+2 & 18 & 6 \\ 
+4 & 24 & 6\\
+3 & 4 & -2 \\
+\end{array}
+\right | = -12
+$$
+
+$$
+\det(\mathbf{A}_2)= 2 \left |
+\begin{array}{cc}
+24 & 6 \\ 
+4 & -2\\
+\end{array}
+\right | - 18 \left |
+\begin{array}{cc}
+4 & 6 \\ 
+3 & -2 \\
+\end{array}
+\right | + 6\left |
+\begin{array}{cc}
+4 & 24 \\ 
+3 & 4 \\ 
+\end{array}
+\right | = 2(24(-2)-6(4))-18(4(-2)-6(3))+6(4(4)-24(3))=-144+468-336=-12
+$$
+
+
+$$
+\det({A}_3)=\left [
+\begin{array}{ccc}
+2 & 4 & 18 \\ 
+4 & 5 & 24\\
+3 & 1 & 4 \\
+\end{array}
+\right ] = 18
+$$
+
+$$
+\det(\mathbf{A}_3)= 5 \left |
+\begin{array}{cc}
+5 & 24 \\ 
+1 & 4\\
+\end{array}
+\right | - 4 \left |
+\begin{array}{cc}
+4 & 24 \\ 
+3 & 4 \\
+\end{array}
+\right | + 18\left |
+\begin{array}{cc}
+4 & 5 \\ 
+3 & 1 \\ 
+\end{array}
+\right | = 2(5(4)-24(1))-4(4(4)-24(3))+18(4(1)-5(3))=-8+224-198=18
+$$
+
+$x_1=\frac{A_1}{A}=\frac{24}{6}=4$
+
+$x_2=\frac{A_2}{A}=-\frac{12}{6}=-2$
+
+$x_3=\frac{A_3}{A}=-\frac{18}{6}=3$
+
+
+4. Para un espacio que sea descrito como un espacio vectorial debe mostrar cerradura, ¿qué significa esto? (Valor: 2.5 puntos)
+
+Si $\mathbf{u}$ y $\mathbf{v}$ son dos vectores cualesquiera en un espacio vectorial $V$, entonces la suma  $\mathbf{u}+\mathbf{v}$ también pertenece a $V$, entonces el espacio vectorial es  cerrado bajo (o respecto) a la suma (vectorial).
+
+
+La multiplicación de un escalar por cualquier vector en $V$ produce también un vector en $V$. Por lo  que la multiplicación por un escalar también es **cerrada**.
+
+5. ¿Qué significa espacio generado? (Valor: 2.5 puntos)
+
+El conjunto de todas las combinaciones lineales de los   vectores $n$ $\mathbf{v}_1,\dots,\mathbf{v}_k$ se llama **espacio generado por los vectores** $\mathbf{v}_1,\dots,\mathbf{v}_k$  y se representa por Gen$\{ \mathbf{v}_1,\dots,\mathbf{v}_k \}$, se dice que $\mathbf{v}_1,\dots,\mathbf{v}_k$ **generan** a $V$ y que $\{ \mathbf{v}_1,\dots,\mathbf{v}_k \}$ es un **conjunto generador** de $V$.
+
+
+6. Defina los términos linealmente dependiente y linealmente independiente. (Valor: 2.5 puntos) 
+
+Una combinación lineal de vectores $n$ $\mathbf{v}_1,\dots,\mathbf{v}_k$  es 
+$c_1\mathbf{v}_1+c_2\mathbf{v}_2+\dots+c_k\mathbf{v}_k$
+
+y se llama **no trivial** cuando algunas de las $c_1,\dots , c_k$ son diferentes de cero, pero si todos los coeficientes son cero se denomina **trivial**.
+
+**Definición:** una *sucesión* de vectores $n$, $\mathbf{v}_1,\dots,\mathbf{v}_k$ es **linealmente dependiente** si $\mathbf{0}$ es una combinación lineal no trivial de esos vectores. En otras palabras, cuando hay escalares $c_1, \dots, c_k$ y no todos son cero, como 
+
+$c_1\mathbf{v}_1+c_2\mathbf{v}_2+\dots \dots + c_k\mathbf{v}_k=\mathbf{0}$
+
+Un conjunto de $\mathbf{v}_1,\dots,\mathbf{v}_k$ de vectores $n$ es linealmente dependiente si lo es como sucesión. Una relación de la forma $c_1\mathbf{v}_1+c_2\mathbf{v}_2+\dots \dots + c_k\mathbf{v}_k=\mathbf{0}$ cuando no todas las $c_1,\dots,c_k$ son cero, se llama **relación de dependencia lineal**.
+
+
+Un *conjunto* de vectores $n$, $\mathbf{v}_1,\dots,\mathbf{v}_k$ es **linealmente independiente** si no lo es linealmente dependiente. Es lo mismo que decir que la única combinación lineal de $\mathbf{0}$ en función de $\mathbf{v}_1,\dots,\mathbf{v}_k$ es la trivial o que la ecuación 
+
+$c_1\mathbf{v}_1+c_2\mathbf{v}_2+\dots \dots + c_k\mathbf{v}_k=\mathbf{0}$
+
+implica que $c_1=0, \dots, c_k = 0$
+
+
+7. Defina los téminos bases y dimensión.  (Valor: 2.5 puntos)
+
+Las **bases** de un espacio vectorial $V$, es el conjunto más pequeño de un conjunto de vectores linealmente independientes que generan $V$. Esto simplemente significa que todos los puntos en el espacio puede ser expresado con este mínimo número de vectores. 
+
+Por ejemplo, dado el conjunto $[1,0]$, $[0,1]$ y $[2,3]$ una base para este conjunto es el conjunto es $[1,0], [0,1]$ mientras que el otro es $[1,0],[2,3]$. Las bases $[1,0],[0,1]$ con frecuencia se les llama bases estándar y se generaliza para un espacio n dimensional. 
+
+Al tamaño de una base se le llama **dimensión**, denotado por $V$.
+
+Aunque el espacio puede tener diferentes bases, un resultado importante es que la dimensión de la base será siempre la misma. Por ejemplo, la dimensión del espacio generado por $[1,0], [0,1]$ y $[1,0], [2,3]$ es 2. 
+
+8. Determine si los vectores: (Valor: 20 puntos)
+
+$$
+\mathbf{v}_1=\left [
+\begin{array}{c}
+1 \\ 
+2\\
+3\\
+\end{array}
+\right ], \  \mathbf{v}_2=\left [
+\begin{array}{c}
+5 \\ 
+6\\
+-1\\
+\end{array}
+\right ] \ y  \ \mathbf{v}_3=\left [
+\begin{array}{c}
+3 \\ 
+2\\
+1\\
+\end{array}
+\right ]
+$$
+
+son linealmente independientes o linealmente dependientes en $R^3$
+
+Solución: Buscamos los escalares $c_1$, $c_2$ y $c_3$, tales que:
+
+$\mathbf{0}=c_1\mathbf{v}_1+c_2\mathbf{v}_2+c_3\mathbf{v}_3$
+
+
+$$
+ \left [
+\begin{array}{c}
+0 \\ 
+0  \\
+0  \\
+\end{array}
+\right ]= c_1 \left [
+\begin{array}{c}
+1  \\ 
+2  \\
+3 \\
+\end{array}
+\right ] + c_2 \left [
+\begin{array}{c}
+5  \\ 
+6  \\
+-1 \\
+\end{array}
+\right ] + c_3 \left [
+\begin{array}{c}
+3  \\ 
+2  \\
+1 \\
+\end{array}
+\right ]
+$$
+
+
+$$
+ \left [
+\begin{array}{ccccc}
+c_1 & + & 5c_2 & + & 3c_3 \\ 
+2c_1 & + & 6c_2 & + & 2c_3 \\ 
+3c_1 & - & c_2 & + & c_3 \\ 
+\end{array}
+\right ]=  \left [
+\begin{array}{c}
+0  \\ 
+0  \\
+0 \\
+\end{array}
+\right ] 
+$$
+
+
+\begin{alignat*}{7}
+   c_1 & {}+{} &  5c_2 & {}+{} & 3c_3 &  {}={} & 0 \\
+   2c_1 & {}+{} &  6c_2 & {}+{} & 2c_3 &  {}={} & 0 \\
+   3c_1 & {}-{} &  c_2 & {}+{} & c_3 &  {}={} & 0 \\
+\end{alignat*}
+
+
+$$
+ \left [
+\begin{array}{ccccc}
+1 & 5 & 3 & | & 0 \\ 
+2 & 6 & 2  & | & 0 \\
+3 & -1 & 1 &  | & 0 \\
+\end{array}
+\right ]  \xrightarrow[ R_3 \rightarrow R_3-3R_1]{R_2 \rightarrow R_2-2R_1} \left [
+\begin{array}{ccccc}
+1 & 5 & 3 & | & 0 \\ 
+0 & -4 & -4  & | & 0 \\
+0 & -16 & -8 &  | & 0 \\
+\end{array}
+\right ]
+$$
+
+
+$$
+ \left [
+\begin{array}{ccccc}
+1 & 5 & 3 & | & 0 \\ 
+0 & -4 & -4  & | & 0 \\
+0 & -16 & -8 &  | & 0 \\
+\end{array}
+\right ]  \xrightarrow[]{R_2 \rightarrow -\frac{1}{4}R_2} \left [
+\begin{array}{ccccc}
+1 & 5 & 3 & | & 0 \\ 
+0 & 1 & 1  & | & 0 \\
+0 & -16 & -8 &  | & 0 \\
+\end{array}
+\right ]
+$$
+
+
+$$
+ \left [
+\begin{array}{ccccc}
+1 & 5 & 3 & | & 0 \\ 
+0 & 1 & 1  & | & 0 \\
+0 & -16 & -8 &  | & 0 \\
+\end{array}
+\right ]  \xrightarrow[R_3 \rightarrow R_3+16R_2]{R_1 \rightarrow R_1-5R_2} \left [
+\begin{array}{ccccc}
+1 & 0 & -2 & | & 0 \\ 
+0 & 1 & 1  & | & 0 \\
+0 & 0 & 8 &  | & 0 \\
+\end{array}
+\right ]
+$$
+
+
+$$
+ \left [
+\begin{array}{ccccc}
+1 & 0 & -2 & | & 0 \\ 
+0 & 1 & 1  & | & 0 \\
+0 & 0 & 8 &  | & 0 \\
+\end{array}
+\right ]  \xrightarrow[]{R_3 \rightarrow \frac{1}{8}R_3} \left [
+\begin{array}{ccccc}
+1 & 0 & -2 & | & 0 \\ 
+0 & 1 & 1  & | & 0 \\
+0 & 0 & 1 &  | & 0 \\
+\end{array}
+\right ]
+$$
+
+
+$$
+ \left [
+\begin{array}{ccccc}
+1 & 0 & -2 & | & 0 \\ 
+0 & 1 & 1  & | & 0 \\
+0 & 0 & 1 &  | & 0 \\
+\end{array}
+\right ]  \xrightarrow[R_1\rightarrow R_1+2R_3]{R_2 \rightarrow R_2-R_3} \left [
+\begin{array}{ccccc}
+1 & 0 & 0 & | & 0 \\ 
+0 & 1 & 0  & | & 0 \\
+0 & 0 & 1 &  | & 0 \\
+\end{array}
+\right ]
+$$
+De lo anterior concluimos que $c_1=0$, $c_2=0$ y $c_3=0$ por lo tanto concluimos que los vectores son linealmente independientes.  
+
+
+9. Si tiene la matriz  (Valor: 10 puntos)
+
+$$
+\mathbf{A}=\left[
+\begin{array}{cc}
+   3 & 0  \\
+   8 & -1
+\end{array}
+\right]
+$$
+
+
+y el vector 
+
+
+$$
+\mathbf{x}=\left[
+\begin{array}{c}
+   1   \\
+   2 
+\end{array}
+\right]
+$$
+
+La pregunta es, ¿será $\mathbf{x}$ un eigenvector de $\mathbf{A}$? Es decir, 
+
+¿$\mathbf{A}\mathbf{x}=\lambda \mathbf{x}$?
+
+Justifique su respuesta
+
+$$
+\mathbf{Ax}=\left[
+\begin{array}{cc}
+   3 & 0  \\
+   8 & -1
+\end{array}
+\right]\left[
+\begin{array}{c}
+   1 \\
+   2
+\end{array}
+\right]=\left[
+\begin{array}{c}
+   (3)(1)+(0)(2)\\
+   (8)(1)+(-1)(2)
+\end{array}
+\right]=\left[
+\begin{array}{c}
+   3   \\
+   6 
+\end{array}
+\right]=3\left[
+\begin{array}{c}
+   1  \\
+   2 
+\end{array}
+\right]
+$$
+
+
+De lo anterior se concluye que 
+
+$$
+\mathbf{x}=\left[
+\begin{array}{c}
+   1   \\
+   2 
+\end{array}
+\right]
+$$
+
+es un eigenvector y $3$ es un eigenvalor. 
+

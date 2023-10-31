@@ -1,0 +1,287 @@
+---
+title: "Día 5 - Revisión de cosenos directores y de Python "
+author: "Dra. Norma C. Pérez Rosas"
+date: '`r format(Sys.time(), "%d/%m/%Y")`'
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+  html_document:
+    toc: yes
+    toc_depth: 2
+---
+
+Ingrese a [Google colab](https://colab.research.google.com/notebooks/intro.ipynb?utm_source=scs-index) y practique los ejercicios de su clase.
+
+
+# Revisión de algunos conceptos de Python 
+
+¿Qué es Python? 
+
+Python es un lenguaje de programación interpretado cuya filosofía hace hincapié en la legibilidad de su código. Es un lenguaje interpretado, dinámico y multiplataforma. 
+
+Revise el sitio web de [Python](https://www.python.org/).
+
+## Variable
+
+Una variable es un valor de un dato que es almacenado en la computadora. 
+
+```{python}
+numero_de_perros = 2
+print(numero_de_perros)
+```
+
+El código anterior declara una variable en la primera linea de código. En nuestro caso creamos "numero_de_perros", pero pudo haberse llamado de cualquier manera. En la misma línea, también fijamos el valor de numero_de_perros igual a 2. La siguiente línea de código imprime el valor contenido en la variable al pasar su argumento en **print()**. La salida será 2. 
+
+Nosotros podemos desarrollar operaciones matemáticas con las variables numéricas usando los siguientes operadores 
+
+
+| | Operadores | 
+|------:|:-----|
+| + | Adición |
+| - | Sustracción | 
+| * | Multiplicación | 
+| / | División |
+| %| División modular |
+
+```{python}
+numero_A = 9
+numero_B = 2 
+respuesta = numero_A/numero_B
+print(respuesta)
+```
+
+## Funciones
+
+Cada comando con paréntesis como print() también es conocida como función. Las funciones son comandos que toman parámetros definidos por el programador. Las funciones son comandos que toman parámetros definidos por el programador y pasarlos a un bloque expandido de código y eliminando la necesidad de copiar y pegar contínuamente usando código. 
+
+# Listas
+
+Una lista es un tipo de dato en Python que contiene otros valores de datos en una lista organizada. Las listas son declaradas usando corchetes:
+
+```{python}
+lista = [1,2,3,4,5,6,88]
+```
+
+# Librerías en Python 
+
+En informática, una biblioteca, o llamada por vicio del lenguaje **librería** (del inglés library) es un conjunto de implementaciones funcionales, codificadas en un lenguaje de programación, que ofrece una interfez bien definida para la funcionalidad que se invoca (Definición de wikipedia). Las **librerías Python** son amplias, con gran cantidad de producciones en contenidos. Consta de módulos que permiten el acceso de funcionalidades del sistema como entrada y salidas de archivos, soluciones estandarizadas a problemas de programación, etc. 
+
+## Librería Numpy 
+
+Numpy es una librería de Python especializada en cálculo numérico y el análisis de datos, especialmente para un gran volumen de datos.
+
+Revise el sitio web de [Numpy](https://numpy.org/doc/stable/user/quickstart.html).
+
+
+## Módulos 
+
+Los módulos son librería de funciones extra que incrementan el número de comandos que Python puede usar. Cuando vimos la librería numpy utilizamos el módulo array para poder generar el vector. En conclusión, los módulos son librerías de funciones que Python usa para ganar funcionalidad. Algunos módulos ya vienen preinstalados en Python.  
+
+```{python}
+import numpy as np
+lista = [1,2,3,4,5,6,88]
+vector = np.array(lista) 
+# numpy es la librería 
+# array es el módulo 
+```
+
+
+
+
+### Creación de arrays 
+
+Para crear un array se utiliza la siguiente función de Numpy
+
+**np.array(lista)**: Crea un array a partir de la lista. 
+
+```{python}
+#importar la librería numpy
+import numpy as np
+#Arreglo (array) de una dimension
+lista = [1,2,3,4]
+vector = np.array(lista)
+print(vector)
+```
+
+
+## Librería math 
+
+La **librería math** es proveída por **Python** como parte de su **librería** estándar y ofrece funciones matemáticas para el uso en el campo de los números reales. 
+
+Los valores numéricos pueden ser transformados y calculados de forma avanzada a través de las matemáticas y las estadísticas. 
+
+| math | 
+|------:|:-----|
+| math.pi | Sustituye en 3.14159.. |
+| math.e | Sustituye en 2.71828... | 
+
+Consulte la libreria de  [math](https://docs.python.org/es/3/library/math.html)
+
+
+# Cálculo de cosenos directores
+
+Calcule los cosenos directores del vector $\mathbf{w}=[4,5,10]$
+
+```{python}
+import numpy as np
+import math
+x = 4
+y = 5
+z = 10 
+v = np.array([x,y,z])
+longitud = np.linalg.norm(v)
+alfa = math.acos(4/longitud)
+angulo_alfa = math.degrees(alfa)
+print(angulo_alfa)
+beta = math.acos(5/longitud)
+angulo_beta = math.degrees(beta)
+print(angulo_beta)
+gamma = math.acos(10/longitud)
+angulo_gamma = math.degrees(gamma)
+print(angulo_gamma)
+cos_cuad_alfa = x**2/(x**2+y**2+z**2)
+cos_cuad_beta = y**2/(x**2+y**2+z**2)
+cos_cuad_gamma = z**2/(x**2+y**2+z**2)
+comprobacion = cos_cuad_alfa + cos_cuad_beta+cos_cuad_gamma
+print(comprobacion)
+```
+
+
+# Igualdad de vectores 
+
+Dos vectores son iguales sí tienen la misma magnitud y dirección. En otras palabras, dos vectores pueden tener diferentes puntos iniciales y terminales, pero son iguales sí tienen la misma dirección y magnitud.  Este es un punto muy importante que debe ser enfatizado. 
+
+**Definición:** Dos vectores son iguales sí tienen la misma magnitud y dirección. 
+La longitud de un vector en $\mathbf{R^2}$ con un determinado punto inicial $x_1,y_1$ y punto terminal $x_2,y_2$, está determinado por:
+
+ $\lVert v \rVert=\sqrt{(x_1-x_2)^{2}+(y_1-y_2)^{2}}$.
+
+Esto naturalmente se extiende a vectores de cualquier número de dimensiones. 
+
+
+## Transposición 
+
+La transpuesta fue introducida anteriormente y aquí se retoma el tema para complementarlo. La transpuesta de una columna de un vector $\mathbf{v}$, es la fila del vector denotado por $\mathbf{v}^T$.
+
+**Ejemplo:**
+
+Dado el vector columna 
+
+
+\begin{equation*}
+\mathbf{u} = 
+\begin{pmatrix}
+u_{1}  \\
+u_{2} \\
+\vdots   \\
+u_{n} 
+\end{pmatrix}
+\end{equation*}
+
+La transpuesta está dada por 
+
+$\mathbf{u}^T=[u_1 u_2 \dots u_n]$
+
+
+```{python}
+#Código en Python para calcular la transpuesta de un vector
+#Proponga que x es un a lista o un arreglo de 1-D
+import numpy as np
+x = [1,2,3,4,5]
+#Convertir la lista en una matriz
+#Nota: todavía no vemos matrices las vemos más adelante 
+x = np.matrix(x)
+x
+#Aplique la transpuesta al vector 
+x.T
+```
+
+
+
+# Vectores unitarios 
+
+Anteriormente, la longitud euclidiana o la norma de un vector fue introducido en términos de una distancia Pitagórica:
+
+$\lVert v \rVert=\sqrt{\sum v_i^{2}}$.
+
+
+# Asistencia 
+
+From Tadeo Pérez to Everyone:  11:30 AM
+
+nunca habia visto a diego 
+
+From Melanie Mondragón to Everyone:  11:31 AM
+
+Presente
+
+From Karla Gómez to Everyone:  11:31 AM
+
+Presente.
+
+From Tadeo Pérez to Everyone:  11:31 
+
+ponerse*
+
+From Diego Nicolas to Everyone:  11:31 AM
+
+Presente
+
+From Tadeo Pérez to Everyone:  11:31 AM
+
+Presente
+
+From Adriana Gaeta to Everyone:  11:31 AM
+
+presente
+
+From Melanie Mondragón to Everyone:  11:31 AM
+
+presente
+
+From Wenddy Ballona Martinez to Everyone:  11:31 AM
+
+presente
+
+From Irving Barreto to Everyone:  11:31 AM
+
+Presente
+
+From Emmanuel Gonzalez to Everyone:  11:31 AM
+
+presente
+
+From Maria Fernanda Garcia to Everyone:  11:31 AM
+
+Presente
+
+From David Dorantes to Everyone:  11:31 AM
+
+Presente
+
+From Jorge Ambrosio to Everyone:  11:31 AM
+
+Presente
+
+From Fernanda Cardenas to Everyone:  11:31 AM
+
+Presente
+
+From Fernanda Pilón to Everyone:  11:31 AM
+
+Presente
+
+From Itzel Aurora Bravo Santos to Everyone:  11:32 AM
+
+Presente
+
+From Ivan Delgado to Everyone:  11:35 AM
+
+presente
+
+From Frida Cuevas to Everyone:  12:19 PM
+
+Presente.
+
+

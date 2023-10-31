@@ -1,0 +1,217 @@
+---
+title: "Día 33-2do. Examen - Álgebra Lineal"
+author: "Dra. Norma C. Pérez Rosas"
+date: '`r format(Sys.time(), "%d/%m/%Y")`'
+output:
+  html_document:
+    toc: yes
+    toc_depth: 2
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+---
+
+Instrucciones: responda correctamente las siguientes preguntas. Al terminar tome fotografía a sus respuestas, genere un solo PDF con la siguiente estructura apellido_paterno_apellido_materno_nombre_examen2_grupo.pdf y envíe su examen al classroom.
+
+Al inicio de su examen coloque 
+
+**Nombre completo**
+
+**Grupo**
+
+**Boleta**
+
+**correo electrónico**
+
+
+
+1. Resuelva el siguiente sistema por el método de Gauss-Jordan (20 puntos). 
+
+
+\begin{alignat*}{4}
+   x_1 & {}+{} 3x_2 &  {}+{} 2x_3  {}={} & 25000 \\
+   x_1 & {}+{} 4x_2 &  {}+{} x_3  {}={} & 20000 \\
+   2x_1 & {}+{} 5x_2 &  {}+{} 5x_3  {}={} & 55000 \\
+\end{alignat*}
+
+
+$$
+\mathbf{A}=\left[
+\begin{array}{ccc}
+1 & 0 & 5 & | & 40000 \\
+0 & 1 & -1 & | & - 5000 \\
+0 & 0 & 0 & | & 0 \\
+\end{array}
+\right]
+$$
+
+2. ¿Cuál de los siguientes sistemas tiene la matriz de coeficientes dada a la derecha? (10 puntos)
+
+$$
+\mathbf{A}=\left[
+\begin{array}{ccc}
+3 & 2 & -1 \\
+0 & 1 & 5 \\
+2 & 0 & 1 \\
+\end{array}
+\right]
+$$
+
+a)
+
+\begin{alignat*}{3}
+   3x & {}+{} & 2y &   {}={} & -1 \\
+      & {} {} & y &   {}={} & 5 \\
+      & {} {} & 2x &   {}={} & 1 \\
+\end{alignat*}
+
+
+b)
+
+\begin{alignat*}{4}
+   3x & {}+{} & 2z &       &    & {}={} & 10 \\
+   2x & {}+{} & y  &       &    & {}={} & 0 \\
+   -x & {}+{} & 5y & {}+{} & z  & {}={} & 5 \\
+\end{alignat*}
+
+c)
+
+\begin{alignat*}{3}
+   3x & {} {} &    &  {}={} & 2 \\
+   2x & {}+{} & y  &  {}={} & 0 \\
+   -x & {}+{} & 5y  &  {}={} & 1 \\  
+\end{alignat*}
+
+**d)**
+
+\begin{alignat*}{4}
+   3x & {}+{} & 2y & {}+{} & -z & {}={} & -3 \\
+    y & {}+{} & 5z &       &    & {}={} & 15 \\
+   2x & {}+{} & z  & {} {} &    & {}={} & 3 \\
+\end{alignat*}
+
+
+3. Es una operación elemental con renglones (5 puntos):
+
+**a.** Reemplazar un renglón con un múltiplo diferente de cero de ese renglón. 
+
+b. Sumar una constante diferente de cero a cada elmento en un renglón. 
+
+c. Intercambiar dos columnas.
+
+d. Reemplazar un renglón con una suma de renglones y una constante $\neq 0$
+
+4. Dadas las matrices
+
+$$
+\mathbf{A}=\left[
+\begin{array}{cc}
+1 & 2  \\
+3 & 4 \\
+5 & 6 \\
+\end{array}
+\right] \ y \ \mathbf{B}=\left[
+\begin{array}{cc}
+-3 & -2  \\
+1 & 5 \\
+4 & 3 \\
+\end{array}
+\right] \ hallar \ \mathbf{D}=\left[
+\begin{array}{cc}
+p & q  \\
+r & s \\
+t & v \\
+\end{array}
+\right]
+$$
+
+de manera que $\mathbf{A+B-D=0}$ (Valor: 25 puntos)
+
+
+
+$$
+\mathbf{D}=\left[
+\begin{array}{cc}
+-2 & 0  \\
+4 & -1 \\
+9 & 9 \\
+\end{array}
+\right] 
+$$
+
+
+4. Sea la matriz  (Valor: 20 puntos)
+
+$$
+\mathbf{A}=\left[
+\begin{array}{ccc}
+2 & -1 & 1  \\
+0 & 1 & 2 \\
+1 & 0 & 1 \\
+\end{array}
+\right] 
+$$
+
+Calcule 
+
+a) $\mathbf{A}^2$
+
+b) $\mathbf{A}^3$
+
+c) Demuestre que $\mathbf{A}^3=\mathbf{A}\cdot \mathbf{A}^2$ 
+
+d)  Demuestre que  $\mathbf{A}^2\cdot \mathbf{A}^3=\mathbf{A}^3\cdot \mathbf{A}^2$
+
+Calcule 
+
+a) $\mathbf{A}^2$. Mencione las dimensiones de la matriz resultante. 
+
+```{r}
+a <- matrix(c(2, -1, 1, 0, 1, 2, 1, 0, 1), nrow=3, byrow=T)
+a
+mult_matrices <- a %*% a
+mult_matrices
+```
+
+b) $\mathbf{A}^3$
+```{r}
+a <- matrix(c(2, -1, 1, 0, 1, 2, 1, 0, 1), nrow=3, byrow=T)
+a
+mult_matrices <- a %*% a %*% a
+mult_matrices
+```
+
+c) Demuestre que $\mathbf{A}^3=\mathbf{A}\cdot \mathbf{A}^2$ 
+```{r}
+a <- matrix(c(2, -1, 1, 0, 1, 2, 1, 0, 1), nrow=3, byrow=T)
+a
+mult_matrices <- a %*% a 
+mult_matrices
+a_mult_matrices <- a %*% mult_matrices
+a_mult_matrices
+```
+
+d)  Demuestre que  $\mathbf{A}^2\cdot \mathbf{A}^3=\mathbf{A}^3\cdot \mathbf{A}^2$
+
+```{r}
+a <- matrix(c(2, -1, 1, 0, 1, 2, 1, 0, 1), nrow=3, byrow=T)
+a
+a_2 <- a %*% a 
+a_2
+a_3 <- a %*% a %*% a
+a_3_a_2 <- a_2 %*% a_3
+a_3_a_2
+a_2_a_3 <- a_3 %*% a_2
+a_2_a_3
+```
+
+e) $\mathbf{A}^T$
+
+```{r}
+a <- matrix(c(2, -1, 1, 0, 1, 2, 1, 0, 1), nrow=3, byrow=T)
+a
+a_t <- t(a) 
+a_t
+```
+
+
