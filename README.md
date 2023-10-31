@@ -1,1 +1,1 @@
-# lineal_algebra_spanish_course
+# Linear Algebra (Spanish course)
